@@ -1,0 +1,48 @@
+{
+  "name": "leostudio-bulk-apikey",
+  "version": "1.0.0",
+  "description": "Bulk API keys for Leo Studio (leostudio.cc) — free tier: 75,000 one-shot credits per account, 7 text models (deepseek-v4-flash, glm-5.3-flash, kimi-k3). One account per key.",
+  "license": "MIT",
+  "type": "commonjs",
+  "bin": {
+    "leostudio-bulk-apikey": "cli.js",
+    "leostudio-bulk-apikey-launcher": "launcher.js"
+  },
+  "main": "cli.js",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node launcher.js",
+    "mint": "node cli.js"
+  },
+  "keywords": [
+    "api-key",
+    "bulk",
+    "register",
+    "launcher",
+    "leostudio",
+    "bulk",
+    "apikey"
+  ],
+  "files": [
+    "cdp.js",
+    "chrome-flags.js",
+    "cli.js",
+    "imap.js",
+    "launcher.js",
+    "lib.js",
+    "mailbox-imap.js",
+    "mint-newapi-pinned.js",
+    "mint.js",
+    "newapi.js",
+    "probe-auth.js",
+    "probe-group.js",
+    "probe-key.js",
+    "provider-cli.js",
+    "proxy.js",
+    "xwave-lib.js",
+    "README.md",
+    "LICENSE"
+  ]
+}

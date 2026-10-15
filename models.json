@@ -1,0 +1,14 @@
+{
+  "at": "2026-10-15T08:13:20.524Z",
+  "base": "https://api.leostudio.cc",
+  "group": "国模",
+  "models": [
+    "deepseek-v4-flash",
+    "deepseek-v4.1-flash",
+    "glm-5.2",
+    "glm-5.3-flash",
+    "hy3",
+    "hy4-preview",
+    "kimi-k3"
+  ]
+}
