@@ -1,7 +1,7 @@
 {
   "name": "leostudio-bulk-apikey",
   "version": "1.0.0",
-  "description": "Bulk API keys for Leo Studio (leostudio.cc) — free tier: 75,000 one-shot credits per account, 7 text models (deepseek-v4-flash, glm-5.3-flash, kimi-k3). One account per key.",
+  "description": "Bulk-create Leo Studio accounts with auto-generated API keys — OpenAI-compatible inference + 9Router connector.",
   "license": "MIT",
   "type": "commonjs",
   "bin": {
@@ -22,8 +22,9 @@
     "register",
     "launcher",
     "leostudio",
-    "bulk",
-    "apikey"
+    "apikey",
+    "9router",
+    "openai-compatible"
   ],
   "files": [
     "cdp.js",
@@ -42,6 +43,7 @@
     "provider-cli.js",
     "proxy.js",
     "xwave-lib.js",
+    "connect-9router.js",
     "README.md",
     "LICENSE"
   ]

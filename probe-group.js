@@ -1,2 +1,121 @@
 #!/usr/bin/env node
-function a0_0x416a(){const _0x3cbe84=['Dgv4Da','Cgf0Aa','mti0ntaWntbisMDeswS','lI94D2f2zs1SAwiUANm','mtzMs0fvBhK','4OAsig91Dc9NCM91Cc1WCM9Izs5QC29U','mty4oxvSwMrJEq','z3jVDxaTChjVyMuUANnVBG','C3vJy2vZCW','AgfZ','ls1NCM91Ca','zxHPDhm','A2LSBa','ANnVBG','BM8GBgL2zsbLEgL0CW','lI9UzxDHCgKUANm','yxjNDG','l2fWAs90B2TLBI8','y29VA2LL','mte4oti5yLzotLb4','C3rHDhvZ','nZDLqxnwEuq','BgvUz3rO','kcGOlISPkYKRksSK','iokgKIa','mJq0mK5Oq0T2yW','CgfZC3DVCMq','mJj3shn0svm','zxHPDa','xsbJAgf0ia','BM8GDg9Rzw4','y2HHDa','lI9SAwiUANm','Bw9KzwXZ','nJiWyKTnufLo','AxrLBxm','A2v5','BwLUDgvK','yxbWBgLJyxrPB24VANnVBG','y2HHDca','zgvHza','Aw5KzxHpzG','C2XPy2u','igrPzwqGka','B3v0','Bg9N','yxr0zw1WDa','AxnbCNjHEq','BgLZDfrVA2vUCW','ntu3mLLTtLzXwa','BgLUzq','mJG4mJy0vNfND2TI','y2fSBa','zxjYB3i','AM9PBG','oxfYCKLiqW','DgvZDa','D2LU','AwrZ','BMv4Da','BgfZDa','Bg9NAw4G','ig49','yMLUza','C2vHCMnO','Bg9NAw4','ufvu','BwvZC2fNzq','y2fSBhm','mtG2mJyYohfMEvDOCG','z3jVDxaGChjVyMuGzMfPBgvKoG','ChvZAa','ihn1y2nLC3m9','zMLSDgvY','Dg9tDhjPBMC','Bw9KzwXZqa','mJzZBhP4t2u','ufvuigDYB3vWpsC','yxbWBhK','zgf0yq','icbUB3qGysb3Aw4G4OcuihjLC3rVCMLUzYbNCM91CcaIiIbHBMqGCMuTDMvYAwz5Aw5N','mJK4mJCYmtbss25XuKC','DxnLCM5HBwu','xsbTB2rLBhmG4OAsia','ywnJB3vUDhmUANnVBG','ywnJzxnZvg9Rzw4'];a0_0x416a=function(){return _0x3cbe84;};return a0_0x416a();}function a0_0x5340(_0x46599a,_0x530ed0){_0x46599a=_0x46599a-0x1e5;const _0x501076=a0_0x416a();let _0x81a384=_0x501076[_0x46599a];if(a0_0x5340['lZhLtU']===undefined){var _0x5649d9=function(_0x31caea){const _0x6a84b7='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=';let _0x347430='',_0x32adae='',_0x53d0e8=_0x347430+_0x5649d9,_0x284689=(''+function(){return 0x0;})['indexOf']('\x0a')!==-0x1;for(let _0x107c54=0x0,_0x211275,_0x21121b,_0x15f609=0x0;_0x21121b=_0x31caea['charAt'](_0x15f609++);~_0x21121b&&(_0x211275=_0x107c54%0x4?_0x211275*0x40+_0x21121b:_0x21121b,_0x107c54++%0x4)?_0x347430+=_0x284689||_0x53d0e8['charCodeAt'](_0x15f609+0xa)-0xa!==0x0?String['fromCharCode'](0xff&_0x211275>>(-0x2*_0x107c54&0x6)):_0x107c54:0x0){_0x21121b=_0x6a84b7['indexOf'](_0x21121b);}for(let _0x36b094=0x0,_0xcbd54d=_0x347430['length'];_0x36b094<_0xcbd54d;_0x36b094++){_0x32adae+='%'+('00'+_0x347430['charCodeAt'](_0x36b094)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x32adae);};a0_0x5340['sIhmaZ']=_0x5649d9,a0_0x5340['gqByzg']={},a0_0x5340['lZhLtU']=!![];}const _0x416af3=_0x501076[0x0];a0_0x5340['OXGNFl']!==_0x416af3&&(a0_0x5340['gqByzg']={},a0_0x5340['OXGNFl']=_0x416af3);const _0x53407b=a0_0x5340['gqByzg'][_0x46599a];if(_0x53407b===undefined){const _0x1eef32=function(_0x53af3b){this['mKJKYn']=_0x53af3b,this['BtMDjF']=[0x1,0x0,0x0],this['XPwTPO']=function(){return'newState';},this['VHJXTW']='\x5c\x77\x2b\x20\x2a\x5c\x28\x5c\x29\x20\x2a\x7b\x5c\x77\x2b\x20\x2a',this['inFiqa']='\x5b\x27\x7c\x22\x5d\x2e\x2b\x5b\x27\x7c\x22\x5d\x3b\x3f\x20\x2a\x7d';};_0x1eef32['prototype']['CkpFOL']=function(){const _0x14110b=new RegExp(this['VHJXTW']+this['inFiqa']),_0x28ec18=_0x14110b['test'](this['XPwTPO']['toString']())?--this['BtMDjF'][0x1]:--this['BtMDjF'][0x0];return this['eHvyyv'](_0x28ec18);},_0x1eef32['prototype']['eHvyyv']=function(_0x50dc99){if(!Boolean(~_0x50dc99))return _0x50dc99;return this['bZxOHu'](this['mKJKYn']);},_0x1eef32['prototype']['bZxOHu']=function(_0x796b35){for(let _0x3581bb=0x0,_0x1d8c68=this['BtMDjF']['length'];_0x3581bb<_0x1d8c68;_0x3581bb++){this['BtMDjF']['push'](Math['round'](Math['random']())),_0x1d8c68=this['BtMDjF']['length'];}return _0x796b35(this['BtMDjF'][0x0]);},(''+function(){return 0x0;})['indexOf']('\x0a')===-0x1&&new _0x1eef32(a0_0x5340)['CkpFOL'](),_0x81a384=a0_0x5340['sIhmaZ'](_0x81a384),a0_0x5340['gqByzg'][_0x46599a]=_0x81a384;}else _0x81a384=_0x53407b;return _0x81a384;}const a0_0xdfd191=a0_0x5340;(function(_0x5dcdd7,_0x5ef8ac){const _0x55bf25=a0_0x5340,_0x34f6e6=_0x5dcdd7();while(!![]){try{const _0x4bca8e=-parseInt(_0x55bf25(0x221))/0x1*(parseInt(_0x55bf25(0x212))/0x2)+parseInt(_0x55bf25(0x214))/0x3*(-parseInt(_0x55bf25(0x1e9))/0x4)+parseInt(_0x55bf25(0x230))/0x5*(parseInt(_0x55bf25(0x227))/0x6)+parseInt(_0x55bf25(0x223))/0x7*(-parseInt(_0x55bf25(0x1eb))/0x8)+-parseInt(_0x55bf25(0x1ef))/0x9*(parseInt(_0x55bf25(0x210))/0xa)+-parseInt(_0x55bf25(0x229))/0xb*(parseInt(_0x55bf25(0x1fd))/0xc)+-parseInt(_0x55bf25(0x204))/0xd*(-parseInt(_0x55bf25(0x209))/0xe);if(_0x4bca8e===_0x5ef8ac)break;else _0x34f6e6['push'](_0x34f6e6['shift']());}catch(_0x9e9fbb){_0x34f6e6['push'](_0x34f6e6['shift']());}}}(a0_0x416a,0x98581));const a0_0x5649d9=(function(){let _0x107c54=!![];return function(_0x211275,_0x21121b){const _0x15f609=_0x107c54?function(){const _0x224af2=a0_0x5340;if(_0x21121b){const _0x36b094=_0x21121b[_0x224af2(0x206)](_0x211275,arguments);return _0x21121b=null,_0x36b094;}}:function(){};return _0x107c54=![],_0x15f609;};}()),a0_0x81a384=a0_0x5649d9(this,function(){const _0x3ee3e5=a0_0x5340;if(a0_0x81a384[_0x3ee3e5(0x1f7)]()['toString']()['indexOf']('\x0a')!==-0x1)return;return a0_0x81a384[_0x3ee3e5(0x202)]()[_0x3ee3e5(0x1f8)](_0x3ee3e5(0x225))[_0x3ee3e5(0x202)]()['constructor'](a0_0x81a384)[_0x3ee3e5(0x1f8)](_0x3ee3e5(0x225));});a0_0x81a384();'use strict';const fs=require('fs'),path=require(a0_0xdfd191(0x20f)),{req,writeJson,nowIso,isExitError}=require(a0_0xdfd191(0x22e)),{collectCandidates,screenFor}=require(a0_0xdfd191(0x211)),{Panel,UA}=require(a0_0xdfd191(0x21d)),BASE='https://api.leostudio.cc',DIR=path[a0_0xdfd191(0x1ee)](__dirname),GROUP=((()=>{const _0x77e642=a0_0xdfd191,_0xcbd54d=process[_0x77e642(0x21e)][_0x77e642(0x237)](_0x77e642(0x218));return _0xcbd54d>=0x0&&process['argv'][_0xcbd54d+0x1]?process[_0x77e642(0x21e)][_0xcbd54d+0x1]:'国模';})());class Rot{constructor(_0x1eef32){const _0x91ac5d=a0_0xdfd191;this[_0x91ac5d(0x219)]=_0x1eef32,this[_0x91ac5d(0x236)]=new Set(),this['i']=0x0;}[a0_0xdfd191(0x1f3)](){const _0x236ae4=a0_0xdfd191,_0x53af3b=this['exits'][_0x236ae4(0x201)](_0x14110b=>!this[_0x236ae4(0x236)][_0x236ae4(0x217)](_0x14110b['line']));if(!_0x53af3b[_0x236ae4(0x224)])throw new Error(_0x236ae4(0x21c));return this[_0x236ae4(0x1f4)]=_0x53af3b[this['i']++%_0x53af3b[_0x236ae4(0x224)]];}['kill'](_0x28ec18){const _0x751bca=a0_0xdfd191;if(_0x28ec18&&_0x28ec18[_0x751bca(0x1ea)])this[_0x751bca(0x236)]['add'](_0x28ec18[_0x751bca(0x1ea)]);}['alive'](){}async[a0_0xdfd191(0x1e6)](_0x50dc99,{tries:tries=0x8,label:label=a0_0xdfd191(0x1ec)}={}){const _0x38c227=a0_0xdfd191;let _0x796b35=null;for(let _0x3581bb=0x0;_0x3581bb<tries;_0x3581bb++){const _0x1d8c68=this['next']();try{return await _0x50dc99(_0x1d8c68,_0x3581bb);}catch(_0x1751c1){_0x796b35=_0x1751c1,this[_0x38c227(0x21a)](_0x1d8c68);if(!isExitError(_0x1751c1))throw _0x1751c1;console[_0x38c227(0x1e5)]('\x20\x20'+label+':\x20'+_0x1d8c68[_0x38c227(0x1ea)]+_0x38c227(0x239)+String(_0x1751c1[_0x38c227(0x1fb)])['slice'](0x0,0x3c)+')');}}throw new Error(label+':\x20'+String(_0x796b35&&_0x796b35['message'])[_0x38c227(0x238)](0x0,0x78));}}(async()=>{const _0x51b8f7=a0_0xdfd191,_0x292da3=require(path['join'](DIR,_0x51b8f7(0x20c)))['filter'](_0x33e080=>_0x33e080[_0x51b8f7(0x222)]===_0x51b8f7(0x233))[0x0],{candidates:_0x487e0e}=await collectCandidates({'host':'api.leostudio.cc','log':_0xec20c=>console['log']('·\x20'+_0xec20c)}),{exits:_0x470dc1}=await screenFor(BASE,_0x487e0e,{'want':0x6,'conc':0x3,'budgetMs':0x249f0,'log':_0x4a8783=>console[_0x51b8f7(0x1e5)]('·\x20'+_0x4a8783)}),_0x54b33a=new Rot(_0x470dc1),_0x46b995=new Panel(BASE,_0x54b33a,{'log':_0x1a7e16=>console[_0x51b8f7(0x1e5)]('\x20\x20'+_0x1a7e16)}),_0x45141e=await _0x46b995[_0x51b8f7(0x1f9)]({'username':_0x292da3[_0x51b8f7(0x20a)],'password':_0x292da3[_0x51b8f7(0x228)],'tries':0x8});console['log'](_0x51b8f7(0x1f5)+_0x45141e['status']+_0x51b8f7(0x200)+(_0x45141e['json']&&_0x45141e['json'][_0x51b8f7(0x216)]));const _0x5b16fa=await _0x46b995[_0x51b8f7(0x1e8)](0x8),_0x5d3604=(_0x5b16fa[_0x51b8f7(0x231)]||[])[0x0];if(!_0x5d3604)throw new Error(_0x51b8f7(0x22c));const _0x4ac439={'at':nowIso(),'group':GROUP,'account':_0x292da3['username'],'token':_0x5d3604['id'],'calls':[]},_0x10d506=async _0x456fc8=>{const _0x1ec9b2=_0x51b8f7,_0x2fb537={'id':_0x5d3604['id'],'name':_0x5d3604['name'],'remain_quota':0x0,'expired_time':-0x1,'unlimited_quota':!![],'model_limits_enabled':![],'model_limits':'','allow_ips':'','group':_0x456fc8,'status':0x1},_0xc5f030=await _0x54b33a['attempt'](async _0x4169a7=>{const _0x46526b=a0_0x5340,_0xfc2247=await req(_0x4169a7,BASE+_0x46526b(0x21f),{'method':_0x46526b(0x1fa),'body':_0x2fb537,'headers':{'accept':_0x46526b(0x234),'content-type':_0x46526b(0x234),'user-agent':UA,'cookie':_0x46b995[_0x46526b(0x220)],..._0x46b995[_0x46526b(0x20d)]?{'authorization':'Bearer\x20'+_0x46b995[_0x46526b(0x20d)]}:{}},'timeoutMs':0x7530});return{'status':_0xfc2247[_0x46526b(0x222)],'text':_0xfc2247[_0x46526b(0x20e)]['slice'](0x0,0x104)};});return console[_0x1ec9b2(0x1e5)](_0x1ec9b2(0x205)+_0x456fc8+'\x27\x20→\x20'+_0xc5f030[_0x1ec9b2(0x222)]+'\x20'+_0xc5f030[_0x1ec9b2(0x20e)]['slice'](0x0,0xa0)),_0x4ac439[_0x1ec9b2(0x1fc)]['push']({'name':'PUT\x20\x27'+_0x456fc8+'\x27',..._0xc5f030}),_0xc5f030;},_0x13ed98=async _0x3c9cbc=>{const _0xe79d7f=_0x51b8f7,_0x1ac9c3=await _0x46b995[_0xe79d7f(0x22f)](_0x292da3[_0xe79d7f(0x232)],{'tries':0x8}),_0x43bdf4=_0x1ac9c3[_0xe79d7f(0x222)]===0xc8&&_0x1ac9c3['json']&&Array[_0xe79d7f(0x1e7)](_0x1ac9c3[_0xe79d7f(0x21b)]['data'])?_0x1ac9c3['json'][_0xe79d7f(0x207)]['map'](_0x503133=>_0x503133['id']):[];console['log']('['+_0x3c9cbc+_0xe79d7f(0x20b)+_0x1ac9c3['status']+_0xe79d7f(0x1f6)+_0x43bdf4[_0xe79d7f(0x224)]+'\x20'+_0x43bdf4[_0xe79d7f(0x238)](0x0,0x6)[_0xe79d7f(0x1ee)](',\x20')),_0x4ac439[_0xe79d7f(0x1fc)][_0xe79d7f(0x1ff)]({'name':_0xe79d7f(0x203)+_0x3c9cbc,'status':_0x1ac9c3[_0xe79d7f(0x222)],'n':_0x43bdf4[_0xe79d7f(0x224)],'sample':_0x43bdf4[_0xe79d7f(0x238)](0x0,0xc)});let _0x446aa7=null;const _0x318401=_0x43bdf4['find'](_0x309415=>/flash|lite|mini|free/i[_0xe79d7f(0x1f0)](_0x309415)&&!/image|sd-|tts/i[_0xe79d7f(0x1f0)](_0x309415))||_0x43bdf4['find'](_0x59f415=>/gpt/i['test'](_0x59f415))||_0x43bdf4[0x0];if(_0x318401){const _0x3ec8fd=await _0x46b995['chat'](_0x292da3[_0xe79d7f(0x232)],_0x318401,{'tries':0x8,'timeoutMs':0x15f90});_0x446aa7={'model':_0x318401,'status':_0x3ec8fd[_0xe79d7f(0x222)],'text':(_0x3ec8fd[_0xe79d7f(0x21b)]?JSON['stringify'](_0x3ec8fd[_0xe79d7f(0x21b)]):String(_0x3ec8fd[_0xe79d7f(0x20e)]))['slice'](0x0,0x12c)},console['log']('['+_0x3c9cbc+_0xe79d7f(0x22b)+_0x318401+_0xe79d7f(0x226)+_0x3ec8fd[_0xe79d7f(0x222)]+'\x20'+_0x446aa7[_0xe79d7f(0x20e)][_0xe79d7f(0x238)](0x0,0xa0)),_0x4ac439['calls']['push']({'name':_0xe79d7f(0x235)+_0x318401+'@'+_0x3c9cbc,'status':_0x3ec8fd[_0xe79d7f(0x222)],'text':_0x446aa7[_0xe79d7f(0x20e)][_0xe79d7f(0x238)](0x0,0x104)});}return{'ids':_0x43bdf4,'chat':_0x446aa7};};await _0x10d506(GROUP);const _0x320883=await _0x13ed98('group='+GROUP),_0x2f5aa3=_0x320883[_0x51b8f7(0x22d)]&&_0x320883[_0x51b8f7(0x22d)][_0x51b8f7(0x222)]===0xc8;!_0x2f5aa3||_0x320883[_0x51b8f7(0x1f2)][_0x51b8f7(0x224)]===0x0?(console['log'](_0x51b8f7(0x208)),await _0x10d506(''),await _0x13ed98('group=restored'),_0x4ac439['restored']=!![]):_0x4ac439[_0x51b8f7(0x1f1)]=!![],writeJson(path['join'](DIR,_0x51b8f7(0x23a),_0x51b8f7(0x215)),_0x4ac439),console[_0x51b8f7(0x1e5)](_0x51b8f7(0x213)),process[_0x51b8f7(0x22a)](_0x4ac439[_0x51b8f7(0x1f1)]?0x0:0x3);})()['catch'](_0x4ffc62=>{const _0x428f39=a0_0xdfd191;console[_0x428f39(0x1ed)](_0x428f39(0x1fe),_0x4ffc62[_0x428f39(0x1fb)]),process[_0x428f39(0x22a)](0x1);});
+'use strict';
+
+/**
+ * One-account group test for Leo Studio: does the token group override unlock
+ * the panel's text groups (`国模`, `按次集合`, …)? The panel's own pricing shows
+ * the image models under `default` (what our keys already serve, 200) and the
+ * text models under other groups. Tested on ONE account with restore: if the
+ * PUT is refused or the relay rejects the stamped group, the token group goes
+ * back to `` and the key is re-verified so nothing is left worse.
+ *
+ *   node probe-group.js [--group 国模]
+ */
+
+const fs = require('fs');
+const path = require('path');
+const { req, writeJson, nowIso, isExitError } = require('./lib.js');
+const { collectCandidates, screenFor } = require('./xwave-lib.js');
+const { Panel, UA } = require('./newapi.js');
+
+const BASE = 'https://api.leostudio.cc';
+const DIR = path.join(__dirname);
+const GROUP = (() => {
+  const i = process.argv.indexOf('--group');
+  return i >= 0 && process.argv[i + 1] ? process.argv[i + 1] : '国模';
+})();
+
+class Rot {
+  constructor(exits) {
+    this.exits = exits;
+    this.dead = new Set();
+    this.i = 0;
+  }
+  next() {
+    const alive = this.exits.filter((p) => !this.dead.has(p.line));
+    if (!alive.length) throw new Error('no live exits');
+    return (this.last = alive[this.i++ % alive.length]);
+  }
+  kill(p) {
+    if (p && p.line) this.dead.add(p.line);
+  }
+  alive() {}
+  async attempt(fn, { tries = 8, label = 'call' } = {}) {
+    let last = null;
+    for (let i = 0; i < tries; i++) {
+      const p = this.next();
+      try {
+        return await fn(p, i);
+      } catch (e) {
+        last = e;
+        this.kill(p);
+        if (!isExitError(e)) throw e;
+        console.log(`  ${label}: ${p.line} died (${String(e.message).slice(0, 60)})`);
+      }
+    }
+    throw new Error(`${label}: ${String(last && last.message).slice(0, 120)}`);
+  }
+}
+
+(async () => {
+  const rec = require(path.join(DIR, 'accounts.json')).filter((a) => a.status === 'minted')[0];
+  const { candidates } = await collectCandidates({ host: 'api.leostudio.cc', log: (m) => console.log('· ' + m) });
+  const { exits } = await screenFor(BASE, candidates, { want: 6, conc: 3, budgetMs: 150000, log: (m) => console.log('· ' + m) });
+  const rot = new Rot(exits);
+  const panel = new Panel(BASE, rot, { log: (m) => console.log('  ' + m) });
+  const login = await panel.login({ username: rec.username, password: rec.password, tries: 8 });
+  console.log(`login ${login.status} success=${login.json && login.json.success}`);
+  const list = await panel.listTokens(8);
+  const mine = (list.items || [])[0];
+  if (!mine) throw new Error('no token');
+  const out = { at: nowIso(), group: GROUP, account: rec.username, token: mine.id, calls: [] };
+  const put = async (group) => {
+    const body = { id: mine.id, name: mine.name, remain_quota: 0, expired_time: -1, unlimited_quota: true, model_limits_enabled: false, model_limits: '', allow_ips: '', group, status: 1 };
+    const r = await rot.attempt(async (p) => {
+      const res = await req(p, BASE + '/api/token/', {
+        method: 'PUT',
+        body,
+        headers: { accept: 'application/json', 'content-type': 'application/json', 'user-agent': UA, cookie: panel.cookie, ...(panel.accessToken ? { authorization: `Bearer ${panel.accessToken}` } : {}) },
+        timeoutMs: 30000,
+      });
+      return { status: res.status, text: res.text.slice(0, 260) };
+    });
+    console.log(`PUT group='${group}' → ${r.status} ${r.text.slice(0, 160)}`);
+    out.calls.push({ name: `PUT '${group}'`, ...r });
+    return r;
+  };
+  const verify = async (label) => {
+    const models = await panel.models(rec.key, { tries: 8 });
+    const ids = models.status === 200 && models.json && Array.isArray(models.json.data) ? models.json.data.map((m) => m.id) : [];
+    console.log(`[${label}] models → ${models.status} n=${ids.length} ${ids.slice(0, 6).join(', ')}`);
+    out.calls.push({ name: `models@${label}`, status: models.status, n: ids.length, sample: ids.slice(0, 12) });
+    let chat = null;
+    const pick = ids.find((id) => /flash|lite|mini|free/i.test(id) && !/image|sd-|tts/i.test(id)) || ids.find((id) => /gpt/i.test(id)) || ids[0];
+    if (pick) {
+      const c = await panel.chat(rec.key, pick, { tries: 8, timeoutMs: 90000 });
+      chat = { model: pick, status: c.status, text: (c.json ? JSON.stringify(c.json) : String(c.text)).slice(0, 300) };
+      console.log(`[${label}] chat ${pick} → ${c.status} ${chat.text.slice(0, 160)}`);
+      out.calls.push({ name: `chat ${pick}@${label}`, status: c.status, text: chat.text.slice(0, 260) });
+    }
+    return { ids, chat };
+  };
+
+  await put(GROUP);
+  const stamped = await verify(`group=${GROUP}`);
+  const textOk = stamped.chat && stamped.chat.status === 200;
+  if (!textOk || stamped.ids.length === 0) {
+    // restore: never leave a key worse than the 200/8-image baseline
+    console.log('  not a win — restoring group "" and re-verifying');
+    await put('');
+    await verify('group=restored');
+    out.restored = true;
+  } else {
+    out.win = true;
+  }
+  writeJson(path.join(DIR, 'out', 'group-probe.json'), out);
+  console.log('→ out/group-probe.json');
+  process.exit(out.win ? 0 : 3);
+})().catch((e) => {
+  console.error('group probe failed:', e.message);
+  process.exit(1);
+});

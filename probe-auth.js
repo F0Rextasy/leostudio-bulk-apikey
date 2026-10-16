@@ -1,2 +1,107 @@
 #!/usr/bin/env node
-const a0_0x350e6d=a0_0x25cb;(function(_0xde170,_0x48e372){const _0x184be8=a0_0x25cb,_0x590a1f=_0xde170();while(!![]){try{const _0x1e108c=parseInt(_0x184be8(0x12c))/0x1+parseInt(_0x184be8(0x12f))/0x2+parseInt(_0x184be8(0x125))/0x3*(parseInt(_0x184be8(0x165))/0x4)+parseInt(_0x184be8(0x15d))/0x5*(-parseInt(_0x184be8(0x151))/0x6)+-parseInt(_0x184be8(0x14f))/0x7*(parseInt(_0x184be8(0x16f))/0x8)+-parseInt(_0x184be8(0x12d))/0x9+parseInt(_0x184be8(0x141))/0xa*(parseInt(_0x184be8(0x128))/0xb);if(_0x1e108c===_0x48e372)break;else _0x590a1f['push'](_0x590a1f['shift']());}catch(_0x2e4e43){_0x590a1f['push'](_0x590a1f['shift']());}}}(a0_0x15c2,0x7286c));const a0_0x324a25=(function(){let _0x5db4c4=!![];return function(_0x39ebcd,_0x4d20d0){const _0x5c1962=_0x5db4c4?function(){const _0x2e9d6e=a0_0x25cb;if(_0x4d20d0){const _0x2c14fa=_0x4d20d0[_0x2e9d6e(0x16a)](_0x39ebcd,arguments);return _0x4d20d0=null,_0x2c14fa;}}:function(){};return _0x5db4c4=![],_0x5c1962;};}()),a0_0x1012b7=a0_0x324a25(this,function(){const _0x8b9be0=a0_0x25cb;if(a0_0x1012b7[_0x8b9be0(0x135)]()[_0x8b9be0(0x126)]()[_0x8b9be0(0x12e)]('\x0a')!==-0x1)return;return a0_0x1012b7['toString']()[_0x8b9be0(0x123)](_0x8b9be0(0x159))[_0x8b9be0(0x126)]()[_0x8b9be0(0x143)](a0_0x1012b7)[_0x8b9be0(0x123)](_0x8b9be0(0x159));});a0_0x1012b7();'use strict';const path=require(a0_0x350e6d(0x124)),{loadExits,req,writeJson,nowIso}=require('./lib.js'),DIR=path['join'](__dirname),BASE='https://api.leostudio.cc',UA=a0_0x350e6d(0x14a),accounts=require(path[a0_0x350e6d(0x172)](DIR,a0_0x350e6d(0x144))),rec=accounts['filter'](_0x29afa5=>_0x29afa5[a0_0x350e6d(0x163)]&&_0x29afa5[a0_0x350e6d(0x163)][a0_0x350e6d(0x130)]&&_0x29afa5[a0_0x350e6d(0x163)][a0_0x350e6d(0x130)]['success'])[a0_0x350e6d(0x161)](-0x1)[0x0];function a0_0x25cb(_0x5b533a,_0x56a478){_0x5b533a=_0x5b533a-0x122;const _0x4bbbba=a0_0x15c2();let _0x1012b7=_0x4bbbba[_0x5b533a];if(a0_0x25cb['AWJzRi']===undefined){var _0x324a25=function(_0x244a5d){const _0x440d61='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=';let _0x14a4dc='',_0x436c60='',_0x15985f=_0x14a4dc+_0x324a25,_0x2a6001=(''+function(){return 0x0;})['indexOf']('\x0a')!==-0x1;for(let _0x5db4c4=0x0,_0x39ebcd,_0x4d20d0,_0x5c1962=0x0;_0x4d20d0=_0x244a5d['charAt'](_0x5c1962++);~_0x4d20d0&&(_0x39ebcd=_0x5db4c4%0x4?_0x39ebcd*0x40+_0x4d20d0:_0x4d20d0,_0x5db4c4++%0x4)?_0x14a4dc+=_0x2a6001||_0x15985f['charCodeAt'](_0x5c1962+0xa)-0xa!==0x0?String['fromCharCode'](0xff&_0x39ebcd>>(-0x2*_0x5db4c4&0x6)):_0x5db4c4:0x0){_0x4d20d0=_0x440d61['indexOf'](_0x4d20d0);}for(let _0x2c14fa=0x0,_0x29afa5=_0x14a4dc['length'];_0x2c14fa<_0x29afa5;_0x2c14fa++){_0x436c60+='%'+('00'+_0x14a4dc['charCodeAt'](_0x2c14fa)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x436c60);};a0_0x25cb['oubtqf']=_0x324a25,a0_0x25cb['XjTABO']={},a0_0x25cb['AWJzRi']=!![];}const _0x15c2ec=_0x4bbbba[0x0];a0_0x25cb['vkFMhv']!==_0x15c2ec&&(a0_0x25cb['XjTABO']={},a0_0x25cb['vkFMhv']=_0x15c2ec);const _0x25cbb4=a0_0x25cb['XjTABO'][_0x5b533a];if(_0x25cbb4===undefined){const _0xc89fa3=function(_0x41903e){this['uDrfFv']=_0x41903e,this['WYEEzD']=[0x1,0x0,0x0],this['XTmPHr']=function(){return'newState';},this['BkLLDM']='\x5c\x77\x2b\x20\x2a\x5c\x28\x5c\x29\x20\x2a\x7b\x5c\x77\x2b\x20\x2a',this['sgCMBF']='\x5b\x27\x7c\x22\x5d\x2e\x2b\x5b\x27\x7c\x22\x5d\x3b\x3f\x20\x2a\x7d';};_0xc89fa3['prototype']['iGifJd']=function(){const _0x4e392d=new RegExp(this['BkLLDM']+this['sgCMBF']),_0x25e653=_0x4e392d['test'](this['XTmPHr']['toString']())?--this['WYEEzD'][0x1]:--this['WYEEzD'][0x0];return this['aFQRiC'](_0x25e653);},_0xc89fa3['prototype']['aFQRiC']=function(_0x271a84){if(!Boolean(~_0x271a84))return _0x271a84;return this['hKORmJ'](this['uDrfFv']);},_0xc89fa3['prototype']['hKORmJ']=function(_0x5bc0f9){for(let _0x1f4600=0x0,_0x5d3737=this['WYEEzD']['length'];_0x1f4600<_0x5d3737;_0x1f4600++){this['WYEEzD']['push'](Math['round'](Math['random']())),_0x5d3737=this['WYEEzD']['length'];}return _0x5bc0f9(this['WYEEzD'][0x0]);},(''+function(){return 0x0;})['indexOf']('\x0a')===-0x1&&new _0xc89fa3(a0_0x25cb)['iGifJd'](),_0x1012b7=a0_0x25cb['oubtqf'](_0x1012b7),a0_0x25cb['XjTABO'][_0x5b533a]=_0x1012b7;}else _0x1012b7=_0x25cbb4;return _0x1012b7;}if(!rec)throw new Error(a0_0x350e6d(0x13c));console[a0_0x350e6d(0x154)](a0_0x350e6d(0x173)+rec[a0_0x350e6d(0x13e)]+'\x20'+rec[a0_0x350e6d(0x13f)]+'\x20('+rec[a0_0x350e6d(0x127)]+')');const pool=loadExits([path['join'](__dirname,a0_0x350e6d(0x133),a0_0x350e6d(0x156),'screened-api.leostudio.cc.txt')],{'shuffle':![]});console[a0_0x350e6d(0x154)]('exits:\x20'+pool[a0_0x350e6d(0x148)]);function a0_0x15c2(){const _0x1d941a=['CgfZC3DVCMq','ANnVBG','mZKYofz4z3vwra','BwvZC2fNzq','C2v0q29VA2LL','AM9PBG','ywnJB3vUDcaJ','icbZzwXMifS','y29VA2LLicSGBMv3lwfWAs11C2vYoG','xsdIHPiG','y2f0y2G','C2vHCMnO','Cgf0Aa','mtGZotiZnef5Bu95AG','Dg9tDhjPBMC','zw1HAwW','mtfMrujuugy','4OAsig91Dc9HDxrOlxbYB2jLlMPZB24','l2fWAs91C2vYl2nOzwnRAw4','zgf0yq','mtC5nty5zgLnt3Di','ndC0mJe5mevXCK1IzG','Aw5KzxHpzG','mtiZmZuYwMD1D3v1','Bg9NAw4','BM9Uzq','icbJAgvJA2LUifS','B3v0','Dg9Rzw5a','yMLUza','FcbKyxrHigTLExm6','Dgv4Da','BMv3lwfWAs11C2vYig9UBhK','zxjYB3i','y29VA2LLig9UBhK','Bg9NAw4G4OAs','BM8GCMvNAxn0zxjLzcbHy2nVDw50ihDPDgGGysbZDwnJzxnZzNvSigXVz2LUig9UigzPBgu','ihWG','Aw5KzxG','DxnLCM5HBwu','BMfTzq','nZeYmdGYmfnNBhfWCW','BgLUzq','y29UC3rYDwn0B3i','ywnJB3vUDhmUANnVBG','yxbWBgLJyxrPB24VANnVBIWGDgv4Dc9WBgfPBIWGkI8Q','l2fWAs91C2vYl3nLBgy','qMvHCMvYia','BgvUz3rO','BwfW','tw96AwXSys81lJaGkfDPBMrVD3mGtLqGmtaUmdSGv2LUnJq7ihG2ncKGqxbWBgvxzwjlAxqVntm3lJm2icHlsfrntcWGBgLRzsbhzwnRBYKGq2HYB21LlZeZoc4WlJaUmcbtywzHCMKVntm3lJm2','CgfYC2u','C2v0lwnVB2TPztO','yxv0Ac1WCM9Izs5QC29U','ChvZAa','mJuWnMfdqvftwa','ChjVyMuGzMfPBgvKoG','mJm2nZCWmMrgBwvrtG','Dg9Rzw4','Bg9NAw4GANnVBIbRzxLZoG','Bg9N','icb0B2TLBIbB','Cg9VBa','l2fWAs90B2TLBI8','C3rYAw5NAwz5','kcGOlISPkYKRksSK','ywnJzxnZx3rVA2vU','C3rHDhvZ','zw4TvvmSzw47Ct0WlJKSEMGTq047Ct0WlJG','nvbgELDKqG','l2fWAs91C2vYl2XVz2LU','yMvHCMvYig9UBhK','icbLEgL0igrPzwqGB24GBg9NAw46ia','C2XPy2u','y29VA2LLicSGyMvHCMvY','C3rLChm','ue9tva','ngnrtfH2AW','zxHPDa','r0vu','A2v5CW','y253nc1WCM9Izq','yxbWBhK','BM8GzxHPDcbJB3vSzcbSB2DPBG','y2HLy2TPBKa'];a0_0x15c2=function(){return _0x1d941a;};return a0_0x15c2();}async function via(_0xc89fa3,_0x41903e,{method:method=a0_0x350e6d(0x167),body:body=null,headers:headers={}}={}){const _0xa903e8=a0_0x350e6d,_0x4e392d=await req(_0xc89fa3,BASE+_0x41903e,{'method':method,'body':body,'timeoutMs':0x7530,'connectTimeoutMs':0x1f40,'headers':{'accept':_0xa903e8(0x145),'accept-language':_0xa903e8(0x15c),'user-agent':UA,...headers}});let _0x25e653=null;try{_0x25e653=JSON[_0xa903e8(0x14b)](_0x4e392d[_0xa903e8(0x137)]);}catch(_0x271a84){}return{'status':_0x4e392d[_0xa903e8(0x15b)],'json':_0x25e653,'text':String(_0x4e392d[_0xa903e8(0x137)])[_0xa903e8(0x161)](0x0,0x12c),'setCookie':_0x4e392d['headers']['set-cookie']||null,'exit':_0xc89fa3['line']};}(async()=>{const _0x4979d1=a0_0x350e6d;let _0x5bc0f9=null,_0x1f4600=null;for(const _0x3cbbcb of pool){try{_0x5bc0f9=await via(_0x3cbbcb,_0x4979d1(0x15e),{'method':_0x4979d1(0x164),'body':{'username':rec[_0x4979d1(0x13f)],'password':rec[_0x4979d1(0x16d)]}}),_0x1f4600=_0x3cbbcb;break;}catch(_0x1b6fe8){console['log'](_0x4979d1(0x160)+_0x3cbbcb[_0x4979d1(0x142)]+'\x20('+String(_0x1b6fe8[_0x4979d1(0x170)])[_0x4979d1(0x161)](0x0,0x3c)+')');}}if(!_0x5bc0f9)throw new Error(_0x4979d1(0x16b));console[_0x4979d1(0x154)](_0x4979d1(0x13b),_0x5bc0f9[_0x4979d1(0x15b)],_0x5bc0f9[_0x4979d1(0x137)][_0x4979d1(0x161)](0x0,0xc8)),console['log'](_0x4979d1(0x153),_0x5bc0f9[_0x4979d1(0x16e)]?Object['keys'](_0x5bc0f9['json']):null,_0x4979d1(0x136),_0x5bc0f9['json']&&_0x5bc0f9[_0x4979d1(0x16e)][_0x4979d1(0x12b)]?Object[_0x4979d1(0x168)](_0x5bc0f9[_0x4979d1(0x16e)][_0x4979d1(0x12b)]):null),console[_0x4979d1(0x154)](_0x4979d1(0x14c),(_0x5bc0f9[_0x4979d1(0x171)]||[])[_0x4979d1(0x149)](_0x8a1181=>_0x8a1181['split'](';')[0x0])[_0x4979d1(0x172)](_0x4979d1(0x13d))||_0x4979d1(0x131));const _0x5d3737=(_0x5bc0f9['setCookie']||[])[_0x4979d1(0x149)](_0x3efe65=>_0x3efe65['split'](';')[0x0])[_0x4979d1(0x172)](';\x20'),_0x28473d=_0x5bc0f9[_0x4979d1(0x16e)]&&_0x5bc0f9[_0x4979d1(0x16e)][_0x4979d1(0x12b)]&&(_0x5bc0f9[_0x4979d1(0x16e)]['data']['id']||_0x5bc0f9[_0x4979d1(0x16e)][_0x4979d1(0x12b)]['user_id']),_0x3f5014=_0x5bc0f9[_0x4979d1(0x16e)]&&_0x5bc0f9[_0x4979d1(0x16e)]['data']&&(_0x5bc0f9[_0x4979d1(0x16e)][_0x4979d1(0x12b)][_0x4979d1(0x15a)]||_0x5bc0f9[_0x4979d1(0x16e)]['data'][_0x4979d1(0x152)]),_0x10c1d0=[[_0x4979d1(0x13a),{'cookie':_0x5d3737}],[_0x4979d1(0x175)+_0x28473d,{'cookie':_0x5d3737,'new-api-user':String(_0x28473d||'')}],[_0x4979d1(0x162),{'cookie':_0x5d3737,..._0x3f5014?{'authorization':_0x4979d1(0x147)+_0x3f5014}:{}}],[_0x4979d1(0x15f),{..._0x3f5014?{'authorization':_0x4979d1(0x147)+_0x3f5014}:{}}],['cookie\x20+\x20new-api-user\x20+\x20bearer',{'cookie':_0x5d3737,'new-api-user':String(_0x28473d||''),..._0x3f5014?{'authorization':_0x4979d1(0x147)+_0x3f5014}:{}}],[_0x4979d1(0x138),{'new-api-user':String(_0x28473d||'')}]],_0xdeff5e=[];for(const [_0x1ed730,_0xd44f21]of _0x10c1d0){let _0x4a0b45=null;try{_0x4a0b45=await via(_0x1f4600,_0x4979d1(0x146),{'headers':_0xd44f21});}catch(_0x55ff8d){_0x4a0b45={'status':0x0,'error':String(_0x55ff8d['message'])['slice'](0x0,0x78)};}_0xdeff5e[_0x4979d1(0x14e)]({'name':_0x1ed730,..._0x4a0b45}),console[_0x4979d1(0x154)](_0x4979d1(0x174)+_0x1ed730+']\x20→\x20'+_0x4a0b45[_0x4979d1(0x15b)]+'\x20'+String(_0x4a0b45['json']?JSON[_0x4979d1(0x158)](_0x4a0b45['json']):_0x4a0b45[_0x4979d1(0x139)]||_0x4a0b45['text'])[_0x4979d1(0x161)](0x0,0x8c));}const _0x466516=_0xdeff5e['find'](_0xc09db4=>_0xc09db4[_0x4979d1(0x15b)]===0xc8);if(_0x466516){const _0x5ea190=_0x10c1d0['find'](([_0x7efaa4])=>_0x7efaa4===_0x466516[_0x4979d1(0x140)])[0x1],_0x18e501=await via(_0x1f4600,_0x4979d1(0x12a),{'method':_0x4979d1(0x164),'body':{},'headers':_0x5ea190});console[_0x4979d1(0x154)](_0x4979d1(0x132)+_0x466516[_0x4979d1(0x140)]+_0x4979d1(0x176)+_0x18e501[_0x4979d1(0x15b)]+'\x20'+_0x18e501[_0x4979d1(0x137)][_0x4979d1(0x161)](0x0,0x78));const _0x5a12ba=await via(_0x1f4600,_0x4979d1(0x157),{'method':_0x4979d1(0x164),'body':{'name':_0x4979d1(0x169),'remain_quota':0x0,'expired_time':-0x1,'unlimited_quota':![],'model_limits_enabled':![],'model_limits':'','allow_ips':'','group':''},'headers':_0x5ea190});console[_0x4979d1(0x154)](_0x4979d1(0x155)+_0x466516[_0x4979d1(0x140)]+_0x4979d1(0x176)+_0x5a12ba[_0x4979d1(0x15b)]+'\x20'+_0x5a12ba['text'][_0x4979d1(0x161)](0x0,0xc8)),_0xdeff5e[_0x4979d1(0x14e)]({'name':_0x4979d1(0x16c)+_0x466516[_0x4979d1(0x140)],..._0x18e501}),_0xdeff5e[_0x4979d1(0x14e)]({'name':_0x4979d1(0x134)+_0x466516['name'],..._0x5a12ba});}writeJson(path[_0x4979d1(0x172)](DIR,_0x4979d1(0x133),_0x4979d1(0x14d)),{'at':nowIso(),'account':rec[_0x4979d1(0x13f)],'login':{'status':_0x5bc0f9['status'],'json':_0x5bc0f9[_0x4979d1(0x16e)],'setCookie':_0x5bc0f9['setCookie']},'variants':_0xdeff5e}),console[_0x4979d1(0x154)](_0x4979d1(0x129));})()[a0_0x350e6d(0x122)](_0x42f987=>{const _0x59e7bb=a0_0x350e6d;console[_0x59e7bb(0x139)](_0x59e7bb(0x150),_0x42f987['message']),process[_0x59e7bb(0x166)](0x1);});
+'use strict';
+
+/**
+ * Which auth carrier does this fork's /api/user/self accept?
+ *
+ * Measured 2026-10-15: register+login answer 200/success, but every authed call
+ * (self/checkin/token) answers `401 {"message":"Unauthorized, invalid access
+ * token"}` with the session cookie + an empty `New-Api-User` header. This probe
+ * logs in with an account record the mint already created and replays the same
+ * request under every plausible carrier, so the fix is evidence-based.
+ *
+ *   node probe-auth.js
+ */
+
+const path = require('path');
+const { loadExits, req, writeJson, nowIso } = require('./lib.js');
+
+const DIR = path.join(__dirname);
+const BASE = 'https://api.leostudio.cc';
+const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36';
+
+const accounts = require(path.join(DIR, 'accounts.json'));
+const rec = accounts.filter((a) => a.steps && a.steps.login && a.steps.login.success).slice(-1)[0];
+if (!rec) throw new Error('no registered account with a successful login on file');
+console.log(`account #${rec.index} ${rec.username} (${rec.email})`);
+
+const pool = loadExits([path.join(__dirname, 'out', 'pool', 'screened-api.leostudio.cc.txt')], { shuffle: false });
+console.log(`exits: ${pool.length}`);
+
+async function via(p, pathname, { method = 'GET', body = null, headers = {} } = {}) {
+  const res = await req(p, BASE + pathname, {
+    method,
+    body,
+    timeoutMs: 30000,
+    connectTimeoutMs: 8000,
+    headers: { accept: 'application/json, text/plain, */*', 'accept-language': 'en-US,en;q=0.9,zh-CN;q=0.8', 'user-agent': UA, ...headers },
+  });
+  let json = null;
+  try {
+    json = JSON.parse(res.text);
+  } catch (e) {}
+  return { status: res.status, json, text: String(res.text).slice(0, 300), setCookie: res.headers['set-cookie'] || null, exit: p.line };
+}
+
+(async () => {
+  // 1) login and capture the full answer
+  let login = null;
+  let pin = null;
+  for (const p of pool) {
+    try {
+      login = await via(p, '/api/user/login', { method: 'POST', body: { username: rec.username, password: rec.password } });
+      pin = p;
+      break;
+    } catch (e) {
+      console.log(`  exit died on login: ${p.line} (${String(e.message).slice(0, 60)})`);
+    }
+  }
+  if (!login) throw new Error('no exit could login');
+  console.log('login →', login.status, login.text.slice(0, 200));
+  console.log('login json keys:', login.json ? Object.keys(login.json) : null, '| data keys:', login.json && login.json.data ? Object.keys(login.json.data) : null);
+  console.log('set-cookie:', (login.setCookie || []).map((c) => c.split(';')[0]).join(' | ') || 'none');
+
+  const cookie = (login.setCookie || []).map((c) => c.split(';')[0]).join('; ');
+  const id = login.json && login.json.data && (login.json.data.id || login.json.data.user_id);
+  const token = login.json && login.json.data && (login.json.data.access_token || login.json.data.token);
+
+  const variants = [
+    ['cookie only', { cookie }],
+    ['cookie + new-api-user:' + id, { cookie, 'new-api-user': String(id || '') }],
+    ['cookie + bearer', { cookie, ...(token ? { authorization: `Bearer ${token}` } : {}) }],
+    ['bearer only', { ...(token ? { authorization: `Bearer ${token}` } : {}) }],
+    ['cookie + new-api-user + bearer', { cookie, 'new-api-user': String(id || ''), ...(token ? { authorization: `Bearer ${token}` } : {}) }],
+    ['new-api-user only', { 'new-api-user': String(id || '') }],
+  ];
+  const rows = [];
+  for (const [name, headers] of variants) {
+    let r = null;
+    try {
+      r = await via(pin, '/api/user/self', { headers });
+    } catch (e) {
+      r = { status: 0, error: String(e.message).slice(0, 120) };
+    }
+    rows.push({ name, ...r });
+    console.log(`  self [${name}] → ${r.status} ${String(r.json ? JSON.stringify(r.json) : r.error || r.text).slice(0, 140)}`);
+  }
+  // also: which one works for checkin/token? (use the winning shape if any)
+  const win = rows.find((r) => r.status === 200);
+  if (win) {
+    const shape = variants.find(([n]) => n === win.name)[1];
+    const ci = await via(pin, '/api/user/checkin', { method: 'POST', body: {}, headers: shape });
+    console.log(`  checkin [${win.name}] → ${ci.status} ${ci.text.slice(0, 120)}`);
+    const tk = await via(pin, '/api/token/', {
+      method: 'POST',
+      body: { name: 'cnw4-probe', remain_quota: 0, expired_time: -1, unlimited_quota: false, model_limits_enabled: false, model_limits: '', allow_ips: '', group: '' },
+      headers: shape,
+    });
+    console.log(`  token [${win.name}] → ${tk.status} ${tk.text.slice(0, 200)}`);
+    rows.push({ name: 'checkin@' + win.name, ...ci });
+    rows.push({ name: 'token@' + win.name, ...tk });
+  }
+  writeJson(path.join(DIR, 'out', 'auth-probe.json'), { at: nowIso(), account: rec.username, login: { status: login.status, json: login.json, setCookie: login.setCookie }, variants: rows });
+  console.log('→ out/auth-probe.json');
+})().catch((e) => {
+  console.error('probe failed:', e.message);
+  process.exit(1);
+});

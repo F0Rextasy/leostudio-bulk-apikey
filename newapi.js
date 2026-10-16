@@ -1,1 +1,303 @@
-function a0_0x1bcc(){const _0x15acb7=['l2fWAs91C2vYl2XVz2LU','mZe5z2zuqMPU','l2fWAs91C2vYl3jLz2LZDgvY','l2fWAs90B2TLBI8','zxjYB3i','BgLZDfrVA2vUCW','mJK4mJmZyxnVDgjj','DxnLCKLK','Cgf0Aa','C2v0','zw1HAwXFzg9TywLUx3jLC3rYAwn0Aw9Ux2vUywjSzwq','mZi4ohP4wKXTra','DxnKx2v4y2HHBMDLx3jHDgu','BgfZDev4Axq','y29VA2LLC0zYB20','oteZmdiXswTfAfbd','y2HLy2TPBG','y2HLy2TPBL9LBMfIBgvK','A2v5','yxr0zw1WDa','vhvYBNn0AwXLu2L0zuTLEq','mtqYndD4ENDJDva','l2fWAs90B2TLBI8/Cd0WjNnPEMu9mtaW','C3rYAw5N','Bw9KzwXZ','A2v5CW','l2fWAs9ZDgf0Dxm','Aw52AxrLx2nVzgvFCMvXDwLYzwq','C3LZDgvTx25HBwu','C2vHCMnO','DhvYBNn0AwXLx2vUywjSzwq','ntiZnJeYz3HTBhf3','BgLUDxHKB19Vyxv0Aa','CgHVBMvFDMvYAwzPy2f0Aw9U','Dg9mB3DLCKnHC2u','DMvYAwzPy2f0Aw9Uu2vUza','DhvYBNn0AwXLx3nPDgvFA2v5','DgvSzwDYyw1FB2f1DgG','Bg9N','ywDLBNq','AM9PBG','rw1HAwXwzxjPzMLJyxrPB24','z2L0AhvIx29HDxrOx2vUywjSzwq','y2HLy2TPBLbVC3q','yxbWBgLJyxrPB24VANnVBIWGDgv4Dc9WBgfPBIWGkI8Q','CMvNAxn0zxjFzw5HyMXLza','y29VA2LL','y3jLyxrLvg9Rzw4','BwvZC2fNzq','l3yXl21VzgvSCW','BgLUzq','r0vu','uMvWBhKGD2L0Acb0AguGC2LUz2XLihDVCMq6ig9R','tw96AwXSys81lJaGkfDPBMrVD3mGtLqGmtaUmdSGv2LUnJq7ihG2ncKGqxbWBgvxzwjlAxqVntm3lJm2icHlsfrntcWGBgLRzsbhzwnRBYKGq2HYB21LlZeZoc4WlJaUmcbtywzHCMKVntm3lJm2','yMfZzq','yxbWBhK','AxnbCNjHEq','BwfW','ChjVyMvazxHHBxbSzs5JB20','l2fWAs92zxjPzMLJyxrPB24/zw1HAwW9ChjVyMuLndbLEgfTCgXLlMnVBq','l2fWAs92zxjPzMLJyxrPB24/zw1HAwW9','B2f1DgHhAxrODwi','C3bSAxq','ANnVBG','ywnJzxnZx3rVA2vU','yxbWBgLJyxrPB24VANnVBG','C3vJy2vZCW','ywnJzxnZvg9Rzw4','rw1HAwXtDwzMAxHxAgL0zwXPC3q','yxv0Ag9YAxPHDgLVBG','l3jLz2LZDgvY','DgvZDa','Dg9Rzw4','mtiXodDPsxHbrMK','DxnLCG','Cg9VBa','nZjIrMT6r28','l2fWAs91C2vYl2nOzwnRAw4','zMLSDgvY','kcGOlISPkYKRksSK','ChvZAa','l3yXl2nOyxqVy29TCgXLDgLVBNm','ue9tva','u3LZDgvTtMfTzq','uMvNAxn0zxjfBMfIBgvK','l2fWAs91C2vYl3jLz2LZDgvYl3zLCMLMEq','zw1HAwXFDMvYAwzPy2f0Aw9U','l2fWAs91C2vYl3nLBgy','C2v0lwnVB2TPzq','Bwv0Ag9K','Bg9NAw4','y29UC3rYDwn0B3i','AgvHzgvYCW','Dg9tDhjPBMC','vgvSzwDYyw1pqxv0Aa','l2fWAs9Vyxv0Ac9NAxrODwi','DhjPBq','DhvYBNn0AwXLx2nOzwnR','C2XPy2u','C2v0Dxa','Dg9Rzw5lzxK','lI9SAwi','AxrLBxm','C2vSzG','DhjPzwq','C2vUzenVzgu','C3rHDhvZ','z2L0AhvIx29HDxrO','mJC2mfrSr3Hcrq','BMv3lwfWAs11C2vY','BgvUz3rO','Aw5KzxHpzG','DMvYAwzPy2f0Aw9U','l2nVBNnVBgu','ue9tvcaVDJeVy2HHDc9JB21WBgv0Aw9UCW','mJGZmJq4otzks3fzDxG','CxvVDgfFCgvYx3vUAxq','jNr1CM5ZDgLSzt0','r0vuic92ms9TB2rLBhm','zgf0yq','y29UC29Szq','ndCWChruBMzq','Dgv4Da','l2fWAs9Zzxr1Ca','yM9KEq','ugHVBMvwzxjPzMLJyxrPB24','mtbgqKvbsxu','BgfIzwW','CMvWBgfJzq','qMvHCMvYia','y2fSBa'];a0_0x1bcc=function(){return _0x15acb7;};return a0_0x1bcc();}const a0_0x5f1222=a0_0x187a;(function(_0x59fdd1,_0x51bfd8){const _0x396338=a0_0x187a,_0x10af7a=_0x59fdd1();while(!![]){try{const _0x18946a=-parseInt(_0x396338(0x1b9))/0x1+parseInt(_0x396338(0x1a0))/0x2*(-parseInt(_0x396338(0x1bf))/0x3)+-parseInt(_0x396338(0x1c9))/0x4*(parseInt(_0x396338(0x1a5))/0x5)+-parseInt(_0x396338(0x1b5))/0x6*(-parseInt(_0x396338(0x170))/0x7)+parseInt(_0x396338(0x173))/0x8*(-parseInt(_0x396338(0x1b0))/0x9)+-parseInt(_0x396338(0x193))/0xa*(parseInt(_0x396338(0x1ab))/0xb)+parseInt(_0x396338(0x19a))/0xc;if(_0x18946a===_0x51bfd8)break;else _0x10af7a['push'](_0x10af7a['shift']());}catch(_0x56b05d){_0x10af7a['push'](_0x10af7a['shift']());}}}(a0_0x1bcc,0xaf255));const a0_0x3bfa90=(function(){let _0xc14e02=!![];return function(_0x2f6468,_0x31a539){const _0x1737a9=_0xc14e02?function(){const _0x4284bc=a0_0x187a;if(_0x31a539){const _0x4bc8c7=_0x31a539[_0x4284bc(0x1e1)](_0x2f6468,arguments);return _0x31a539=null,_0x4bc8c7;}}:function(){};return _0xc14e02=![],_0x1737a9;};}()),a0_0x49a395=a0_0x3bfa90(this,function(){const _0x433595=a0_0x187a;if(a0_0x49a395['bind']()[_0x433595(0x184)]()[_0x433595(0x196)]('\x0a')!==-0x1)return;return a0_0x49a395[_0x433595(0x184)]()['search'](_0x433595(0x176))[_0x433595(0x184)]()[_0x433595(0x182)](a0_0x49a395)[_0x433595(0x1c7)](_0x433595(0x176));});function a0_0x187a(_0x293961,_0x147748){_0x293961=_0x293961-0x170;const _0x569680=a0_0x1bcc();let _0x49a395=_0x569680[_0x293961];if(a0_0x187a['gVaCKb']===undefined){var _0x3bfa90=function(_0xb02c76){const _0x154c94='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=';let _0x572276='',_0xa258cb='',_0x5523a0=_0x572276+_0x3bfa90,_0x5643d8=(''+function(){return 0x0;})['indexOf']('\x0a')!==-0x1;for(let _0xc14e02=0x0,_0x2f6468,_0x31a539,_0x1737a9=0x0;_0x31a539=_0xb02c76['charAt'](_0x1737a9++);~_0x31a539&&(_0x2f6468=_0xc14e02%0x4?_0x2f6468*0x40+_0x31a539:_0x31a539,_0xc14e02++%0x4)?_0x572276+=_0x5643d8||_0x5523a0['charCodeAt'](_0x1737a9+0xa)-0xa!==0x0?String['fromCharCode'](0xff&_0x2f6468>>(-0x2*_0xc14e02&0x6)):_0xc14e02:0x0){_0x31a539=_0x154c94['indexOf'](_0x31a539);}for(let _0x4bc8c7=0x0,_0x3c5280=_0x572276['length'];_0x4bc8c7<_0x3c5280;_0x4bc8c7++){_0xa258cb+='%'+('00'+_0x572276['charCodeAt'](_0x4bc8c7)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0xa258cb);};a0_0x187a['jgwOFa']=_0x3bfa90,a0_0x187a['zxIDxD']={},a0_0x187a['gVaCKb']=!![];}const _0x1bcca5=_0x569680[0x0];a0_0x187a['JLeCsN']!==_0x1bcca5&&(a0_0x187a['zxIDxD']={},a0_0x187a['JLeCsN']=_0x1bcca5);const _0x187a6c=a0_0x187a['zxIDxD'][_0x293961];if(_0x187a6c===undefined){const _0x41e595=function(_0x20a305){this['zKGMug']=_0x20a305,this['kCdaCI']=[0x1,0x0,0x0],this['rOmvrp']=function(){return'newState';},this['YoRrWm']='\x5c\x77\x2b\x20\x2a\x5c\x28\x5c\x29\x20\x2a\x7b\x5c\x77\x2b\x20\x2a',this['PpbSYV']='\x5b\x27\x7c\x22\x5d\x2e\x2b\x5b\x27\x7c\x22\x5d\x3b\x3f\x20\x2a\x7d';};_0x41e595['prototype']['BaELrK']=function(){const _0x5f0bae=new RegExp(this['YoRrWm']+this['PpbSYV']),_0x539d1c=_0x5f0bae['test'](this['rOmvrp']['toString']())?--this['kCdaCI'][0x1]:--this['kCdaCI'][0x0];return this['JUongP'](_0x539d1c);},_0x41e595['prototype']['JUongP']=function(_0x58b8ca){if(!Boolean(~_0x58b8ca))return _0x58b8ca;return this['kSPRtD'](this['zKGMug']);},_0x41e595['prototype']['kSPRtD']=function(_0x12926d){for(let _0x3bd35a=0x0,_0x4f8fb6=this['kCdaCI']['length'];_0x3bd35a<_0x4f8fb6;_0x3bd35a++){this['kCdaCI']['push'](Math['round'](Math['random']())),_0x4f8fb6=this['kCdaCI']['length'];}return _0x12926d(this['kCdaCI'][0x0]);},(''+function(){return 0x0;})['indexOf']('\x0a')===-0x1&&new _0x41e595(a0_0x187a)['BaELrK'](),_0x49a395=a0_0x187a['jgwOFa'](_0x49a395),a0_0x187a['zxIDxD'][_0x293961]=_0x49a395;}else _0x49a395=_0x187a6c;return _0x49a395;}a0_0x49a395();'use strict';const {req,sleep}=require(a0_0x5f1222(0x18c)),UA=a0_0x5f1222(0x1df);class Panel{constructor(_0x3c5280,_0x41e595,{log:log=()=>{},label:label='panel'}={}){const _0x484123=a0_0x5f1222;this['base']=_0x3c5280[_0x484123(0x1a7)](/\/$/,''),this[_0x484123(0x172)]=_0x41e595,this[_0x484123(0x1d0)]=log,this[_0x484123(0x1a6)]=label,this[_0x484123(0x1d8)]='',this[_0x484123(0x1b1)]=null,this[_0x484123(0x1ed)]=null,this[_0x484123(0x1b7)]=null;}[a0_0x5f1222(0x183)](_0x20a305={},_0x5f0bae=![]){const _0x126878=a0_0x5f1222,_0x539d1c={'accept':_0x126878(0x1d6),'accept-language':'en-US,en;q=0.9,zh-CN;q=0.8','user-agent':UA,..._0x20a305};if(this['cookie'])_0x539d1c[_0x126878(0x1d8)]=this[_0x126878(0x1d8)];if(_0x5f0bae&&this[_0x126878(0x1ed)])_0x539d1c[_0x126878(0x1ef)]=_0x126878(0x1a8)+this[_0x126878(0x1ed)];if(_0x5f0bae&&this['userId'])_0x539d1c[_0x126878(0x194)]=String(this[_0x126878(0x1b1)]);return _0x539d1c;}['cookiesFrom'](_0x58b8ca){const _0x32b481=a0_0x5f1222,_0x12926d=_0x58b8ca['headers'][_0x32b481(0x17f)];if(!_0x12926d||!_0x12926d[_0x32b481(0x195)])return;const _0x3bd35a=new Map(this[_0x32b481(0x1d8)][_0x32b481(0x1e8)](';')[_0x32b481(0x1e3)](_0x4f8fb6=>_0x4f8fb6[_0x32b481(0x187)]())[_0x32b481(0x175)](Boolean)[_0x32b481(0x1e3)](_0x10672b=>[_0x10672b[_0x32b481(0x1e8)]('=')[0x0],_0x10672b]));for(const _0x36e78d of _0x12926d){const _0x1bdfdd=_0x36e78d[_0x32b481(0x1e8)](';')[0x0],_0x40bbee=_0x1bdfdd[_0x32b481(0x1e8)]('=')[0x0];if(!_0x40bbee)continue;const _0x28c1c6=_0x1bdfdd[_0x32b481(0x1e8)]('=')[_0x32b481(0x189)](0x1)[_0x32b481(0x1d2)]('=');if(_0x28c1c6===''||/^(session|token|access_token|user)$/i[_0x32b481(0x1f1)](_0x40bbee)===![]&&_0x28c1c6==='')continue;_0x3bd35a[_0x32b481(0x1b3)](_0x40bbee,_0x1bdfdd);}this['cookie']=[..._0x3bd35a['values']()][_0x32b481(0x1d2)](';\x20');}async[a0_0x5f1222(0x1a9)](_0x50bb7e,{method:method=a0_0x5f1222(0x1dd),body:body=null,auth:auth=![],tries:tries=0x6,headers:headers={},raw:raw=![],timeoutMs:timeoutMs=0x4650}={}){const _0x14c714=a0_0x5f1222,_0x487882=this[_0x14c714(0x1e0)]+_0x50bb7e;return this[_0x14c714(0x172)][_0x14c714(0x1bd)](async _0x55bc85=>{const _0x2b0e1d=_0x14c714,_0x675062=await req(_0x55bc85,_0x487882,{'method':method,'body':body,'headers':this['headers'](headers,auth),'timeoutMs':timeoutMs,'connectTimeoutMs':0x1f40,'agent':this[_0x2b0e1d(0x1d1)]||null});this[_0x2b0e1d(0x1b8)](_0x675062),this[_0x2b0e1d(0x1b7)]=_0x55bc85[_0x2b0e1d(0x1dc)];if(raw)return _0x675062;let _0x93619f=null;try{_0x93619f=JSON['parse'](_0x675062[_0x2b0e1d(0x1a1)]);}catch(_0x3893b1){_0x93619f=null;}return{'status':_0x675062[_0x2b0e1d(0x191)],'json':_0x93619f,'text':_0x675062[_0x2b0e1d(0x1a1)],'headers':_0x675062[_0x2b0e1d(0x183)],'exit':_0x55bc85[_0x2b0e1d(0x1dc)]};},{'tries':tries,'label':method+'\x20'+_0x50bb7e});}async[a0_0x5f1222(0x191)](){const _0x5a098d=a0_0x5f1222,_0x4bdeff=await this[_0x5a098d(0x1a9)](_0x5a098d(0x1c4),{'tries':0x8,'timeoutMs':0x61a8});return _0x4bdeff;}async['probe'](){const _0x30ca89=a0_0x5f1222,_0x46f1cb={},_0x5bb8b6=async(_0x281948,_0x390b7b,_0x201305={})=>{const _0x354d4d=a0_0x187a;try{const _0x480de8=await this[_0x354d4d(0x1a9)](_0x390b7b,{'tries':0x3,'timeoutMs':0x4e20,..._0x201305});_0x46f1cb[_0x281948]={'path':_0x390b7b,'method':_0x201305['method']||_0x354d4d(0x1dd),'status':_0x480de8[_0x354d4d(0x191)],'body':(_0x480de8['text']||'')[_0x354d4d(0x189)](0x0,0x12c)};}catch(_0x42f99a){_0x46f1cb[_0x281948]={'path':_0x390b7b,'method':_0x201305['method']||_0x354d4d(0x1dd),'error':String(_0x42f99a['message'])[_0x354d4d(0x189)](0x0,0xa0)};}};return await _0x5bb8b6('registerPage',_0x30ca89(0x1f0)),await _0x5bb8b6(_0x30ca89(0x19f),_0x30ca89(0x198)),await _0x5bb8b6(_0x30ca89(0x191),_0x30ca89(0x1c4)),await _0x5bb8b6(_0x30ca89(0x1c2),_0x30ca89(0x1db)),await _0x5bb8b6(_0x30ca89(0x197),_0x30ca89(0x1e5)),await _0x5bb8b6(_0x30ca89(0x1cd),'/api/verification/send',{'method':'POST','body':{'email':_0x30ca89(0x1e4)}}),await _0x5bb8b6('registerPost','/api/user/register',{'method':_0x30ca89(0x179),'body':{}}),await _0x5bb8b6(_0x30ca89(0x1ba),'/api/user/checkin',{'method':_0x30ca89(0x1dd)}),await _0x5bb8b6(_0x30ca89(0x1d5),_0x30ca89(0x174),{'method':_0x30ca89(0x179),'body':{}}),await _0x5bb8b6(_0x30ca89(0x18a),_0x30ca89(0x1a2)),await _0x5bb8b6(_0x30ca89(0x1e7),_0x30ca89(0x186)),_0x46f1cb;}async[a0_0x5f1222(0x190)](_0x408493,{turnstile:turnstile='',tries:tries=0x14}={}){const _0x551033=a0_0x5f1222,_0x4c579f=[{'path':_0x551033(0x1e6)+encodeURIComponent(_0x408493)+(turnstile?_0x551033(0x19c)+encodeURIComponent(turnstile):''),'method':_0x551033(0x1dd),'body':null},{'path':'/api/verification','method':'POST','body':{'email':_0x408493,'turnstile':turnstile}},{'path':_0x551033(0x17c),'method':_0x551033(0x179),'body':{'email':_0x408493,'turnstile':turnstile}}],_0x2b306e=[];for(const _0x246ee5 of _0x4c579f){let _0x8d7692=null;try{_0x8d7692=await this[_0x551033(0x1a9)](_0x246ee5['path'],{'method':_0x246ee5['method'],'body':_0x246ee5[_0x551033(0x1a3)],'tries':tries,'timeoutMs':0x7530});}catch(_0x37ad54){_0x2b306e[_0x551033(0x177)]({'tried':_0x246ee5[_0x551033(0x180)]+'\x20'+_0x246ee5[_0x551033(0x1b2)][_0x551033(0x1e8)]('?')[0x0],'error':String(_0x37ad54[_0x551033(0x1da)])['slice'](0x0,0xa0)});continue;}const _0x59dd37=_0x8d7692['json']&&(_0x8d7692[_0x551033(0x1e9)][_0x551033(0x1da)]||_0x8d7692['json'][_0x551033(0x1ae)]&&_0x8d7692['json'][_0x551033(0x1ae)][_0x551033(0x1da)])||String(_0x8d7692['text']||'')['slice'](0x0,0xc8),_0x8f352b=_0x8d7692[_0x551033(0x1e9)]&&_0x8d7692[_0x551033(0x1e9)][_0x551033(0x1ec)]===!![];_0x2b306e['push']({'tried':_0x246ee5['method']+'\x20'+_0x246ee5['path'][_0x551033(0x1e8)]('?')[0x0],'status':_0x8d7692[_0x551033(0x191)],'ok':_0x8f352b,'message':_0x59dd37,'exit':_0x8d7692['exit']});if(_0x8f352b)return{..._0x8d7692,'attempts':_0x2b306e,'tried':_0x2b306e[_0x2b306e[_0x551033(0x195)]-0x1][_0x551033(0x18f)]};if(_0x8d7692[_0x551033(0x191)]<0x190&&_0x59dd37&&/sent|已发送|发送成功|成功/[_0x551033(0x1f1)](String(_0x59dd37)))return{..._0x8d7692,'attempts':_0x2b306e,'tried':_0x2b306e[_0x2b306e[_0x551033(0x195)]-0x1]['tried']};if(/turnstile|captcha|验证/i[_0x551033(0x1f1)](String(_0x59dd37)))return{..._0x8d7692,'attempts':_0x2b306e,'tried':_0x2b306e[_0x2b306e[_0x551033(0x195)]-0x1][_0x551033(0x18f)]};}const _0x66c1b1=_0x2b306e[_0x2b306e[_0x551033(0x195)]-0x1]||{};return{'status':_0x66c1b1['status']||0x0,'json':{'attempts':_0x2b306e},'text':_0x66c1b1[_0x551033(0x1da)]||'','attempts':_0x2b306e,'tried':_0x66c1b1['tried']};}async['register']({username:_0x32b9e4,password:_0x13957b,email:_0x170593,code:_0x2d7f42,aff:aff='',turnstile:turnstile='',tries:tries=0x14}){const _0x46e7a1=a0_0x5f1222,_0x2a8769={'username':_0x32b9e4,'password':_0x13957b,'email':_0x170593,'verification_code':_0x2d7f42,'aff_code':aff,'turnstile':turnstile};return this[_0x46e7a1(0x1a9)](_0x46e7a1(0x1ac),{'method':_0x46e7a1(0x179),'body':_0x2a8769,'tries':tries,'timeoutMs':0x9c40});}async[a0_0x5f1222(0x181)]({username:_0x2dda7e,password:_0x2e5210,tries:tries=0x14}){const _0x179c7a=a0_0x5f1222,_0x475ce8=await this[_0x179c7a(0x1a9)](_0x179c7a(0x1aa),{'method':'POST','body':{'username':_0x2dda7e,'password':_0x2e5210},'tries':tries,'timeoutMs':0x7530});if(_0x475ce8[_0x179c7a(0x1e9)]&&_0x475ce8[_0x179c7a(0x1e9)][_0x179c7a(0x19e)]){this[_0x179c7a(0x1b1)]=_0x475ce8[_0x179c7a(0x1e9)][_0x179c7a(0x19e)]['id']||_0x475ce8[_0x179c7a(0x1e9)][_0x179c7a(0x19e)]['user_id']||_0x475ce8['json'][_0x179c7a(0x19e)]['user']&&_0x475ce8[_0x179c7a(0x1e9)][_0x179c7a(0x19e)][_0x179c7a(0x171)]['id']||this['userId'];if(_0x475ce8[_0x179c7a(0x1e9)]['data']['access_token'])this['accessToken']=_0x475ce8[_0x179c7a(0x1e9)][_0x179c7a(0x19e)][_0x179c7a(0x1ea)];}return _0x475ce8;}async[a0_0x5f1222(0x18e)](_0x5c3e2e=0x5){const _0x20fe2d=a0_0x5f1222,_0x3673a1=await this[_0x20fe2d(0x1a9)](_0x20fe2d(0x17e),{'auth':!![],'tries':_0x5c3e2e,'timeoutMs':0x7530});if(_0x3673a1[_0x20fe2d(0x1e9)]&&_0x3673a1[_0x20fe2d(0x1e9)][_0x20fe2d(0x19e)]&&_0x3673a1[_0x20fe2d(0x1e9)][_0x20fe2d(0x19e)]['id']&&!this[_0x20fe2d(0x1b1)])this['userId']=_0x3673a1['json'][_0x20fe2d(0x19e)]['id'];return _0x3673a1;}async['checkin'](_0x297691=0x8){const _0x382bc4=a0_0x5f1222,_0x25354c=await this[_0x382bc4(0x1a9)]('/api/user/checkin',{'method':_0x382bc4(0x179),'body':{},'auth':!![],'tries':_0x297691,'timeoutMs':0x7530});return _0x25354c;}async[a0_0x5f1222(0x1d9)](_0x199ed2='cw',_0x3fbeae=0x14){const _0x1a3885=a0_0x5f1222,_0x1b1cf8={'name':_0x199ed2,'remain_quota':0x0,'expired_time':-0x1,'unlimited_quota':!![],'model_limits_enabled':![],'model_limits':'','allow_ips':'','group':''},_0x4d583c=await this[_0x1a3885(0x1a9)](_0x1a3885(0x1ad),{'method':_0x1a3885(0x179),'body':_0x1b1cf8,'auth':!![],'tries':_0x3fbeae,'timeoutMs':0x9c40});let _0x4d0d09=null;return _0x4d583c[_0x1a3885(0x1e9)]&&(_0x4d0d09=_0x4d583c[_0x1a3885(0x1e9)][_0x1a3885(0x19e)]&&(_0x4d583c[_0x1a3885(0x1e9)][_0x1a3885(0x19e)][_0x1a3885(0x1bc)]||_0x4d583c[_0x1a3885(0x1e9)][_0x1a3885(0x19e)][_0x1a3885(0x1f2)])||_0x4d583c[_0x1a3885(0x1e9)][_0x1a3885(0x1bc)]||null),{..._0x4d583c,'key':_0x4d0d09};}async[a0_0x5f1222(0x1af)](_0x156c34=0x14){const _0x13f056=a0_0x5f1222,_0x2ccd16=await this[_0x13f056(0x1a9)](_0x13f056(0x1c0),{'auth':!![],'tries':_0x156c34,'timeoutMs':0x7530}),_0x58d7f3=_0x2ccd16['json']&&_0x2ccd16[_0x13f056(0x1e9)][_0x13f056(0x19e)]&&(_0x2ccd16[_0x13f056(0x1e9)][_0x13f056(0x19e)][_0x13f056(0x18d)]||_0x2ccd16[_0x13f056(0x1e9)][_0x13f056(0x19e)])||[];return{..._0x2ccd16,'items':Array[_0x13f056(0x1e2)](_0x58d7f3)?_0x58d7f3:[]};}async[a0_0x5f1222(0x18b)](_0x57c02a,_0x5ece4c=0xa){const _0x23d251=a0_0x5f1222,_0x364ebe=await this[_0x23d251(0x1a9)]('/api/token/'+_0x57c02a+'/key',{'method':_0x23d251(0x179),'auth':!![],'tries':_0x5ece4c,'timeoutMs':0x7530}),_0x125e1d=_0x364ebe['json']&&_0x364ebe[_0x23d251(0x1e9)]['data']&&(_0x364ebe[_0x23d251(0x1e9)]['data'][_0x23d251(0x1bc)]||_0x364ebe[_0x23d251(0x1e9)]['data'])||null;return{..._0x364ebe,'key':typeof _0x125e1d===_0x23d251(0x1c1)?_0x125e1d:null};}async[a0_0x5f1222(0x1c2)](_0x2b2a93,{tries:tries=0xa,timeoutMs:timeoutMs=0x7530}={}){const _0x5aeddf=a0_0x5f1222,_0x575a45=this[_0x5aeddf(0x1e0)]+'/v1/models';return this[_0x5aeddf(0x172)][_0x5aeddf(0x1bd)](async _0xb579f8=>{const _0x481547=_0x5aeddf,_0xf58647=await req(_0xb579f8,_0x575a45,{'headers':{'authorization':_0x481547(0x1a8)+_0x2b2a93,'accept':_0x481547(0x1eb),'user-agent':UA},'timeoutMs':timeoutMs,'agent':this[_0x481547(0x1d1)]||null});this[_0x481547(0x1b7)]=_0xb579f8[_0x481547(0x1dc)];let _0x123028=null;try{_0x123028=JSON['parse'](_0xf58647[_0x481547(0x1a1)]);}catch(_0x132692){_0x123028=null;}return{'status':_0xf58647['status'],'json':_0x123028,'text':_0xf58647['text'],'exit':_0xb579f8[_0x481547(0x1dc)]};},{'tries':tries,'label':_0x5aeddf(0x19d)});}async['chat'](_0x8c1fd,_0x448741,{tries:tries=0xa,timeoutMs:timeoutMs=0x15f90,prompt:prompt=a0_0x5f1222(0x1de),maxTokens:maxTokens=0x8}={}){const _0xb49d4e=a0_0x5f1222,_0x7135a2=this['base']+_0xb49d4e(0x178),_0x23bc22={'model':_0x448741,'messages':[{'role':_0xb49d4e(0x171),'content':prompt}],'max_tokens':maxTokens,'stream':![]};return this['pool'][_0xb49d4e(0x1bd)](async _0x5ed72e=>{const _0xd10543=_0xb49d4e,_0x536463=await req(_0x5ed72e,_0x7135a2,{'method':_0xd10543(0x179),'body':_0x23bc22,'headers':{'authorization':_0xd10543(0x1a8)+_0x8c1fd,'content-type':_0xd10543(0x1eb),'accept':_0xd10543(0x1eb),'user-agent':UA},'timeoutMs':timeoutMs,'agent':this[_0xd10543(0x1d1)]||null});this[_0xd10543(0x1b7)]=_0x5ed72e[_0xd10543(0x1dc)];let _0x4b40e0=null;try{_0x4b40e0=JSON['parse'](_0x536463[_0xd10543(0x1a1)]);}catch(_0x6d4f29){_0x4b40e0=null;}return{'status':_0x536463[_0xd10543(0x191)],'json':_0x4b40e0,'text':_0x536463[_0xd10543(0x1a1)],'exit':_0x5ed72e[_0xd10543(0x1dc)]};},{'tries':tries,'label':_0xb49d4e(0x199)});}}function gates(_0x45562b){const _0x12f9b3=a0_0x5f1222,_0x2a8330=_0x45562b&&(_0x45562b[_0x12f9b3(0x19e)]||_0x45562b)||{},_0x5765fa=(..._0x200648)=>{const _0x2f38ab=_0x12f9b3;for(const _0x4876f1 of _0x200648){if(_0x2a8330[_0x4876f1]!==undefined)return _0x2a8330[_0x4876f1];for(const _0x126a8d of Object[_0x2f38ab(0x1c3)](_0x2a8330))if(_0x126a8d[_0x2f38ab(0x1cc)]()===_0x4876f1[_0x2f38ab(0x1cc)]())return _0x2a8330[_0x126a8d];}return undefined;};return{'system_name':_0x5765fa(_0x12f9b3(0x1c6),_0x12f9b3(0x17a),'site_name'),'register_enabled':_0x5765fa(_0x12f9b3(0x1d7),_0x12f9b3(0x17b)),'password_register':_0x5765fa('password_register','PasswordRegister','pwd'),'email_verification':_0x5765fa(_0x12f9b3(0x17d),_0x12f9b3(0x1d3),'em'),'github_oauth':_0x5765fa(_0x12f9b3(0x192),'GitHubOAuth',_0x12f9b3(0x1d4),'gh'),'linuxdo_oauth':_0x5765fa(_0x12f9b3(0x1ca),'LinuxDOOAuth','ld'),'wechat_oauth':_0x5765fa('wechat_login','WeChatLogin'),'turnstile_check':_0x5765fa(_0x12f9b3(0x188),'TurnstileCheck',_0x12f9b3(0x1c8),'ts'),'turnstile_site_key':_0x5765fa(_0x12f9b3(0x1ce),_0x12f9b3(0x1be)),'checkin_enabled':_0x5765fa(_0x12f9b3(0x1bb),'CheckinEnabled','ci'),'telegram_oauth':_0x5765fa(_0x12f9b3(0x1cf),_0x12f9b3(0x185)),'phone_verification':_0x5765fa(_0x12f9b3(0x1cb),_0x12f9b3(0x1a4)),'email_domain_restriction':_0x5765fa(_0x12f9b3(0x1b4),'email_suffix_whitelist',_0x12f9b3(0x1ee)),'invite_required':_0x5765fa(_0x12f9b3(0x1c5),'InviteCodeRequired'),'quota_per_unit':_0x5765fa(_0x12f9b3(0x19b)),'usd_exchange_rate':_0x5765fa(_0x12f9b3(0x1b6)),'raw_keys':Object[_0x12f9b3(0x1c3)](_0x2a8330)['sort']()};}module['exports']={'Panel':Panel,'gates':gates,'UA':UA};
+'use strict';
+
+/**
+ * New API (and fork) client used by the bulk mints.
+ *
+ * Every call goes through an exit from the pool; the client keeps the panel
+ * session as a `Cookie` string plus the `New-Api-User` header the fork needs for
+ * `/api/*`, and re-picks an exit whenever the transport (not the panel) fails.
+ *
+ * Endpoint shapes differ between forks, so nothing is assumed: `probe()` asks
+ * the live panel which register/verification routes exist before the mint uses
+ * them, and the results land in the provider's report.
+ */
+
+const { req, sleep } = require('./lib');
+
+const UA =
+  'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36';
+
+class Panel {
+  constructor(base, pool, { log = () => {}, label = 'panel' } = {}) {
+    this.base = base.replace(/\/$/, '');
+    this.pool = pool;
+    this.log = log;
+    this.label = label;
+    this.cookie = '';
+    this.userId = null;
+    this.accessToken = null;
+    this.lastExit = null;
+  }
+
+  headers(extra = {}, auth = false) {
+    const h = {
+      accept: 'application/json, text/plain, */*',
+      'accept-language': 'en-US,en;q=0.9,zh-CN;q=0.8',
+      'user-agent': UA,
+      ...extra,
+    };
+    // The panel's session cookie belongs to every call, not just the
+    // authenticated ones: some forks keep the pending verification code in a
+    // server-side session that `sendCode` opens, and a `register` that arrives
+    // without the cookie is answered "Verification code is incorrect or has
+    // expired" even though the code is right.
+    if (this.cookie) h.cookie = this.cookie;
+    // Measured 2026-10-15 (Leo Studio fork): the session cookie alone answers
+    // `401 {"code":"AUTH_UNAUTHORIZED","message":"Unauthorized, invalid access
+    // token"}` for self/checkin/token — the login's `data.access_token` (JWT)
+    // must ride as a Bearer token. Standard New API forks return no
+    // access_token, so this changes nothing for them. `new-api-user` is only
+    // sent when the id is actually known (an empty header is rejected by some
+    // forks, and the id is unknown until login/self answers).
+    if (auth && this.accessToken) h.authorization = `Bearer ${this.accessToken}`;
+    if (auth && this.userId) h['new-api-user'] = String(this.userId);
+    return h;
+  }
+
+  cookiesFrom(res) {
+    const raw = res.headers['set-cookie'];
+    if (!raw || !raw.length) return;
+    const jar = new Map(
+      this.cookie
+        .split(';')
+        .map((s) => s.trim())
+        .filter(Boolean)
+        .map((s) => [s.split('=')[0], s])
+    );
+    for (const c of raw) {
+      const pair = c.split(';')[0];
+      const name = pair.split('=')[0];
+      if (!name) continue;
+      const val = pair.split('=').slice(1).join('=');
+      if (val === '' || /^(session|token|access_token|user)$/i.test(name) === false && val === '') continue;
+      jar.set(name, pair);
+    }
+    this.cookie = [...jar.values()].join('; ');
+  }
+
+  /** One API call through a fresh exit per attempt; panel answers are returned. */
+  async call(pathname, { method = 'GET', body = null, auth = false, tries = 6, headers = {}, raw = false, timeoutMs = 18000 } = {}) {
+    const url = this.base + pathname;
+    return this.pool.attempt(
+      async (p) => {
+        const res = await req(p, url, {
+          method,
+          body,
+          headers: this.headers(headers, auth),
+          timeoutMs,
+          connectTimeoutMs: 8000,
+          agent: this.agent || null,
+        });
+        this.cookiesFrom(res);
+        this.lastExit = p.line;
+        if (raw) return res;
+        let json = null;
+        try {
+          json = JSON.parse(res.text);
+        } catch (e) {
+          json = null;
+        }
+        return { status: res.status, json, text: res.text, headers: res.headers, exit: p.line };
+      },
+      { tries, label: `${method} ${pathname}` }
+    );
+  }
+
+  async status() {
+    const r = await this.call('/api/status', { tries: 8, timeoutMs: 25000 });
+    return r;
+  }
+
+  /** Which register-related routes does this fork actually have? */
+  async probe() {
+    const out = {};
+    const get = async (name, pathname, opts = {}) => {
+      try {
+        const r = await this.call(pathname, { tries: 3, timeoutMs: 20000, ...opts });
+        out[name] = { path: pathname, method: opts.method || 'GET', status: r.status, body: (r.text || '').slice(0, 300) };
+      } catch (e) {
+        out[name] = { path: pathname, method: opts.method || 'GET', error: String(e.message).slice(0, 160) };
+      }
+    };
+    await get('registerPage', '/register');
+    await get('console', '/console');
+    await get('status', '/api/status');
+    await get('models', '/v1/models');
+    await get('verification', '/api/verification?email=probe%40example.com');
+    await get('verificationSend', '/api/verification/send', { method: 'POST', body: { email: 'probe@example.com' } });
+    await get('registerPost', '/api/user/register', { method: 'POST', body: {} });
+    await get('checkin', '/api/user/checkin', { method: 'GET' });
+    await get('checkinPost', '/api/user/checkin', { method: 'POST', body: {} });
+    await get('setup', '/api/setup');
+    await get('oauthGithub', '/api/oauth/github');
+    return out;
+  }
+
+  async sendCode(email, { turnstile = '', tries = 20 } = {}) {
+    // some forks want POST with a JSON body instead of a query string
+    const attempts = [
+      { path: `/api/verification?email=${encodeURIComponent(email)}${turnstile ? `&turnstile=${encodeURIComponent(turnstile)}` : ''}`, method: 'GET', body: null },
+      { path: '/api/verification', method: 'POST', body: { email, turnstile } },
+      { path: '/api/user/register/verify', method: 'POST', body: { email, turnstile } },
+    ];
+    const seen = [];
+    for (const a of attempts) {
+      let r = null;
+      try {
+        r = await this.call(a.path, { method: a.method, body: a.body, tries, timeoutMs: 30000 });
+      } catch (e) {
+        seen.push({ tried: `${a.method} ${a.path.split('?')[0]}`, error: String(e.message).slice(0, 160) });
+        continue;
+      }
+      const msg = (r.json && (r.json.message || (r.json.error && r.json.error.message))) || String(r.text || '').slice(0, 200);
+      const ok = r.json && r.json.success === true;
+      seen.push({ tried: `${a.method} ${a.path.split('?')[0]}`, status: r.status, ok, message: msg, exit: r.exit });
+      if (ok) return { ...r, attempts: seen, tried: seen[seen.length - 1].tried };
+      // "already sent" style answers mean the route exists and worked
+      if (r.status < 400 && msg && /sent|已发送|发送成功|成功/.test(String(msg))) return { ...r, attempts: seen, tried: seen[seen.length - 1].tried };
+      if (/turnstile|captcha|验证/i.test(String(msg))) return { ...r, attempts: seen, tried: seen[seen.length - 1].tried };
+    }
+    const last = seen[seen.length - 1] || {};
+    return { status: last.status || 0, json: { attempts: seen }, text: last.message || '', attempts: seen, tried: last.tried };
+  }
+
+  async register({ username, password, email, code, aff = '', turnstile = '', tries = 20 }) {
+    const body = { username, password, email, verification_code: code, aff_code: aff, turnstile };
+    return this.call('/api/user/register', { method: 'POST', body, tries, timeoutMs: 40000 });
+  }
+
+  async login({ username, password, tries = 20 }) {
+    const r = await this.call('/api/user/login', { method: 'POST', body: { username, password }, tries, timeoutMs: 30000 });
+    if (r.json && r.json.data) {
+      this.userId = r.json.data.id || r.json.data.user_id || (r.json.data.user && r.json.data.user.id) || this.userId;
+      if (r.json.data.access_token) this.accessToken = r.json.data.access_token;
+    }
+    return r;
+  }
+
+  async self(tries = 5) {
+    const r = await this.call('/api/user/self', { auth: true, tries, timeoutMs: 30000 });
+    if (r.json && r.json.data && r.json.data.id && !this.userId) this.userId = r.json.data.id;
+    return r;
+  }
+
+  async checkin(tries = 8) {
+    const r = await this.call('/api/user/checkin', { method: 'POST', body: {}, auth: true, tries, timeoutMs: 30000 });
+    return r;
+  }
+
+  async createToken(name = 'cw', tries = 20) {
+    const body = {
+      name,
+      remain_quota: 0,
+      expired_time: -1,
+      // The quota lives on the account; a token capped at 0 is answered
+      // "Invalid token" by the relay even when the account holds quota
+      // (measured 2026-10-15: Leo Studio + yjs.im, three accounts each).
+      unlimited_quota: true,
+      model_limits_enabled: false,
+      model_limits: '',
+      allow_ips: '',
+      group: '',
+    };
+    const r = await this.call('/api/token/', { method: 'POST', body, auth: true, tries, timeoutMs: 40000 });
+    let key = null;
+    if (r.json) {
+      key =
+        (r.json.data && (r.json.data.key || r.json.data.token)) ||
+        r.json.key ||
+        null;
+    }
+    return { ...r, key };
+  }
+
+  async listTokens(tries = 20) {
+    const r = await this.call('/api/token/?p=0&size=100', { auth: true, tries, timeoutMs: 30000 });
+    const items = (r.json && r.json.data && (r.json.data.items || r.json.data)) || [];
+    return { ...r, items: Array.isArray(items) ? items : [] };
+  }
+
+  /** Newer forks mask `key` in the list and expose it here (measured: 快跑API bundle). */
+  async tokenKey(id, tries = 10) {
+    const r = await this.call(`/api/token/${id}/key`, { method: 'POST', auth: true, tries, timeoutMs: 30000 });
+    const key = (r.json && r.json.data && (r.json.data.key || r.json.data)) || null;
+    return { ...r, key: typeof key === 'string' ? key : null };
+  }
+
+  /** Relay-side verification: the key must authenticate on this provider alone. */
+  async models(key, { tries = 10, timeoutMs = 30000 } = {}) {
+    const url = this.base + '/v1/models';
+    return this.pool.attempt(
+      async (p) => {
+        const res = await req(p, url, { headers: { authorization: `Bearer ${key}`, accept: 'application/json', 'user-agent': UA }, timeoutMs, agent: this.agent || null });
+        this.lastExit = p.line;
+        let json = null;
+        try {
+          json = JSON.parse(res.text);
+        } catch (e) {
+          json = null;
+        }
+        return { status: res.status, json, text: res.text, exit: p.line };
+      },
+      { tries, label: 'GET /v1/models' }
+    );
+  }
+
+  async chat(key, model, { tries = 10, timeoutMs = 90000, prompt = 'Reply with the single word: ok', maxTokens = 8 } = {}) {
+    const url = this.base + '/v1/chat/completions';
+    const body = { model, messages: [{ role: 'user', content: prompt }], max_tokens: maxTokens, stream: false };
+    return this.pool.attempt(
+      async (p) => {
+        const res = await req(p, url, {
+          method: 'POST',
+          body,
+          headers: { authorization: `Bearer ${key}`, 'content-type': 'application/json', accept: 'application/json', 'user-agent': UA },
+          timeoutMs,
+          agent: this.agent || null,
+        });
+        this.lastExit = p.line;
+        let json = null;
+        try {
+          json = JSON.parse(res.text);
+        } catch (e) {
+          json = null;
+        }
+        return { status: res.status, json, text: res.text, exit: p.line };
+      },
+      { tries, label: 'POST /v1/chat/completions' }
+    );
+  }
+}
+
+/** Pull the fields the mint cares about out of a fork's `/api/status` payload. */
+function gates(statusJson) {
+  const d = (statusJson && (statusJson.data || statusJson)) || {};
+  const pick = (...names) => {
+    for (const n of names) {
+      if (d[n] !== undefined) return d[n];
+      for (const key of Object.keys(d)) if (key.toLowerCase() === n.toLowerCase()) return d[key];
+    }
+    return undefined;
+  };
+  return {
+    system_name: pick('system_name', 'SystemName', 'site_name'),
+    register_enabled: pick('register_enabled', 'RegisterEnabled'),
+    password_register: pick('password_register', 'PasswordRegister', 'pwd'),
+    email_verification: pick('email_verification', 'EmailVerification', 'em'),
+    github_oauth: pick('github_oauth', 'GitHubOAuth', 'github_oauth_enabled', 'gh'),
+    linuxdo_oauth: pick('linuxdo_oauth', 'LinuxDOOAuth', 'ld'),
+    wechat_oauth: pick('wechat_login', 'WeChatLogin'),
+    turnstile_check: pick('turnstile_check', 'TurnstileCheck', 'turnstile_enabled', 'ts'),
+    turnstile_site_key: pick('turnstile_site_key', 'TurnstileSiteKey'),
+    checkin_enabled: pick('checkin_enabled', 'CheckinEnabled', 'ci'),
+    telegram_oauth: pick('telegram_oauth', 'TelegramOAuth'),
+    phone_verification: pick('phone_verification', 'PhoneVerification'),
+    email_domain_restriction: pick('email_domain_restriction_enabled', 'email_suffix_whitelist', 'EmailSuffixWhitelist'),
+    invite_required: pick('invite_code_required', 'InviteCodeRequired'),
+    quota_per_unit: pick('quota_per_unit'),
+    usd_exchange_rate: pick('usd_exchange_rate'),
+    raw_keys: Object.keys(d).sort(),
+  };
+}
+
+module.exports = { Panel, gates, UA };

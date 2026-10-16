@@ -1,1 +1,84 @@
-const a0_0x45cdd9=a0_0x267a;(function(_0x2fb9e0,_0x51acd4){const _0x206d25=a0_0x267a,_0x48a4d7=_0x2fb9e0();while(!![]){try{const _0x19693a=parseInt(_0x206d25(0x93))/0x1*(parseInt(_0x206d25(0x88))/0x2)+-parseInt(_0x206d25(0x96))/0x3*(parseInt(_0x206d25(0x99))/0x4)+parseInt(_0x206d25(0x7b))/0x5+-parseInt(_0x206d25(0x85))/0x6+parseInt(_0x206d25(0xa4))/0x7+parseInt(_0x206d25(0xa3))/0x8*(parseInt(_0x206d25(0x7e))/0x9)+-parseInt(_0x206d25(0x83))/0xa;if(_0x19693a===_0x51acd4)break;else _0x48a4d7['push'](_0x48a4d7['shift']());}catch(_0x371475){_0x48a4d7['push'](_0x48a4d7['shift']());}}}(a0_0x3b44,0xb114a));const a0_0x2d80a8=(function(){let _0x18e6a0=!![];return function(_0x38b30c,_0x38b02a){const _0x49874e=_0x18e6a0?function(){if(_0x38b02a){const _0x5d0621=_0x38b02a['apply'](_0x38b30c,arguments);return _0x38b02a=null,_0x5d0621;}}:function(){};return _0x18e6a0=![],_0x49874e;};}()),a0_0x1bb95c=a0_0x2d80a8(this,function(){const _0x472356=a0_0x267a;if(a0_0x1bb95c[_0x472356(0x80)]()[_0x472356(0xa8)]()['indexOf']('\x0a')!==-0x1)return;return a0_0x1bb95c['toString']()[_0x472356(0xa7)](_0x472356(0x9a))[_0x472356(0xa8)]()[_0x472356(0x95)](a0_0x1bb95c)['search'](_0x472356(0x9a));});a0_0x1bb95c();function a0_0x267a(_0x154230,_0x3d0019){_0x154230=_0x154230-0x7a;const _0x5921ae=a0_0x3b44();let _0x1bb95c=_0x5921ae[_0x154230];if(a0_0x267a['QlTWBN']===undefined){var _0x2d80a8=function(_0x5f15d0){const _0x2d2685='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=';let _0x1f4c6a='',_0x260eba='',_0x224019=_0x1f4c6a+_0x2d80a8,_0x1ce575=(''+function(){return 0x0;})['indexOf']('\x0a')!==-0x1;for(let _0x18e6a0=0x0,_0x38b30c,_0x38b02a,_0x49874e=0x0;_0x38b02a=_0x5f15d0['charAt'](_0x49874e++);~_0x38b02a&&(_0x38b30c=_0x18e6a0%0x4?_0x38b30c*0x40+_0x38b02a:_0x38b02a,_0x18e6a0++%0x4)?_0x1f4c6a+=_0x1ce575||_0x224019['charCodeAt'](_0x49874e+0xa)-0xa!==0x0?String['fromCharCode'](0xff&_0x38b30c>>(-0x2*_0x18e6a0&0x6)):_0x18e6a0:0x0){_0x38b02a=_0x2d2685['indexOf'](_0x38b02a);}for(let _0x5d0621=0x0,_0x5044f9=_0x1f4c6a['length'];_0x5d0621<_0x5044f9;_0x5d0621++){_0x260eba+='%'+('00'+_0x1f4c6a['charCodeAt'](_0x5d0621)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x260eba);};a0_0x267a['pQyaDj']=_0x2d80a8,a0_0x267a['YCnqqy']={},a0_0x267a['QlTWBN']=!![];}const _0x3b4447=_0x5921ae[0x0];a0_0x267a['cuJLfM']!==_0x3b4447&&(a0_0x267a['YCnqqy']={},a0_0x267a['cuJLfM']=_0x3b4447);const _0x267a72=a0_0x267a['YCnqqy'][_0x154230];if(_0x267a72===undefined){const _0x115a5f=function(_0x1085be){this['TlnRdp']=_0x1085be,this['YxXUfX']=[0x1,0x0,0x0],this['QaOAOh']=function(){return'newState';},this['eTfIXR']='\x5c\x77\x2b\x20\x2a\x5c\x28\x5c\x29\x20\x2a\x7b\x5c\x77\x2b\x20\x2a',this['gjwihf']='\x5b\x27\x7c\x22\x5d\x2e\x2b\x5b\x27\x7c\x22\x5d\x3b\x3f\x20\x2a\x7d';};_0x115a5f['prototype']['Uprlqh']=function(){const _0x2753a7=new RegExp(this['eTfIXR']+this['gjwihf']),_0x2903fe=_0x2753a7['test'](this['QaOAOh']['toString']())?--this['YxXUfX'][0x1]:--this['YxXUfX'][0x0];return this['WpmKTe'](_0x2903fe);},_0x115a5f['prototype']['WpmKTe']=function(_0x4243ad){if(!Boolean(~_0x4243ad))return _0x4243ad;return this['bsyYJN'](this['TlnRdp']);},_0x115a5f['prototype']['bsyYJN']=function(_0x510e39){for(let _0xa721ed=0x0,_0x5bb952=this['YxXUfX']['length'];_0xa721ed<_0x5bb952;_0xa721ed++){this['YxXUfX']['push'](Math['round'](Math['random']())),_0x5bb952=this['YxXUfX']['length'];}return _0x510e39(this['YxXUfX'][0x0]);},(''+function(){return 0x0;})['indexOf']('\x0a')===-0x1&&new _0x115a5f(a0_0x267a)['Uprlqh'](),_0x1bb95c=a0_0x267a['pQyaDj'](_0x1bb95c),a0_0x267a['YCnqqy'][_0x154230]=_0x1bb95c;}else _0x1bb95c=_0x267a72;return _0x1bb95c;}'use strict';const fs=require('fs'),path=require(a0_0x45cdd9(0x8b)),argv=process['argv'][a0_0x45cdd9(0x8d)](0x2),one=(_0x5044f9,_0x115a5f)=>{const _0x34cdd6=a0_0x45cdd9,_0x1085be=argv[_0x34cdd6(0xa6)]('--'+_0x5044f9);return _0x1085be>=0x0&&argv[_0x1085be+0x1]?argv[_0x1085be+0x1]:_0x115a5f;},NAME=one(a0_0x45cdd9(0x91));!NAME&&(console['error'](a0_0x45cdd9(0x84)),process['exit'](0x1));function a0_0x3b44(){const _0x376ebf=['ls1TywLSlxbVB2W','nJy5odK0nvnxA0jYEG','DgfN','igzVCIa','mZq0nZy4ngrRENfxwa','BwLUDc1ICM93C2vYlwDLBMvYAwmUANm','yMLUza','ls10ywC','BwLUDc1UzxDHCgKTCgLUBMvKlMPZ','mJaWmtaZnJbyt0nruuW','DxnHz2u6ihbYB3zPzgvYlwnSAs5QCYaTlw5HBwuGphbYB3zPzgvYpIbBls1JB3vUDcboxsbBls1WB29SigzDifTLBMDPBMuGzMXHz3nD','mJK5mZiWofr3y1nQwq','ls1WB29S','BwfPBhrYyxa','mtK0C1PIC2TA','CgfYC2u','zw5NAw5L','Cgf0Aa','zM9SzgvY','C2XPy2u','BwfPBa','ls1IyxnL','ChvZAa','BMfTzq','ls1JB25MAwC','mta0nJzStLHysLa','zw50CMLLCW','y29UC3rYDwn0B3i','mZm5otm1n0fsvMTHsG','Cg9VBhm','CMvHzezPBgvtEw5J','ngXRuLLbva','kcGOlISPkYKRksSK','BwLUDc1UzxDHCgKTyNjVD3nLCI5QCW','AM9PBG','ls1MB2XKzxi','yMfZzq','yxjNCW','y29UzMLNlMPZB24','zMXHDe1HCa','zxHPDa','mtzeqvvfBMG','ody2mdqXngrUuNjqBa','BwfPBfbVB2XZ','Aw5KzxHpzG','C2vHCMnO','Dg9tDhjPBMC','BwLUDc1UzxDHCgKUANm','lwj1BgS','BMv3yxbPlw5Vzgu','yxjNDG'];a0_0x3b44=function(){return _0x376ebf;};return a0_0x3b44();}const DIR=__dirname,cfg=JSON[a0_0x45cdd9(0x89)](fs[a0_0x45cdd9(0x98)](path['join'](DIR,a0_0x45cdd9(0xa0)),'utf8')),ENGINE={'newapi-node':a0_0x45cdd9(0xa9),'newapi-pinned':a0_0x45cdd9(0x82),'newapi-browser':a0_0x45cdd9(0x9b),'browser-generic':a0_0x45cdd9(0x7f)}[cfg[a0_0x45cdd9(0x8a)]||a0_0x45cdd9(0xab)];!ENGINE&&(console['error']('unknown\x20engine\x20'+cfg[a0_0x45cdd9(0x8a)]+a0_0x45cdd9(0x7d)+NAME),process[a0_0x45cdd9(0xa2)](0x1));const extra=[];for(const [k,v]of Object[a0_0x45cdd9(0x94)](cfg[a0_0x45cdd9(0x9f)]||{})){if(v===!![])extra[a0_0x45cdd9(0x90)]('--'+k);else{if(v===![]||v===null||v===undefined)continue;else extra[a0_0x45cdd9(0x90)]('--'+k,String(v));}}const forwarded=[];for(let i=0x0;i<argv['length'];i++){if(argv[i]==='--name'||argv[i]===a0_0x45cdd9(0x92))continue;forwarded[a0_0x45cdd9(0x90)](argv[i]);}process[a0_0x45cdd9(0xac)]=[process[a0_0x45cdd9(0xac)][0x0],path['join'](__dirname,ENGINE),'--name',cfg[a0_0x45cdd9(0x91)]||NAME,a0_0x45cdd9(0x8f),cfg[a0_0x45cdd9(0x9e)],a0_0x45cdd9(0x81),cfg[a0_0x45cdd9(0x7c)]||NAME,a0_0x45cdd9(0x9d),cfg[a0_0x45cdd9(0x8c)]||NAME+a0_0x45cdd9(0xaa),'--mail',one(a0_0x45cdd9(0x8e),cfg[a0_0x45cdd9(0x8e)]||a0_0x45cdd9(0x87)),...(cfg[a0_0x45cdd9(0x97)]||[])[a0_0x45cdd9(0xa1)](_0x2753a7=>[a0_0x45cdd9(0x86),_0x2753a7]),...(cfg[a0_0x45cdd9(0xa5)]||[])[a0_0x45cdd9(0xa1)](_0x2903fe=>[a0_0x45cdd9(0x7a),_0x2903fe]),...extra,...forwarded],require(path[a0_0x45cdd9(0x9c)](__dirname,ENGINE));
+'use strict';
+
+/**
+ * Per-provider CLI: every provider folder has a `config.json` describing how it
+ * is minted, and a 3-line `src/mint.js` shim that calls this file. That keeps
+ * the engines shared (one place to fix bugs) while each provider folder stays
+ * self-contained and re-runnable — the rule for shipping a provider.
+ *
+ *   node provider-cli.js --name kuaipao [--count 3] [--mail emailnator] …
+ *
+ * config.json:
+ *   {
+ *     "name": "kuaipao", "base": "https://kuaipao.ai", "tag": "kp",
+ *     "engine": "newapi-node" | "newapi-browser" | "script",
+ *     "mail": "mailtrap" | "emailnator",
+ *     "pools": ["proxies.txt"],
+ *     "args": { "no-checkin": true, "headless": true, "port": 9870 }
+ *   }
+ */
+
+const fs = require('fs');
+const path = require('path');
+
+const argv = process.argv.slice(2);
+const one = (name, dflt) => {
+  const i = argv.indexOf(`--${name}`);
+  return i >= 0 && argv[i + 1] ? argv[i + 1] : dflt;
+};
+
+const NAME = one('name');
+if (!NAME) {
+  console.error('usage: provider-cli.js --name <provider> [--count N] [--pool f] [engine flags]');
+  process.exit(1);
+}
+
+const DIR = __dirname;
+const cfg = JSON.parse(fs.readFileSync(path.join(DIR, 'config.json'), 'utf8'));
+
+const ENGINE = {
+  'newapi-node': 'mint-newapi.js',
+  'newapi-pinned': 'mint-newapi-pinned.js',
+  'newapi-browser': 'mint-newapi-browser.js',
+  'browser-generic': 'mint-browser-generic.js',
+}[cfg.engine || 'newapi-node'];
+
+if (!ENGINE) {
+  console.error(`unknown engine ${cfg.engine} for ${NAME}`);
+  process.exit(1);
+}
+
+// config args first, then whatever the caller passed (caller wins by position:
+// engines read a flag's *first* occurrence after --name/--base are fixed)
+const extra = [];
+for (const [k, v] of Object.entries(cfg.args || {})) {
+  if (v === true) extra.push(`--${k}`);
+  else if (v === false || v === null || v === undefined) continue;
+  else extra.push(`--${k}`, String(v));
+}
+const forwarded = [];
+for (let i = 0; i < argv.length; i++) {
+  if (argv[i] === '--name' || argv[i] === '--config') continue;
+  forwarded.push(argv[i]);
+}
+
+process.argv = [
+  process.argv[0],
+  path.join(__dirname, ENGINE),
+  '--name',
+  cfg.name || NAME,
+  '--base',
+  cfg.base,
+  '--tag',
+  cfg.tag || NAME,
+  '--folder',
+  cfg.folder || `${NAME}-bulk`,
+  '--mail',
+  one('mail', cfg.mail || 'mailtrap'),
+  ...(cfg.pools || []).flatMap((p) => ['--pool', p]),
+  ...(cfg.mailPools || []).flatMap((p) => ['--mail-pool', p]),
+  ...extra,
+  ...forwarded,
+];
+
+require(path.join(__dirname, ENGINE));
