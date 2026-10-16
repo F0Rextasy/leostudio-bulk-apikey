@@ -1,17 +1,17 @@
 <div align="center">
 
 ```
-███████╗ ██████╗ ██████╗ ███████╗██╗  ██╗████████╗ █████╗ ███████╗██╗   ██╗
-██╔════╝██╔═████╗██╔══██╗██╔════╝╚██╗██╔╝╚══██╔══╝██╔══██╗██╔════╝╚██╗ ██╔╝
-█████╗  ██║██╔██║██████╔╝█████╗   ╚███╔╝    ██║   ███████║███████╗ ╚████╔╝
-██╔══╝  ██║████╔╝██╔══██╗██╔══╝   ██╔██╗    ██║   ██╔══██║╚════██║  ╚██╔╝
-██║     ╚██████╔╝██║  ██║███████╗██╔╝ ██╗   ██║   ██║  ██║███████║   ██║
-╚═╝      ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚══════╝   ╚═╝
+██╗     ███████╗ ██████╗ ███████╗████████╗██╗   ██╗██████╗ ██╗ ██████╗
+██║     ██╔════╝██╔═══██╗██╔════╝╚══██╔══╝██║   ██║██╔══██╗██║██╔═══██╗
+██║     █████╗  ██║   ██║███████╗   ██║   ██║   ██║██║  ██║██║██║   ██║
+██║     ██╔══╝  ██║   ██║╚════██║   ██║   ██║   ██║██║  ██║██║██║   ██║
+███████╗███████╗╚██████╔╝███████║   ██║   ╚██████╔╝██████╔╝██║╚██████╔╝
+╚══════╝╚══════╝ ╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═════╝ ╚═╝ ╚═════╝
 ```
 
 # leostudio-bulk-apikey
 
-**Bulk-create [Leo Studio](https://leostudio.cc) accounts with auto-generated API keys — OpenAI-compatible inference + 9Router connector.**
+**Bulk-create [Leo Studio](https://leostudio.cc) accounts with auto-generated API keys — OpenAI-compatible inference + [9Router](https://9router.com) connector.**
 
 [![Node](https://img.shields.io/badge/Node-%E2%89%A518-3DA639?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org)
 [![Dependencies](https://img.shields.io/badge/dependencies-0-blue?style=for-the-badge)](#)
@@ -91,15 +91,15 @@ cd leostudio-bulk-apikey
 printf 'socks5://127.0.0.1:1080\n' > proxies.txt
 
 # 2) go — one run mints one key per fresh account
-node launcher.js                 # interactive menu: mint / verify / probe / settings
+node src/launcher.js             # interactive menu: mint / verify / probe / settings
 # or drive it directly:
-node cli.js mint --count 3       # fresh accounts → one verified key each
-node cli.js verify               # re-check the keys already on disk
-node cli.js probe                # deep probe of a single account or key
+node src/cli.js mint --count 3   # fresh accounts → one verified key each
+node src/cli.js verify           # re-check the keys already on disk
+node src/cli.js probe            # deep probe of a single account or key
 ```
 
-`node cli.js help` lists the tasks; every task takes its own flags — ask it directly
-(`node mint.js --help`). Keys land in `keys.txt`, one per line; per-account detail (e-mail,
+`node src/cli.js help` lists the tasks; every task takes its own flags — ask it directly
+(`node src/mint.js --help`). Keys land in `keys.txt`, one per line; per-account detail (e-mail,
 steps, verify result) lands in `accounts.json`. Settings from the launcher persist in
 `launcher.config.json`.
 
@@ -113,7 +113,7 @@ A key is written to `keys.txt` only after the live API answers with it:
 | real completion | `POST https://api.leostudio.cc/v1/chat/completions` (`deepseek-v4-flash`) | `200` + the assistant message |
 
 The check runs from **an exit different from the one that minted the key**, so it cannot pass on
-session state rather than key validity. `node cli.js verify` reproduces exactly that check for your
+session state rather than key validity. `node src/cli.js verify` reproduces exactly that check for your
 own file.
 
 ## 📬 Mail
@@ -153,11 +153,11 @@ Per account, end to end over one exit:
 
 | task | flags |
 |---|---|
-| `mint` | `--count N` (30) · `--conc N` (2) — plus the engine's own flags (`node mint.js --help`) |
-| `verify` | re-checks the keys already on disk (`probe-key.js`) |
-| `probe` | deep probe of a single account or key (`probe-key.js`) |
-| `launcher.js` | interactive: mint / verify / probe / settings — persisted in `launcher.config.json` |
-| `--connect-9router` | on any task: after it finishes, registers every key in `keys.txt` into a running 9Router (`node connect-9router.js --help`) |
+| `mint` | `--count N` (30) · `--conc N` (2) — plus the engine's own flags (`node src/mint.js --help`) |
+| `verify` | re-checks the keys already on disk (`src/probe-key.js`) |
+| `probe` | deep probe of a single account or key (`src/probe-key.js`) |
+| `src/launcher.js` | interactive: mint / verify / probe / settings — persisted in `launcher.config.json` |
+| `--connect-9router` | on any task: after it finishes, registers every key in `keys.txt` into a running 9Router (`node src/connect-9router.js --help`) |
 
 ## 🛰️ Behind a proxy
 
@@ -175,7 +175,7 @@ OpenAI-compatible endpoint (`https://api.leostudio.cc/v1`), so register it once 
 minted becomes a connection under one provider-node — 9Router load-balances across them:
 
 ```bash
-node connect-9router.js \
+node src/connect-9router.js \
   --base http://localhost:20128 --password 123456 \
   --api-key sk-xxxxxxxx
 ```
@@ -194,13 +194,13 @@ leostudio/deepseek-v4.1-flash
 leostudio/glm-5.3-flash
 ```
 
-`node cli.js mint --count 3 --connect-9router` mints and registers in one pass, and
-`node launcher.js` drives the same flow from its menu.
+`node src/cli.js mint --count 3 --connect-9router` mints and registers in one pass, and
+`node src/launcher.js` drives the same flow from its menu.
 
 ## 🐞 Issues
 
 Open an issue with the failing step, the exit used and the tool's stdout — the per-account dumps in
-`accounts.json` and `outputs/` make failures reproducible without leaking a key.
+`accounts.json` and `out/` make failures reproducible without leaking a key.
 
 ## 📄 License
 

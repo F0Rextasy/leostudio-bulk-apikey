@@ -9,7 +9,7 @@
  * PUT is refused or the relay rejects the stamped group, the token group goes
  * back to `` and the key is re-verified so nothing is left worse.
  *
- *   node probe-group.js [--group 国模]
+ *   node src/probe-group.js [--group 国模]
  */
 
 const fs = require('fs');
@@ -19,7 +19,7 @@ const { collectCandidates, screenFor } = require('./xwave-lib.js');
 const { Panel, UA } = require('./newapi.js');
 
 const BASE = 'https://api.leostudio.cc';
-const DIR = path.join(__dirname);
+const ROOT = path.resolve(__dirname, '..');
 const GROUP = (() => {
   const i = process.argv.indexOf('--group');
   return i >= 0 && process.argv[i + 1] ? process.argv[i + 1] : '国模';
@@ -58,7 +58,7 @@ class Rot {
 }
 
 (async () => {
-  const rec = require(path.join(DIR, 'accounts.json')).filter((a) => a.status === 'minted')[0];
+  const rec = require(path.join(ROOT, 'accounts.json')).filter((a) => a.status === 'minted')[0];
   const { candidates } = await collectCandidates({ host: 'api.leostudio.cc', log: (m) => console.log('· ' + m) });
   const { exits } = await screenFor(BASE, candidates, { want: 6, conc: 3, budgetMs: 150000, log: (m) => console.log('· ' + m) });
   const rot = new Rot(exits);
@@ -112,7 +112,7 @@ class Rot {
   } else {
     out.win = true;
   }
-  writeJson(path.join(DIR, 'out', 'group-probe.json'), out);
+  writeJson(path.join(ROOT, 'out', 'group-probe.json'), out);
   console.log('→ out/group-probe.json');
   process.exit(out.win ? 0 : 3);
 })().catch((e) => {

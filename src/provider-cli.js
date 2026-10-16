@@ -6,7 +6,7 @@
  * the engines shared (one place to fix bugs) while each provider folder stays
  * self-contained and re-runnable — the rule for shipping a provider.
  *
- *   node provider-cli.js --name kuaipao [--count 3] [--mail emailnator] …
+ *   node src/provider-cli.js --name kuaipao [--count 3] [--mail emailnator] …
  *
  * config.json:
  *   {
@@ -29,7 +29,7 @@ const one = (name, dflt) => {
 
 const NAME = one('name');
 if (!NAME) {
-  console.error('usage: provider-cli.js --name <provider> [--count N] [--pool f] [engine flags]');
+  console.error('usage: node src/provider-cli.js --name <provider> [--count N] [--pool f] [engine flags]');
   process.exit(1);
 }
 

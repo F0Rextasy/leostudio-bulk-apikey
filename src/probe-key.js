@@ -10,7 +10,7 @@
  *   - with the token object's `group`/`status` printed for context
  * and, if the token looks disabled, enables it via the update route and retries.
  *
- *   node probe-key.js
+ *   node src/probe-key.js
  */
 
 const fs = require('fs');
@@ -18,7 +18,7 @@ const path = require('path');
 const { loadExits, req, writeJson, nowIso, isExitError } = require('./lib.js');
 const { Panel, UA } = require('./newapi.js');
 
-const DIR = path.join(__dirname);
+const ROOT = path.resolve(__dirname, '..');
 const BASE = 'https://api.leostudio.cc';
 
 class Rot {
@@ -54,11 +54,11 @@ class Rot {
 }
 
 (async () => {
-  const accounts = require(path.join(DIR, 'accounts.json'));
+  const accounts = require(path.join(ROOT, 'accounts.json'));
   const rec = accounts.filter((a) => a.steps && a.steps.login && a.steps.login.success).slice(-1)[0];
   const lines = [];
   try {
-    for (const l of fs.readFileSync(path.join(__dirname, 'out', 'pool', 'screened-api.leostudio.cc.txt'), 'utf8').split(/\r?\n/)) if (l.trim() && !l.startsWith('#')) lines.push(l);
+    for (const l of fs.readFileSync(path.join(ROOT, 'out', 'pool', 'screened-api.leostudio.cc.txt'), 'utf8').split(/\r?\n/)) if (l.trim() && !l.startsWith('#')) lines.push(l);
   } catch (e) {}
   const rot = new Rot(
     lines
@@ -113,7 +113,7 @@ class Rot {
     out.results.push({ name: 'GET /v1/models after stamp', status: again.status, text: String(again.text).slice(0, 300), exit: again.exit });
     console.log(`  models after stamp → ${again.status} ${String(again.text).slice(0, 160)}`);
   }
-  writeJson(path.join(DIR, 'out', 'key-probe.json'), out);
+  writeJson(path.join(ROOT, 'out', 'key-probe.json'), out);
   console.log('→ out/key-probe.json');
 })().catch((e) => {
   console.error('probe failed:', e.message);

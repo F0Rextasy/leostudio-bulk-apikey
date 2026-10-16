@@ -5,16 +5,16 @@
   "license": "MIT",
   "type": "commonjs",
   "bin": {
-    "leostudio-bulk-apikey": "cli.js",
-    "leostudio-bulk-apikey-launcher": "launcher.js"
+    "leostudio-bulk-apikey": "src/cli.js",
+    "leostudio-bulk-apikey-launcher": "src/launcher.js"
   },
-  "main": "cli.js",
+  "main": "src/cli.js",
   "engines": {
     "node": ">=18"
   },
   "scripts": {
-    "start": "node launcher.js",
-    "mint": "node cli.js"
+    "start": "node src/launcher.js",
+    "mint": "node src/cli.js"
   },
   "keywords": [
     "api-key",
@@ -27,23 +27,7 @@
     "openai-compatible"
   ],
   "files": [
-    "cdp.js",
-    "chrome-flags.js",
-    "cli.js",
-    "imap.js",
-    "launcher.js",
-    "lib.js",
-    "mailbox-imap.js",
-    "mint-newapi-pinned.js",
-    "mint.js",
-    "newapi.js",
-    "probe-auth.js",
-    "probe-group.js",
-    "probe-key.js",
-    "provider-cli.js",
-    "proxy.js",
-    "xwave-lib.js",
-    "connect-9router.js",
+    "src",
     "README.md",
     "LICENSE"
   ]

@@ -27,7 +27,7 @@
  * register body, the panel's verbatim answer, the exit line and the cookie seen
  * at sendCode vs register.
  *
- *   node mint-newapi-pinned.js --name aiaiai \
+ *   node src/mint-newapi-pinned.js --name aiaiai \
  *     --base https://api.aiaiai001.com --tag aaa --count 3 \
  *     --pool out/pool/aiaiai-live.txt --probe
  */
@@ -35,7 +35,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const { loadExits, ExitPool, providerDir, readJson, writeJson, appendLine, sleep, randHex, randPass, nowIso, extractCode, req, isExitError } = require('./lib');
+const { loadExits, ExitPool, readJson, writeJson, appendLine, sleep, randHex, randPass, nowIso, extractCode, req, isExitError } = require('./lib');
 const { Panel, gates, UA } = require('./newapi');
 const { createAgent } = require(path.join(__dirname, 'proxy'));
 
@@ -45,6 +45,13 @@ try {
 } catch (e) {
   /* reported on first use */
 }
+
+// Checkout root — the code lives in `src/` and every user-facing file
+// (`keys.txt`, `accounts.json`, `models.json`, `out/`) sits at the top.
+const ROOT = path.resolve(__dirname, '..');
+
+// Pool files named on the CLI resolve against the checkout root, never the cwd.
+const poolPath = (f) => (path.isAbsolute(f) ? f : path.join(ROOT, f));
 
 // --------------------------------------------------------------------------- cli
 
@@ -66,8 +73,8 @@ const TAG = one('tag', (NAME || 'x').slice(0, 12));
 const COUNT = parseInt(one('count', '3'), 10);
 const FOLDER = one('folder', `${NAME}-bulk`);
 const CHECKIN = !has('no-checkin');
-const POOLS = many('pool');
-const MAIL_POOLS = many('mail-pool');
+const POOLS = many('pool').map(poolPath);
+const MAIL_POOLS = many('mail-pool').map(poolPath);
 const PROBE = has('probe');
 const PROBE_MAIL = has('probe-mail');
 const PROBE_REGISTER = has('probe-register');
@@ -108,11 +115,10 @@ const SENDER = one('sender', '');
 const STRICT_SENDER = Boolean(SENDER);
 
 if (!NAME || !BASE) {
-  console.error('usage: mint-newapi-pinned.js --name <provider> --base <https://host> [--count 3] [--pool f] [--probe] [--probe-register]');
+  console.error('usage: node src/mint-newapi-pinned.js --name <provider> --base <https://host> [--count 3] [--pool f] [--probe] [--probe-register]');
   process.exit(1);
 }
 
-const DIR = providerDir(NAME);
 const PANEL_DOMAIN = (() => {
   try {
     const host = new URL(BASE).host;
@@ -122,9 +128,9 @@ const PANEL_DOMAIN = (() => {
     return null;
   }
 })();
-const KEYS = path.join(DIR, 'keys.txt');
-const ACCOUNTS = path.join(DIR, 'accounts.json');
-const LOG = path.join(DIR, 'out', `pinned-${new Date().toISOString().slice(0, 10)}.log`);
+const KEYS = path.join(ROOT, 'keys.txt');
+const ACCOUNTS = path.join(ROOT, 'accounts.json');
+const LOG = path.join(ROOT, 'out', `pinned-${new Date().toISOString().slice(0, 10)}.log`);
 const log = (...a) => {
   const line = `[${nowIso()}] ${a.join(' ')}`;
   console.log(line);
@@ -465,7 +471,7 @@ async function waitFreshCode(plain, pool, { since, dotted = null, timeoutMs = CO
 }
 
 async function dumpInbox(box, freshDump, extra = {}) {
-  const file = path.join(DIR, 'out', `inbox-${box.plain.replace(/[^a-z0-9]+/gi, '_')}.json`);
+  const file = path.join(ROOT, 'out', `inbox-${box.plain.replace(/[^a-z0-9]+/gi, '_')}.json`);
   let all = [];
   try {
     all = box.provider === 'imap' ? [] : (await mailList(box.plain, box._pool)).map((m) => ({ id: msgId(m), subject: m.subject, from: m.from }));
@@ -479,15 +485,14 @@ async function dumpInbox(box, freshDump, extra = {}) {
 
 // --------------------------------------------------------------------------- exit lists
 
-const ROOT = path.resolve(__dirname);
 const HOT_FILES = [
-  path.join(__dirname, 'out', 'pool', 'mintx2-live.txt'),
-  path.join(__dirname, 'out', 'community-live-aiaiai.txt'),
-  path.join(__dirname, 'out', 'pool-exits.txt'),
+  path.join(ROOT, 'out', 'pool', 'mintx2-live.txt'),
+  path.join(ROOT, 'out', 'community-live-aiaiai.txt'),
+  path.join(ROOT, 'out', 'pool-exits.txt'),
 ];
 const MAIL_FILES = [
-  path.join(__dirname, 'out', 'pool', 'mintx2-mail-live.txt'),
-  path.join(__dirname, 'out', 'community-live-emailnator.txt'),
+  path.join(ROOT, 'out', 'pool', 'mintx2-mail-live.txt'),
+  path.join(ROOT, 'out', 'community-live-emailnator.txt'),
 ];
 
 function loadSoft(files) {
@@ -567,7 +572,7 @@ async function probeRegister(panel, email) {
 
 (async () => {
   const priority = loadSoft(POOLS.length ? POOLS.filter((f) => !/emailnator|mail/.test(f)) : HOT_FILES);
-  for (const a of loadAnnotated(path.join(__dirname, 'out', 'pool-exits.txt'))) {
+  for (const a of loadAnnotated(path.join(ROOT, 'out', 'pool-exits.txt'))) {
     try {
       const p = require('./proxy.js').parseProxy(a.line);
       if (p) {
@@ -648,7 +653,7 @@ async function probeRegister(panel, email) {
   if (!st) throw new Error(`no exit answers ${BASE}/api/status (scanned ${hunter.scanned})`);
   const g = gates(st.r.json);
   log(`gates: ${JSON.stringify({ site: g.system_name, reg: g.register_enabled, pwd: g.password_register, em: g.email_verification, ts: g.turnstile_check, ci: g.checkin_enabled, invite: g.invite_required })} · probed via ${st.pin}`);
-  writeJson(path.join(DIR, 'out', `pinned-status-${Date.now()}.json`), st.r.json || { text: st.r.text });
+  writeJson(path.join(ROOT, 'out', `pinned-status-${Date.now()}.json`), st.r.json || { text: st.r.text });
   if (g.turnstile_check === true) {
     log('turnstile_check=true → this panel needs the browser mint; aborting');
     process.exit(2);
@@ -711,7 +716,7 @@ async function probeRegister(panel, email) {
       results.push({ method, pathname, status: r.status, text: String(r.text || '').slice(0, 300), exit: r.exit, error: r.error });
       log(`  ${method} ${pathname} → ${r.status} ${String(r.text || r.error || '').slice(0, 200)}`);
     }
-    writeJson(path.join(DIR, 'out', `mail-probe-${Date.now()}.json`), { at: nowIso(), box: box.plain, message: { id, from: m.from, subject: m.subject, keys: Object.keys(m) }, results });
+    writeJson(path.join(ROOT, 'out', `mail-probe-${Date.now()}.json`), { at: nowIso(), box: box.plain, message: { id, from: m.from, subject: m.subject, keys: Object.keys(m) }, results });
     return;
   }
 
@@ -765,7 +770,7 @@ async function probeRegister(panel, email) {
 
         if (PROBE_REGISTER) {
           cyc.registerProbes = await probeRegister(panel, box.plain);
-          writeJson(path.join(DIR, 'out', `pinned-register-probes-${index}.json`), cyc.registerProbes);
+          writeJson(path.join(ROOT, 'out', `pinned-register-probes-${index}.json`), cyc.registerProbes);
         }
 
         // snapshot BEFORE sendCode: Emailnator recycles addresses, and a code
@@ -964,7 +969,7 @@ async function probeRegister(panel, email) {
             sameEgress: !independent,
           };
           const list = models.status === 200 && models.json && Array.isArray(models.json.data) ? models.json.data : null;
-          if (list) writeJson(path.join(DIR, 'models.json'), { at: nowIso(), base: BASE, models: list.map((m) => m.id || m) });
+          if (list) writeJson(path.join(ROOT, 'models.json'), { at: nowIso(), base: BASE, models: list.map((m) => m.id || m) });
           const ids = list ? list.map((m) => m.id) : [];
           const chatModel = OFFER_MODEL || pickCheapest(ids) || '';
           if (chatModel) {

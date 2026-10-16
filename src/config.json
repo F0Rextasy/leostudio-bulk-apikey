@@ -1,0 +1,19 @@
+{
+  "base": "https://api.leostudio.cc",
+  "tag": "ls",
+  "engine": "newapi-pinned",
+  "mail": "emailnator",
+  "args": {
+    "poll-ms": 2000,
+    "code-wait": 240000,
+    "max-cycle": 3,
+    "scan": 140,
+    "sender": "leostudio2026@163"
+  },
+  "pools": [
+    "proxies.txt"
+  ],
+  "mailPools": [
+    "proxies.txt"
+  ]
+}

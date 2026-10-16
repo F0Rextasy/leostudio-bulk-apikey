@@ -3,7 +3,7 @@
 
 /**
  * Interactive launcher for leostudio-bulk-apikey — a menu over the task modules.
- * Settings persist in launcher.config.json next to this file.
+ * Settings persist in launcher.config.json at the checkout root.
  */
 
 const fs = require('fs');
@@ -13,9 +13,10 @@ const { spawnSync } = require('child_process');
 const { connect9Router, connectKeysFile, readKeys, defaultKeysFile } = require('./connect-9router.js');
 
 const HERE = __dirname;
-const CONFIG = path.join(HERE, 'launcher.config.json');
-const POOL = path.join(HERE, 'proxies.txt');
-const KEYS = path.join(HERE, 'keys.txt');
+const ROOT = path.resolve(HERE, '..');
+const CONFIG = path.join(ROOT, 'launcher.config.json');
+const POOL = path.join(ROOT, 'proxies.txt');
+const KEYS = path.join(ROOT, 'keys.txt');
 
 const defaults = { count: 30, conc: 2 };
 let cfg = { ...defaults };
@@ -27,19 +28,19 @@ const rl = readline.createInterface({ input: process.stdin, output: process.stdo
 const ask = (q, fb) => new Promise((r) => rl.question(q + (fb !== undefined ? ' [' + fb + ']' : '') + ': ', (a) => r(String(a).trim() || fb)));
 
 const LOGO = String.raw`
-  ███████╗ ██████╗ ██████╗ ███████╗██╗  ██╗████████╗ █████╗ ███████╗██╗   ██╗
-  ██╔════╝██╔═████╗██╔══██╗██╔════╝╚██╗██╔╝╚══██╔══╝██╔══██╗██╔════╝╚██╗ ██╔╝
-  █████╗  ██║██╔██║██████╔╝█████╗   ╚███╔╝    ██║   ███████║███████╗ ╚████╔╝
-  ██╔══╝  ██║████╔╝██╔══██╗██╔══╝   ██╔██╗    ██║   ██╔══██║╚════██║  ╚██╔╝
-  ██║     ╚██████╔╝██║  ██║███████╗██╔╝ ██╗   ██║   ██║  ██║███████║   ██║
-  ╚═╝      ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚══════╝   ╚═╝`;
+  ██╗     ███████╗ ██████╗ ███████╗████████╗██╗   ██╗██████╗ ██╗ ██████╗
+  ██║     ██╔════╝██╔═══██╗██╔════╝╚══██╔══╝██║   ██║██╔══██╗██║██╔═══██╗
+  ██║     █████╗  ██║   ██║███████╗   ██║   ██║   ██║██║  ██║██║██║   ██║
+  ██║     ██╔══╝  ██║   ██║╚════██║   ██║   ██║   ██║██║  ██║██║██║   ██║
+  ███████╗███████╗╚██████╔╝███████║   ██║   ╚██████╔╝██████╔╝██║╚██████╔╝
+  ╚══════╝╚══════╝ ╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═════╝ ╚═╝ ╚═════╝`;
 
 function banner() {
   const w = 78;
   const box = (s) => '  │ ' + s.padEnd(w) + ' │';
   console.log(LOGO);
   console.log('  ┌' + '─'.repeat(w + 2) + '┐');
-  console.log(box('leostudio-bulk-apikey  ·  One leostudio account per API key — captcha-free signup, live-verified, any number you want.'));
+  console.log(box('leostudio-bulk-apikey  ·  Bulk-create Leo Studio accounts with auto-generated API keys — OpenAI-compatible inference + 9Router connector.'));
   console.log(box('open source · MIT · leostudio-bulk-apikey contributors'));
   console.log('  └' + '─'.repeat(w + 2) + '┘\n');
 }
@@ -47,7 +48,7 @@ function banner() {
 const count = (f) => { try { return fs.readFileSync(f, 'utf8').split(/\r?\n/).filter((l) => l.trim() && !l.trim().startsWith('#')).length; } catch (e) { return 0; } };
 
 function run(args) {
-  console.log('\n▶ node ' + args.join(' ') + '\n');
+  console.log('\n▶ node src/' + args.join(' ') + '\n');
   const r = spawnSync(process.execPath, args, { windowsHide: true, cwd: HERE, stdio: 'inherit' });
   if (r.status !== 0) console.log('\n⚠ exited with code ' + r.status);
 }

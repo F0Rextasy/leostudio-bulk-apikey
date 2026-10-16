@@ -10,22 +10,22 @@
  * logs in with an account record the mint already created and replays the same
  * request under every plausible carrier, so the fix is evidence-based.
  *
- *   node probe-auth.js
+ *   node src/probe-auth.js
  */
 
 const path = require('path');
 const { loadExits, req, writeJson, nowIso } = require('./lib.js');
 
-const DIR = path.join(__dirname);
+const ROOT = path.resolve(__dirname, '..');
 const BASE = 'https://api.leostudio.cc';
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36';
 
-const accounts = require(path.join(DIR, 'accounts.json'));
+const accounts = require(path.join(ROOT, 'accounts.json'));
 const rec = accounts.filter((a) => a.steps && a.steps.login && a.steps.login.success).slice(-1)[0];
 if (!rec) throw new Error('no registered account with a successful login on file');
 console.log(`account #${rec.index} ${rec.username} (${rec.email})`);
 
-const pool = loadExits([path.join(__dirname, 'out', 'pool', 'screened-api.leostudio.cc.txt')], { shuffle: false });
+const pool = loadExits([path.join(ROOT, 'out', 'pool', 'screened-api.leostudio.cc.txt')], { shuffle: false });
 console.log(`exits: ${pool.length}`);
 
 async function via(p, pathname, { method = 'GET', body = null, headers = {} } = {}) {
@@ -99,7 +99,7 @@ async function via(p, pathname, { method = 'GET', body = null, headers = {} } = 
     rows.push({ name: 'checkin@' + win.name, ...ci });
     rows.push({ name: 'token@' + win.name, ...tk });
   }
-  writeJson(path.join(DIR, 'out', 'auth-probe.json'), { at: nowIso(), account: rec.username, login: { status: login.status, json: login.json, setCookie: login.setCookie }, variants: rows });
+  writeJson(path.join(ROOT, 'out', 'auth-probe.json'), { at: nowIso(), account: rec.username, login: { status: login.status, json: login.json, setCookie: login.setCookie }, variants: rows });
   console.log('→ out/auth-probe.json');
 })().catch((e) => {
   console.error('probe failed:', e.message);

@@ -21,7 +21,9 @@ const { URL } = require('url');
 
 const { parseProxy, createAgent, loadPoolFile } = require(path.join(__dirname, 'proxy'));
 
-const ROOT = path.resolve(__dirname);
+// Checkout root — the code lives in `src/`; every user-facing file the tools
+// read or write (`proxies.txt`, `keys.txt`, `out/`, …) sits at the top.
+const ROOT = path.resolve(__dirname, '..');
 const CODE_RE = /[0-9]{4,8}/;
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -37,11 +39,11 @@ function jitter(base, spread = 0.35) {
 
 /** Files we screen into; every list is `scheme://host:port[  # comment]`. */
 const DEFAULT_POOLS = [
-  path.join(__dirname, 'out', 'community-live.txt'),
-  path.join(__dirname, 'out', 'captcha-exits-live.txt'),
-  path.join(__dirname, 'out', 'union-live.txt'),
-  path.join(__dirname, 'out', 'freshpool-live.txt'),
-  path.join(__dirname, 'out', 'pool-refresh-2026-10-14T18-56-54.txt'),
+  path.join(ROOT, 'out', 'community-live.txt'),
+  path.join(ROOT, 'out', 'captcha-exits-live.txt'),
+  path.join(ROOT, 'out', 'union-live.txt'),
+  path.join(ROOT, 'out', 'freshpool-live.txt'),
+  path.join(ROOT, 'out', 'pool-refresh-2026-10-14T18-56-54.txt'),
 ];
 
 function loadExits(files = DEFAULT_POOLS, { shuffle = true } = {}) {
@@ -416,13 +418,6 @@ function extractCode(text) {
 
 // --------------------------------------------------------------------------- files
 
-function providerDir(name) {
-  const dir = path.join(ROOT, 'providers', name);
-  fs.mkdirSync(dir, { recursive: true });
-  fs.mkdirSync(path.join(dir, 'out'), { recursive: true });
-  return dir;
-}
-
 function readJson(file, dflt = null) {
   try {
     return JSON.parse(fs.readFileSync(file, 'utf8'));
@@ -464,7 +459,6 @@ module.exports = {
   plainGmail,
   extractCode,
   flattenHtml,
-  providerDir,
   readJson,
   writeJson,
   appendLine,
