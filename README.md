@@ -11,83 +11,85 @@
 
 # leostudio-bulk-apikey
 
-**Bulk-create [Leo Studio](https://leostudio.cc) accounts with auto-generated API keys — OpenAI-compatible inference + [9Router](https://9router.com) connector.**
+**Bulk-create Leo Studio accounts with auto-generated API keys — OpenAI-compatible inference (DeepSeek, GLM, Kimi, Hunyuan) + 9Router connector.**
 
 [![Node](https://img.shields.io/badge/Node-%E2%89%A518-3DA639?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org)
 [![Dependencies](https://img.shields.io/badge/dependencies-0-blue?style=for-the-badge)](#)
 [![License](https://img.shields.io/badge/license-MIT-6ea8fe?style=for-the-badge)](LICENSE)
-[![Models](https://img.shields.io/badge/models-7%20text-412991?style=for-the-badge)](models.json)
+[![Models](https://img.shields.io/badge/models-7%20served-412991?style=for-the-badge)](https://api.leostudio.cc)
 [![9Router](https://img.shields.io/badge/9Router-connector-8B5CF6?style=for-the-badge)](#-connect-to-9router)
+[![X](https://img.shields.io/badge/X-%40bigbullapp-000000?style=for-the-badge&logo=x&logoColor=white)](https://x.com/bigbullapp)
 
-[🛠 Quick start](#-quick-start) · [✅ Verified](#-verified-working--every-key-is-tested) · [📬 Mail](#-mail) · [🧭 How it works](#-how-it-works) · [🤖 Models & free tier](#-models--free-tier) · [⚙️ Options](#️-cli-options) · [🛰️ Proxies](#️-behind-a-proxy) · [🔌 9Router](#-connect-to-9router) · [🐞 Issues](#-issues)
+[🛠 Quick start](#-quick-start) · [🎁 Free tier](#-free-tier--how-much-you-get) · [🤖 Models](#-models--all-7-of-them) · [🧪 Use the API](#-how-to-use-the-api) · [✅ Verified](#-verified-working--every-key-is-tested) · [🧭 How it works](#-how-it-works) · [🔌 9Router](#-connect-to-9router) · [⚙️ Options](#️-cli-options) · [🛰️ Proxies](#️-behind-a-proxy) · [🐞 Issues](#-issues)
 
 </div>
 
 ---
 
-> **One account, one key.** N accounts → N keys, one sign-up each, every key verified live
-> before it lands in `keys.txt`.
-
 ## ✨ Why this exists
 
-Leo Studio (`api.leostudio.cc`) hands every account a free quota — and the usable unit is *one
-account per key*, because the quota lives on the **account**, never on a second key of the same
-account. Sign-up is open, has **no captcha** (`turnstile_check: false` on the panel's own status
-route) and verifies by e-mail; there is **no daily check-in** to top the quota up. This tool walks
-the whole path unattended, over your proxy list, and only records a key after a real completion:
+Leo Studio (`api.leostudio.cc`) hands every account **75,000 credits** and the usable unit is *one account per key* — the quota lives on the **account**, never on a second key of the same account. Sign-up is open, has **no captcha** (`turnstile_check: false`) and verifies by e-mail; there is **no daily check-in** (`签到功能未启用`). This tool walks the whole path unattended, over your proxy list, and only records a key after a real completion on the **`国模`** group.
 
+## 🎁 Free tier — how much you get
+
+**Every new Leo Studio account carries 75,000 credits — one-shot, no refill, no card.**
+
+| Item | Measured |
+| --- | --- |
+| Sign-up grant | **75,000 credits** (`GET /api/user/self` → `quota: 75000`) |
+| Daily check-in | **disabled** (`{"success":false,"message":"签到功能未启用"}`) — the grant is one-shot |
+| Captcha at sign-up | **none** (`turnstile_check: false`) |
+| E-mail the panel accepts | **Gmail** (or QQ) — disposable domains are refused; verification mail arrives from `leostudio2026@163.com` (subject «Leo Studio邮箱验证邮件», 6-char code, 10-min validity) |
+| Group that serves text models | **`国模`** — a fresh account's `default` group serves only the image line and a chat call there answers `503 model_not_found` |
+| The unit that scales | **one account = one key** → `--count N` is really "N free accounts" (the quota is per account) |
+
+> 💡 The free tier is set by Leo Studio and can change. Check the live numbers at [leostudio.cc](https://leostudio.cc) — and let the tool's own gate decide:
+
+```bash
+node src/cli.js verify                 # every key in keys.txt is re-tested against the live API
 ```
-proxies.txt ──▶ exit screened against api.leostudio.cc (each fresh exit is proven before it is spent)
-                    │
-                    ▼
-   fresh verification address ──▶ GET /api/verification ──▶ code mail (read from the body)
-        │                                                          │
-        ▼                                                          ▼
-   POST /api/user/register ──▶ login (JWT) ──▶ POST /api/token/
-                                                   └─▶ reveal ─▶ group `国模`
-                                                                     │
-        keys.txt  ◀── live verify: GET /v1/models 200 + POST /v1/chat/completions 200 ──┘
-```
 
-## 🤖 Models & free tier
+## 🤖 Models — all 7 of them
 
-`models.json` is the live `GET /v1/models` answer of a minted key on the `国模` group — **7 text
-models**:
+`GET https://api.leostudio.cc/v1/models` with a minted key on the **`国模`** group serves **7 text models** (captured in [`models.json`](models.json)):
 
-| id | note |
-|---|---|
-| `deepseek-v4-flash` | the verifier's default chat model |
-| `deepseek-v4.1-flash` | the next DeepSeek flash |
-| `glm-5.2`, `glm-5.3-flash` | GLM line |
-| `kimi-k3` | Moonshot |
-| `hy3`, `hy4-preview` | Hunyuan line |
+| Model ID | Family | Note |
+| --- | --- | --- |
+| `deepseek-v4-flash` | DeepSeek | verifier's default chat model |
+| `deepseek-v4.1-flash` | DeepSeek | next flash |
+| `glm-5.2` | Z.ai (GLM) | |
+| `glm-5.3-flash` | Z.ai (GLM) | |
+| `kimi-k3` | Moonshot | |
+| `hy3` | Hunyuan | |
+| `hy4-preview` | Hunyuan | preview |
 
-**How much is free:** each account carries **75,000 credits** — `GET /api/user/self` reports
-`quota: 75000` per account, and the panel runs **no daily check-in** (`{"success":false,"message":
-"签到功能未启用"}`), so the grant is one-shot: it is spent, never refilled. New account = new 75,000
-credits, which is why the tool mints **one key per account** and `--count N` is your quota
-multiplier.
+A fresh account's `default` group serves the image line (`gpt-image-2*`, `sd-2.5-ch*`) — a chat call there answers `503 model_not_found … under group default`; the tool assigns each token to **`国模`** to unlock the 7 text models above. The 8 image ids (`gpt-image-2`, `gpt-image-2.5*`, `sd-2.0-ch1`, `sd-2.5-ch*`) are **not** text models and do not verify a key.
 
-**Groups decide what a key can call.** A fresh account's `default` group serves the panel's image
-line (`gpt-image-2*`, `sd-2.5-ch*`) and a chat call there answers
-`503 model_not_found … under group default`; the tool assigns the token to the **`国模`** group,
-which is what unlocks the 7 text models above. If you import one of these keys into another client
-and see `model_not_found`, it is the group, not the key.
+## 🧪 How to use the API
+
+The base URL is **`https://api.leostudio.cc/v1`** — OpenAI-compatible, so anything that speaks OpenAI works (SDKs, Cursor, OpenCode, Kilo Code, …).
 
 ```bash
 curl https://api.leostudio.cc/v1/chat/completions \
   -H "Authorization: Bearer <one of your keys>" \
   -H "Content-Type: application/json" \
-  -d '{"model":"deepseek-v4-flash","messages":[{"role":"user","content":"hi"}]}'
+  -d '{"model":"deepseek-v4-flash","messages":[{"role":"user","content":"hi"}],"max_tokens":8}'
+```
+
+```python
+from openai import OpenAI
+client = OpenAI(base_url="https://api.leostudio.cc/v1", api_key="<your key>")
+print(client.chat.completions.create(model="deepseek-v4-flash",
+      messages=[{"role": "user", "content": "hi"}]).choices[0].message.content)
 ```
 
 ## 🛠 Quick start
 
 ```bash
-# clone or fork this repository, then:
+# clone this repository (or download the ZIP), then:
 cd leostudio-bulk-apikey
 
-# 1) your proxy list — one exit per line (http://, socks5://, socks4://, or bare host:port)
+# 1) your proxy list, one exit per line (http://, socks5://, socks4:// or bare host:port)
 printf 'socks5://127.0.0.1:1080\n' > proxies.txt
 
 # 2) go — one run mints one key per fresh account
@@ -98,95 +100,91 @@ node src/cli.js verify           # re-check the keys already on disk
 node src/cli.js probe            # deep probe of a single account or key
 ```
 
-`node src/cli.js help` lists the tasks; every task takes its own flags — ask it directly
-(`node src/mint.js --help`). Keys land in `keys.txt`, one per line; per-account detail (e-mail,
-steps, verify result) lands in `accounts.json`. Settings from the launcher persist in
-`launcher.config.json`.
+`node src/cli.js help` lists the tasks; each task reads its own flags. Keys land in `keys.txt`, one per line; per-account detail (e-mail, steps, verify result) lands in `accounts.json`. Settings from the launcher persist in `launcher.config.json`.
+
+### 🖱️ The launcher
+
+```bash
+node src/launcher.js
+```
+
+A menu over the task modules: **mint**, **verify**, **probe**, **9Router**. It asks for `count` (keys per run) and `concurrency` (parallel exits), keeps them in `launcher.config.json`, and spawns `node src/cli.js <task>` with the right flags. Menu item **6** runs the 9Router registration directly.
 
 ## ✅ Verified working — every key is tested
 
-A key is written to `keys.txt` only after the live API answers with it:
+Measured **2026-10-15**: **3 accounts → 3 keys, one key per account**. Every key was checked after it existed, on an exit *independent* of the mint, with `verify.independent=true` in `accounts.json`.
 
-| check | call | expected |
-|---|---|---|
-| auth + model list | `GET https://api.leostudio.cc/v1/models` | `200` + the account's model ids (7 on the `国模` group) |
-| real completion | `POST https://api.leostudio.cc/v1/chat/completions` (`deepseek-v4-flash`) | `200` + the assistant message |
+| Check | Call | Result |
+| --- | --- | --- |
+| Auth + model list | `GET https://api.leostudio.cc/v1/models` (on the **`国模`** group) | **200** + 7 text model ids |
+| Real completion | `POST https://api.leostudio.cc/v1/chat/completions` (`deepseek-v4-flash`) | **200** + assistant message |
 
-The check runs from **an exit different from the one that minted the key**, so it cannot pass on
-session state rather than key validity. `node src/cli.js verify` reproduces exactly that check for your
-own file.
-
-## 📬 Mail
-
-The panel's verification route (`GET /api/verification?email=…`) answers on the **address class**
-before anything is sent, and the class that works for an unattended tool is narrow: **a real Gmail
-address** (or a QQ address) is accepted; disposable domains are refused by policy. The tool
-registers and reads a real mailbox for you.
-
-Two facts worth knowing up front: the verification mail **does not come from the panel's domain** —
-it arrives from a third-party sender (subject «Leo Studio邮箱验证邮件»,
-six-character code, 10-minute validity) — and the **first code of a batch can take a few minutes**
-to arrive. The tool waits out that window instead of re-sending, because a re-send invalidates the
-code already in flight.
+The check runs from **an exit different from the one that minted the key**, so it cannot pass on session state rather than key validity. `node src/cli.js verify` reproduces exactly that check for your own file. A key is written to `keys.txt` only after both checks answer 200.
 
 ## 🧭 How it works
 
-Per account, end to end over one exit:
+```
+inbox (one address per account)                                  a fresh address per account
+   │
+   ├─▶ sign-up: Leo Studio page → e-mail address → code / link from the inbox
+   ├─▶ session: the account's cookies or access token in hand
+   ├─▶ key mint: the account's key endpoint → plaintext key returned once (written to disk immediately)
+   └─▶ live proof: POST https://api.leostudio.cc/v1/chat/completions → real content = the key is live
+```
 
-1. a fresh exit from `proxies.txt`, proven against the panel right then (a dead exit costs one
-   attempt, not the batch);
-2. a fresh verification address — these panels only accept a real Gmail (or QQ) mailbox, so the
-   tool registers one and reads the code from the message **body**;
-3. `GET /api/verification?email=…` → the code mail («Leo Studio邮箱验证邮件», 10-minute
-   validity, six-character code) → `POST /api/user/register`;
-4. `POST /api/user/login` — this fork answers with a **JWT**; the tool carries it as a Bearer
-   token (the session cookie alone is answered `401 AUTH_UNAUTHORIZED`);
-5. `POST /api/token/` → the plaintext key comes from the reveal route
-   (`POST /api/token/{id}/key`), and the token is created **unlimited** so the relay accepts it
-   from the account's quota;
-6. the token's group is set to **`国模`** — a fresh account's default group serves the image line
-   only;
-7. the key is captured, then verified live (`/v1/models` + a chat completion) and appended to
-   `keys.txt` + `accounts.json`.
+| Step | Call | Notes |
+| --- | --- | --- |
+| Gates | `GET /api/status` | `register_enabled: true` · `email_verification: true` · `turnstile_check: false` · `checkin_enabled: false` |
+| Mailbox | [Emailnator](https://www.emailnator.com) | a fresh Gmail address per account, read over your exits; the code is in the **body** (`content` field), not the subject |
+| Send code | `GET /api/verification?email=<plain>` | `{"success":true}` |
+| Register | `POST /api/user/register` (`username`, `password`, `email`, `verification_code`) | `{"success":true}` |
+| Login | `POST /api/user/login` | returns **`data.access_token` (JWT)** + `new_api_refresh` cookie; the cookie alone answers `401 AUTH_UNAUTHORIZED` — Bearer is required |
+| Self | `GET /api/user/self` (Bearer + cookie) | `quota: 75000` per account |
+| Token create | `POST /api/token/` (Bearer) | masked key first (`tbCR******…`) |
+| Key reveal | `POST /api/token/{id}/key` (Bearer) | 48-char plaintext key |
+| Group | `PUT /api/token/{id}` | stamp to **`国模`** (`unlimited_quota: true`) — otherwise the relay answers `401 Invalid token` even though the account holds quota |
+| Prove | `GET /v1/models` + `POST /v1/chat/completions` | both on an exit *different* from the mint; only then is the key appended to `keys.txt` |
 
 ## ⚙️ CLI options
 
-| task | flags |
-|---|---|
-| `mint` | `--count N` (30) · `--conc N` (2) — plus the engine's own flags (`node src/mint.js --help`) |
-| `verify` | re-checks the keys already on disk (`src/probe-key.js`) |
-| `probe` | deep probe of a single account or key (`src/probe-key.js`) |
-| `src/launcher.js` | interactive: mint / verify / probe / settings — persisted in `launcher.config.json` |
-| `--connect-9router` | on any task: after it finishes, registers every key in `keys.txt` into a running 9Router (`node src/connect-9router.js --help`) |
+All code lives in `src/` — run it from the repository root as `node src/<file>.js`.
+
+| Tool | Flags |
+| --- | --- |
+| `src/cli.js` | `mint` · `verify` · `probe` — dispatcher; `--connect-9router` registers keys in 9Router after the task; every task's own flags via `node src/<task> --help` |
+| `src/mint.js` | thin wrapper → `provider-cli.js` / `mint-newapi-pinned.js` — `--count N` (3) · `--pool FILE` · `--mail emailnator\|imap` · `--sender REGEX` (default `leostudio2026@163`) · `--scan` / `--scan-conc` · `--poll-ms` · `--code-wait` · `--max-cycle` · `--budget` |
+| `src/probe-key.js` | deep probe of one account or key |
+| `src/launcher.js` | interactive: mint / verify / probe / settings — `count` and `concurrency` persist in `launcher.config.json` |
 
 ## 🛰️ Behind a proxy
 
-* `proxies.txt` — one exit per line; `scheme://user:pass@host:port`, `scheme://host:port` or bare
-  `host:port` (defaults to `http://`). Comments after `#` and blank lines are ignored.
-* Exits are proven against the panel **at the moment of use**; dead ones are retired and the pool
-  is only re-read when the usable set runs dry.
-* Every panel request — and the mailbox traffic — goes through the pool; nothing leaves your own
-  interface. Use exits you are allowed to use.
+* Exits come from `proxies.txt` (one line per exit, `scheme://host:port`, `user:pass@` supported, `#` comments ignored). The same pool feeds the panel calls, the key verification and the mailbox reads; the tools never dial the provider directly.
+* **Screening is the work.** Each account pins the first exit that proves `GET /api/status` against the panel host, and verification pins a *different* proven exit — a dead exit retires itself and the account continues on the next one.
+* The mailbox ([Emailnator](https://www.emailnator.com)) is a third-party temp-mail service rather than the panel; its API is read through your exits as well.
+* The verification mail arrives from **`leostudio2026@163.com`** (not the panel domain); the first code of a batch can take a few minutes to arrive — the tool waits instead of re-sending, because a re-send invalidates the code in flight.
+
+## 📄 Files
+
+| Path | Contents |
+| --- | --- |
+| `keys.txt` | one live-verified key per line — git-ignored |
+| `accounts.json` | mailbox, steps, check-in, both verify exits per account — git-ignored |
+| `models.json` | a fresh `/v1/models` capture on the `国模` group — git-ignored |
+| `proxies.txt` | your exits, one per line — git-ignored |
+| `out/pinned-<date>.log` | the per-run log (exit, timing, exact server answer) — git-ignored |
+| `src/mint.js` · `src/probe-key.js` | the engines the CLI dispatches to |
+| `src/connect-9router.js` | registers the keys in `keys.txt` as 9Router connections |
 
 ## 🔌 Connect to 9Router
 
-[9Router](https://9router.com) is a self-hosted, OpenAI-compatible router. Leo Studio serves an
-OpenAI-compatible endpoint (`https://api.leostudio.cc/v1`), so register it once and every key you
-minted becomes a connection under one provider-node — 9Router load-balances across them:
+[9Router](https://9router.com) is a self-hosted, OpenAI-compatible router. Leo Studio is OpenAI-compatible, so register it once and use every key:
 
 ```bash
-node src/connect-9router.js \
-  --base http://localhost:20128 --password 123456 \
-  --api-key sk-xxxxxxxx
+node src/connect-9router.js --base http://localhost:20128 --password 123456
+# or: node src/cli.js mint --count 3 --connect-9router
 ```
 
-Run it without `--api-key` to register **every** key in `keys.txt`. Re-running is idempotent: the
-node is matched by `--prefix leostudio`, each connection is matched by name (`leostudio-001`,
-`leostudio-002`, …), and an already-registered key is left alone. Defaults:
-`--base http://localhost:20128`, `--password 123456`, `--name "Leo Studio"`,
-`--prefix leostudio`, `--base-url https://api.leostudio.cc/v1`, `--model deepseek-v4-flash`.
-
-Inside 9Router the keys are served as:
+Every key in `keys.txt` becomes one connection of the `leostudio` provider node (`--api-key <key>` registers a single key instead, `--model <id>` overrides the default). Then pick a model inside 9Router:
 
 ```
 leostudio/deepseek-v4-flash
@@ -194,22 +192,28 @@ leostudio/deepseek-v4.1-flash
 leostudio/glm-5.3-flash
 ```
 
-`node src/cli.js mint --count 3 --connect-9router` mints and registers in one pass, and
-`node src/launcher.js` drives the same flow from its menu.
+Defaults: `--base http://localhost:20128`, `--password 123456`, `--prefix leostudio`, `--base-url https://api.leostudio.cc/v1`, default model `deepseek-v4-flash`.
+
+## 🔑 What one key gets you
+
+| | |
+| --- | --- |
+| 🏢 Provider | **Leo Studio** — [leostudio.cc](https://leostudio.cc) |
+| 🎁 What the provider gives | 75,000 credits per account · 7 text models (deepseek-v4-flash, kimi-k3, glm-5.3-flash) · every key live-verified |
+| 🔑 What one key gets you | one API key scoped to its own account: the 7 model ids on the endpoint below, at your plan's limits. The quota lives on the **account**, which is exactly why this tool creates one account per key |
+| 🌐 API shape | OpenAI-compatible: `POST https://api.leostudio.cc/v1/chat/completions` |
+| 🔒 Your data | only leostudio.cc and the inbox backend you configure are contacted; keys stay on your machine |
 
 ## 🐞 Issues
 
-Open an issue with the failing step, the exit used and the tool's stdout — the per-account dumps in
-`accounts.json` and `out/` make failures reproducible without leaking a key.
+Open an issue with the failing step and the run log tail (`out/pinned-<date>.log`) — it carries the exit, the timing and the exact server answer, which is everything needed to reproduce a miss. Never attach a key. **[Open an issue](../../issues)** and PRs are welcome.
 
 ## 📄 License
 
-MIT — see [LICENSE](LICENSE). Use it on accounts you are allowed to create.
-
----
+MIT © 2026 — see [LICENSE](LICENSE).
 
 <div align="center">
 
-**[MIT](LICENSE) © 2026 leostudio-bulk-apikey contributors**
+**[MIT](LICENSE)** © 2026 leostudio-bulk-apikey contributors
 
 </div>
