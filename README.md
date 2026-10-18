@@ -24,6 +24,12 @@
 
 </div>
 
+<div align="center">
+
+**English** · [Türkçe](README.tr.md) · [中文](README.cn.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md) · [Русский](README.ru.md) · [Português](README.pt.md)
+
+</div>
+
 ---
 
 ## ✨ Why this exists
@@ -53,15 +59,9 @@ node src/cli.js verify                 # every key in keys.txt is re-tested agai
 
 `GET https://api.leostudio.cc/v1/models` with a minted key on the **`国模`** group serves **7 text models** (captured in [`models.json`](models.json)):
 
-| Model ID | Family | Note |
-| --- | --- | --- |
-| `deepseek-v4-flash` | DeepSeek | verifier's default chat model |
-| `deepseek-v4.1-flash` | DeepSeek | next flash |
-| `glm-5.2` | Z.ai (GLM) | |
-| `glm-5.3-flash` | Z.ai (GLM) | |
-| `kimi-k3` | Moonshot | |
-| `hy3` | Hunyuan | |
-| `hy4-preview` | Hunyuan | preview |
+| Model | ✓ |
+| --- | --- |
+| `deepseek-v4-flash` | ✓ |
 
 A fresh account's `default` group serves the image line (`gpt-image-2*`, `sd-2.5-ch*`) — a chat call there answers `503 model_not_found … under group default`; the tool assigns each token to **`国模`** to unlock the 7 text models above. The 8 image ids (`gpt-image-2`, `gpt-image-2.5*`, `sd-2.0-ch1`, `sd-2.5-ch*`) are **not** text models and do not verify a key.
 
