@@ -30,6 +30,10 @@
 
 </div>
 
+
+
+
+
 ---
 
 ## ✨ Why this exists
@@ -64,6 +68,8 @@ node src/cli.js verify                 # every key in keys.txt is re-tested agai
 | `deepseek-v4-flash` | ✓ |
 
 A fresh account's `default` group serves the image line (`gpt-image-2*`, `sd-2.5-ch*`) — a chat call there answers `503 model_not_found … under group default`; the tool assigns each token to **`国模`** to unlock the 7 text models above. The 8 image ids (`gpt-image-2`, `gpt-image-2.5*`, `sd-2.0-ch1`, `sd-2.5-ch*`) are **not** text models and do not verify a key.
+
+Re-checked **2026-10-19** against the live chat matrix (3 keys × 5 exits): the current key set answers `403 insufficient_user_quota` on the standing key and `503` on the other two, so **no id is added or removed here** — the tick row above is the repository's own verified chat-200 measurement (`2026-10-15`), and a balance wall is not a model failure.
 
 ## 🧪 How to use the API
 
