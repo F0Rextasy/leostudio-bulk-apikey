@@ -14,7 +14,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const { req, writeJson, nowIso, isExitError } = require('./lib.js');
+const { req, DIRECT, writeJson, nowIso, isExitError } = require('./lib.js');
 const { collectCandidates, screenFor } = require('./xwave-lib.js');
 const { Panel, UA } = require('./newapi.js');
 
@@ -32,12 +32,16 @@ class Rot {
     this.i = 0;
   }
   next() {
+    // The direct sentinel (no pool was given) is the one sticky entry: never
+    // rotated out, never retired, so one blip does not end the run.
+    const direct = this.exits.find((p) => p && p.direct);
+    if (direct) return (this.last = direct);
     const alive = this.exits.filter((p) => !this.dead.has(p.line));
     if (!alive.length) throw new Error('no live exits');
     return (this.last = alive[this.i++ % alive.length]);
   }
   kill(p) {
-    if (p && p.line) this.dead.add(p.line);
+    if (p && p.line && !p.direct) this.dead.add(p.line);
   }
   alive() {}
   async attempt(fn, { tries = 8, label = 'call' } = {}) {
@@ -61,7 +65,9 @@ class Rot {
   const rec = require(path.join(ROOT, 'accounts.json')).filter((a) => a.status === 'minted')[0];
   const { candidates } = await collectCandidates({ host: 'api.leostudio.cc', log: (m) => console.log('· ' + m) });
   const { exits } = await screenFor(BASE, candidates, { want: 6, conc: 3, budgetMs: 150000, log: (m) => console.log('· ' + m) });
-  const rot = new Rot(exits);
+  // No exit answered the screen = DIRECT mode: a proxy is recommended at scale
+  // (per-IP limits, bans), but the probe works without one.
+  const rot = new Rot(exits.length ? exits : [DIRECT]);
   const panel = new Panel(BASE, rot, { log: (m) => console.log('  ' + m) });
   const login = await panel.login({ username: rec.username, password: rec.password, tries: 8 });
   console.log(`login ${login.status} success=${login.json && login.json.success}`);

@@ -45,7 +45,7 @@ Leo Studio (`api.leostudio.cc`) gibt jedem Konto **75.000 Credits**, und die nut
 | Registrierungs-Gutschrift | **75.000 Credits** (`GET /api/user/self` → `quota: 75000`) |
 | Täglicher Check-in | **deaktiviert** (`{"success":false,"message":"签到功能未启用"}`) — die Gutschrift ist einmalig |
 | Captcha bei der Registrierung | **keines** (`turnstile_check: false`) |
-| E-Mail, die das Panel akzeptiert | **Gmail** (oder QQ) — Wegwerf-Domains werden abgelehnt; die Verifizierungsmail kommt von `leostudio2026@163.com` (Betreff «Leo Studio邮箱验证邮件», 6-stelliger Code, 10 Minuten gültig) |
+| E-Mail, die das Panel akzeptiert | **Gmail** (oder QQ) — Wegwerf-Domains werden abgelehnt; die Verifizierungsmail kommt von `leostudio2026@163` (Betreff «Leo Studio邮箱验证邮件», 6-stelliger Code, 10 Minuten gültig) |
 | Gruppe, die Textmodelle bereitstellt | **`国模`** — die Gruppe `default` eines frischen Kontos stellt nur die Bildlinie bereit, und ein Chat-Aufruf dort antwortet mit `503 model_not_found` |
 | Die Einheit, die skaliert | **ein Konto = ein Schlüssel** → `--count N` bedeutet wirklich „N kostenlose Konten" (das Kontingent gilt pro Konto) |
 
@@ -163,7 +163,7 @@ Der gesamte Code liegt in `src/` — führe ihn vom Repository-Stammverzeichnis 
 * Ausgänge stammen aus `proxies.txt` (eine Zeile pro Ausgang, `scheme://host:port`, `user:pass@` unterstützt, `#`-Kommentare werden ignoriert). Derselbe Pool speist die Panel-Aufrufe, die Schlüsselverifizierung und die Postfach-Lesevorgänge; die Tools wählen den Anbieter niemals direkt an.
 * **Die Auswahl ist die Arbeit.** Jedes Konto bindet sich an den ersten Ausgang, der `GET /api/status` gegen den Panel-Host beweist, und die Verifizierung bindet sich an einen *anderen* bewiesenen Ausgang — ein toter Ausgang zieht sich selbst zurück und das Konto fährt mit dem nächsten fort.
 * Das Postfach ([Emailnator](https://www.emailnator.com)) ist ein Drittanbieter-Temp-Mail-Dienst und nicht das Panel; seine API wird ebenfalls über deine Ausgänge gelesen.
-* Die Verifizierungsmail kommt von **`leostudio2026@163.com`** (nicht von der Panel-Domain); der erste Code einer Charge kann einige Minuten brauchen — das Tool wartet, statt erneut zu senden, weil ein erneutes Senden den unterwegs befindlichen Code ungültig macht.
+* Die Verifizierungsmail kommt von **`leostudio2026@163`** (nicht von der Panel-Domain); der erste Code einer Charge kann einige Minuten brauchen — das Tool wartet, statt erneut zu senden, weil ein erneutes Senden den unterwegs befindlichen Code ungültig macht.
 
 ## 📄 Dateien
 

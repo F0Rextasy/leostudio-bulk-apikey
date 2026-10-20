@@ -45,7 +45,7 @@ Leo Studio (`api.leostudio.cc`) her hesaba **75.000 kredi** verir ve kullanılab
 | Kayıt hediyesi | **75.000 kredi** (`GET /api/user/self` → `quota: 75000`) |
 | Günlük giriş | **devre dışı** (`{"success":false,"message":"签到功能未启用"}`) — hibe tek seferlik |
 | Kayıt sırasında Captcha | **yok** (`turnstile_check: false`) |
-| Panelin kabul ettiği e-posta | **Gmail** (veya QQ) — geçici alan adları reddedilir; doğrulama e-postası `leostudio2026@163.com` adresinden gelir (konu «Leo Studio邮箱验证邮件», 6 karakterli kod, 10 dakikalık geçerlilik) |
+| Panelin kabul ettiği e-posta | **Gmail** (veya QQ) — geçici alan adları reddedilir; doğrulama e-postası `leostudio2026@163` adresinden gelir (konu «Leo Studio邮箱验证邮件», 6 karakterli kod, 10 dakikalık geçerlilik) |
 | Metin modellerini sunan grup | **`国模`** — yeni bir hesabın `default` grubu yalnızca görüntü satırını sunar ve orada yapılan sohbet çağrısı `503 model_not_found` yanıtını verir |
 | Ölçeklenen birim | **bir hesap = bir anahtar** → `--count N` aslında "N ücretsiz hesap" demektir (kota hesap başına) |
 
@@ -163,7 +163,7 @@ Tüm kod `src/` içinde bulunur — depoyu kök dizininden `node src/<file>.js` 
 * Çıkışlar `proxies.txt` dosyasından gelir (satır başına bir çıkış, `scheme://host:port`, `user:pass@` desteklenir, `#` yorumları yok sayılır). Aynı havuz panel çağrılarını, anahtar doğrulamasını ve posta kutusu okumalarını besler; araçlar sağlayıcıya doğrudan bağlanmaz.
 * **Tarama işin kendisidir.** Her hesap, panel hostuna karşı `GET /api/status` yanıtı veren ilk çıkışı sabitler ve doğrulama, *farklı* bir kanıtlanmış çıkışı sabitler — ölü bir çıkış kendini devre dışı bırakır ve hesap bir sonraki çıkışa geçer.
 * Posta kutusu ([Emailnator](https://www.emailnator.com)) panel yerine üçüncü taraf bir geçici‑mail hizmetidir; API’si de çıkışlarınız üzerinden okunur.
-* Doğrulama e‑postası **`leostudio2026@163.com`** adresinden gelir (panel domaini değil); bir partinin ilk kodu gelmesi birkaç dakika sürebilir — araç yeniden göndermek yerine bekler, çünkü yeniden gönderim uçta olan kodu geçersiz kılar.
+* Doğrulama e‑postası **`leostudio2026@163`** adresinden gelir (panel domaini değil); bir partinin ilk kodu gelmesi birkaç dakika sürebilir — araç yeniden göndermek yerine bekler, çünkü yeniden gönderim uçta olan kodu geçersiz kılar.
 
 ## 📄 Dosyalar
 

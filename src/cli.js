@@ -32,8 +32,10 @@ function help() {
   console.log('  node src/<task-file> --help');
   console.log('  --connect-9router  register the keys in 9Router after the task finishes');
   console.log('  --preset turbo|balanced|safe  run shape for the task (5/4/2 workers, 3/6/8 s apart)');
-  console.log('\nproxy pool:');
-  console.log('  one exit per line in proxies.txt — scheme://host:port[#comment], user:pass@ supported');
+  console.log('\nproxy pool — optional:');
+  console.log('  --pool FILE   exit list, one per line (default proxies.txt), optional');
+  console.log('  each line — scheme://host:port[#comment], user:pass@ supported');
+  console.log('  Requests go through your proxy list when one is provided (--pool / env). Without a pool the tool connects directly.');
   console.log('\nno options? run the interactive launcher:  node src/launcher.js');
 }
 

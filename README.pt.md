@@ -45,7 +45,7 @@ O Leo Studio (`api.leostudio.cc`) concede a cada conta **75.000 créditos** e a 
 | Concessão no cadastro | **75.000 créditos** (`GET /api/user/self` → `quota: 75000`) |
 | Check-in diário | **desativado** (`{"success":false,"message":"签到功能未启用"}`) — a concessão é única |
 | Captcha no cadastro | **nenhum** (`turnstile_check: false`) |
-| E-mail que o painel aceita | **Gmail** (ou QQ) — domínios descartáveis são recusados; o e-mail de verificação chega de `leostudio2026@163.com` (assunto «Leo Studio邮箱验证邮件», código de 6 caracteres, validade de 10 min) |
+| E-mail que o painel aceita | **Gmail** (ou QQ) — domínios descartáveis são recusados; o e-mail de verificação chega de `leostudio2026@163` (assunto «Leo Studio邮箱验证邮件», código de 6 caracteres, validade de 10 min) |
 | Grupo que serve modelos de texto | **`国模`** — o grupo `default` de uma conta nova serve apenas a linha de imagem e uma chamada de chat ali responde `503 model_not_found` |
 | A unidade que escala | **uma conta = uma chave** → `--count N` é realmente "N contas gratuitas" (a cota é por conta) |
 
@@ -163,7 +163,7 @@ Todo o código fica em `src/` — execute a partir da raiz do repositório como 
 * As saídas vêm de `proxies.txt` (uma linha por saída, `scheme://host:port`, `user:pass@` suportado, comentários com `#` ignorados). O mesmo pool alimenta as chamadas ao painel, a verificação de chaves e as leituras da caixa de correio; as ferramentas nunca discam para o provedor diretamente.
 * **A triagem é o trabalho.** Cada conta fixa a primeira saída que comprova `GET /api/status` contra o host do painel, e a verificação fixa uma saída comprovada *diferente* — uma saída morta se aposenta e a conta continua na próxima.
 * A caixa de correio ([Emailnator](https://www.emailnator.com)) é um serviço de e-mail temporário de terceiros, e não o painel; sua API também é lida através das suas saídas.
-* O e-mail de verificação chega de **`leostudio2026@163.com`** (não do domínio do painel); o primeiro código de um lote pode levar alguns minutos para chegar — a ferramenta espera em vez de reenviar, porque um reenvio invalida o código em trânsito.
+* O e-mail de verificação chega de **`leostudio2026@163`** (não do domínio do painel); o primeiro código de um lote pode levar alguns minutos para chegar — a ferramenta espera em vez de reenviar, porque um reenvio invalida o código em trânsito.
 
 ## 📄 Arquivos
 

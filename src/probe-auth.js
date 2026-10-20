@@ -26,7 +26,9 @@ if (!rec) throw new Error('no registered account with a successful login on file
 console.log(`account #${rec.index} ${rec.username} (${rec.email})`);
 
 const pool = loadExits([path.join(ROOT, 'out', 'pool', 'screened-api.leostudio.cc.txt')], { shuffle: false });
-console.log(`exits: ${pool.length}`);
+// `[null]` from the loader = DIRECT mode: a proxy is recommended at scale, not
+// required, and the request layer reads the sentinel as "no tunnel".
+console.log(`exits: ${pool.filter(Boolean).length || 'direct'}`);
 
 async function via(p, pathname, { method = 'GET', body = null, headers = {} } = {}) {
   const res = await req(p, BASE + pathname, {
@@ -40,7 +42,7 @@ async function via(p, pathname, { method = 'GET', body = null, headers = {} } = 
   try {
     json = JSON.parse(res.text);
   } catch (e) {}
-  return { status: res.status, json, text: String(res.text).slice(0, 300), setCookie: res.headers['set-cookie'] || null, exit: p.line };
+  return { status: res.status, json, text: String(res.text).slice(0, 300), setCookie: res.headers['set-cookie'] || null, exit: (p && p.line) || 'direct' };
 }
 
 (async () => {
@@ -53,7 +55,7 @@ async function via(p, pathname, { method = 'GET', body = null, headers = {} } = 
       pin = p;
       break;
     } catch (e) {
-      console.log(`  exit died on login: ${p.line} (${String(e.message).slice(0, 60)})`);
+      console.log(`  exit died on login: ${(p && p.line) || 'direct'} (${String(e.message).slice(0, 60)})`);
     }
   }
   if (!login) throw new Error('no exit could login');

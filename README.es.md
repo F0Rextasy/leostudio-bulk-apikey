@@ -45,7 +45,7 @@ Leo Studio (`api.leostudio.cc`) entrega a cada cuenta **75.000 créditos** y la 
 | Concesión al registrarse | **75.000 créditos** (`GET /api/user/self` → `quota: 75000`) |
 | Check-in diario | **deshabilitado** (`{"success":false,"message":"签到功能未启用"}`) — la concesión es de una sola vez |
 | Captcha al registrarse | **ninguno** (`turnstile_check: false`) |
-| Correo que acepta el panel | **Gmail** (o QQ) — se rechazan los dominios desechables; el correo de verificación llega desde `leostudio2026@163.com` (asunto «Leo Studio邮箱验证邮件», código de 6 caracteres, validez de 10 min) |
+| Correo que acepta el panel | **Gmail** (o QQ) — se rechazan los dominios desechables; el correo de verificación llega desde `leostudio2026@163` (asunto «Leo Studio邮箱验证邮件», código de 6 caracteres, validez de 10 min) |
 | Grupo que sirve modelos de texto | **`国模`** — el grupo `default` de una cuenta nueva solo sirve la línea de imágenes y una llamada de chat allí responde `503 model_not_found` |
 | La unidad que escala | **una cuenta = una clave** → `--count N` es realmente "N cuentas gratuitas" (la cuota es por cuenta) |
 
@@ -163,7 +163,7 @@ Todo el código vive en `src/` — ejecútalo desde la raíz del repositorio com
 * Las salidas provienen de `proxies.txt` (una línea por salida, `scheme://host:port`, se admite `user:pass@`, los comentarios `#` se ignoran). El mismo pool alimenta las llamadas al panel, la verificación de claves y las lecturas del buzón; las herramientas nunca marcan al proveedor directamente.
 * **El filtrado es el trabajo.** Cada cuenta fija la primera salida que demuestra `GET /api/status` contra el host del panel, y la verificación fija una salida *distinta* ya probada — una salida muerta se retira sola y la cuenta continúa con la siguiente.
 * El buzón ([Emailnator](https://www.emailnator.com)) es un servicio de correo temporal de terceros en lugar del panel; su API también se lee a través de tus salidas.
-* El correo de verificación llega desde **`leostudio2026@163.com`** (no desde el dominio del panel); el primer código de un lote puede tardar unos minutos en llegar — la herramienta espera en lugar de reenviar, porque un reenvío invalida el código en curso.
+* El correo de verificación llega desde **`leostudio2026@163`** (no desde el dominio del panel); el primer código de un lote puede tardar unos minutos en llegar — la herramienta espera en lugar de reenviar, porque un reenvío invalida el código en curso.
 
 ## 📄 Archivos
 

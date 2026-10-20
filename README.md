@@ -45,7 +45,7 @@ Leo Studio (`api.leostudio.cc`) hands every account **75,000 credits** and the u
 | Sign-up grant | **75,000 credits** (`GET /api/user/self` → `quota: 75000`) |
 | Daily check-in | **disabled** (`{"success":false,"message":"签到功能未启用"}`) — the grant is one-shot |
 | Captcha at sign-up | **none** (`turnstile_check: false`) |
-| E-mail the panel accepts | **Gmail** (or QQ) — disposable domains are refused; verification mail arrives from `leostudio2026@163.com` (subject «Leo Studio邮箱验证邮件», 6-char code, 10-min validity) |
+| E-mail the panel accepts | **Gmail** (or QQ) — disposable domains are refused; verification mail arrives from `leostudio2026@163` (subject «Leo Studio邮箱验证邮件», 6-char code, 10-min validity) |
 | Group that serves text models | **`国模`** — a fresh account's `default` group serves only the image line and a chat call there answers `503 model_not_found` |
 | The unit that scales | **one account = one key** → `--count N` is really "N free accounts" (the quota is per account) |
 
@@ -92,7 +92,7 @@ print(client.chat.completions.create(model="deepseek-v4-flash",
 cd leostudio-bulk-apikey
 
 # 1) your proxy list, one exit per line (http://, socks5://, socks4:// or bare host:port)
-printf 'socks5://127.0.0.1:1080\n' > proxies.txt
+printf 'socks5://127.0.0.1:1080\n' > proxies.txt   # optional — without it the tool runs direct
 
 # 2) go — one run mints one key per fresh account
 node src/launcher.js             # interactive menu: mint / verify / probe / settings
@@ -154,16 +154,21 @@ All code lives in `src/` — run it from the repository root as `node src/<file>
 | Tool | Flags |
 | --- | --- |
 | `src/cli.js` | `mint` · `verify` · `probe` — dispatcher; `--connect-9router` registers keys in 9Router after the task; every task's own flags via `node src/<task> --help` |
-| `src/mint.js` | thin wrapper → `provider-cli.js` / `mint-newapi-pinned.js` — `--count N` (3) · `--pool FILE` · `--mail emailnator\|imap` · `--sender REGEX` (default `leostudio2026@163`) · `--scan` / `--scan-conc` · `--poll-ms` · `--code-wait` · `--max-cycle` · `--budget` |
+| `src/mint.js` | thin wrapper → `provider-cli.js` / `mint-newapi-pinned.js` — `--count N` (3) · `--pool FILE` (optional) · `--mail emailnator\|imap` · `--sender REGEX` (default `leostudio2026@163`) · `--scan` / `--scan-conc` · `--poll-ms` · `--code-wait` · `--max-cycle` · `--budget` |
 | `src/probe-key.js` | deep probe of one account or key |
 | `src/launcher.js` | interactive: mint / verify / probe / settings — `count` and `concurrency` persist in `launcher.config.json` |
 
 ## 🛰️ Behind a proxy
 
-* Exits come from `proxies.txt` (one line per exit, `scheme://host:port`, `user:pass@` supported, `#` comments ignored). The same pool feeds the panel calls, the key verification and the mailbox reads; the tools never dial the provider directly.
+**Optional — recommended at scale (per-IP limits, bans).** The tool works without a proxy too.
+
+* **With a pool:** pass `--pool <file>` (or put exits in `proxies.txt`) and every request goes through an exit from that list — a dead line fails that attempt and the tool moves to the next one.
+* **Without a pool:** the CLI prints `running WITHOUT a proxy (direct)` and connects directly. Nothing about sign-up, key minting or verification changes — only where the packets leave from.
+
+* Exits come from `proxies.txt` (one line per exit, `scheme://host:port`, `user:pass@` supported, `#` comments ignored). The same pool feeds the panel calls, the key verification and the mailbox reads when one is provided; without a pool the tools connect directly.
 * **Screening is the work.** Each account pins the first exit that proves `GET /api/status` against the panel host, and verification pins a *different* proven exit — a dead exit retires itself and the account continues on the next one.
-* The mailbox ([Emailnator](https://www.emailnator.com)) is a third-party temp-mail service rather than the panel; its API is read through your exits as well.
-* The verification mail arrives from **`leostudio2026@163.com`** (not the panel domain); the first code of a batch can take a few minutes to arrive — the tool waits instead of re-sending, because a re-send invalidates the code in flight.
+* The mailbox ([Emailnator](https://www.emailnator.com)) is a third-party temp-mail service rather than the panel; its API is read through your exits as well when a pool is provided.
+* The verification mail arrives from **`leostudio2026@163`** (not the panel domain); the first code of a batch can take a few minutes to arrive — the tool waits instead of re-sending, because a re-send invalidates the code in flight.
 
 ## 📄 Files
 

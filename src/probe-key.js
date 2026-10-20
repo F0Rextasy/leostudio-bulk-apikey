@@ -15,7 +15,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const { loadExits, req, writeJson, nowIso, isExitError } = require('./lib.js');
+const { loadExits, DIRECT, req, writeJson, nowIso, isExitError } = require('./lib.js');
 const { Panel, UA } = require('./newapi.js');
 
 const ROOT = path.resolve(__dirname, '..');
@@ -28,12 +28,16 @@ class Rot {
     this.i = 0;
   }
   next() {
+    // The direct sentinel (no pool was given) is the one sticky entry: never
+    // rotated out, never retired, so one blip does not end the run.
+    const direct = this.exits.find((p) => p && p.direct);
+    if (direct) return (this.last = direct);
     const alive = this.exits.filter((p) => !this.dead.has(p.line));
     if (!alive.length) throw new Error('no live exits');
     return (this.last = alive[this.i++ % alive.length]);
   }
   kill(p) {
-    if (p && p.line) this.dead.add(p.line);
+    if (p && p.line && !p.direct) this.dead.add(p.line);
   }
   alive() {}
   async attempt(fn, { tries = 6, label = 'call' } = {}) {
@@ -60,16 +64,17 @@ class Rot {
   try {
     for (const l of fs.readFileSync(path.join(ROOT, 'out', 'pool', 'screened-api.leostudio.cc.txt'), 'utf8').split(/\r?\n/)) if (l.trim() && !l.startsWith('#')) lines.push(l);
   } catch (e) {}
-  const rot = new Rot(
-    lines
-      .map((l) => {
-        const { parseProxy } = require(path.join(__dirname, 'proxy'));
-        const p = parseProxy(l);
-        if (p) p.line = l;
-        return p;
-      })
-      .filter(Boolean)
-  );
+  const exits = lines
+    .map((l) => {
+      const { parseProxy } = require(path.join(__dirname, 'proxy'));
+      const p = parseProxy(l);
+      if (p) p.line = l;
+      return p;
+    })
+    .filter(Boolean);
+  // No screened exit on disk = DIRECT mode: a proxy is recommended at scale
+  // (per-IP limits, bans), but the probe works without one.
+  const rot = new Rot(exits.length ? exits : [DIRECT]);
   const panel = new Panel(BASE, rot, { log: (m) => console.log('  ' + m) });
   const login = await panel.login({ username: rec.username, password: rec.password, tries: 8 });
   console.log(`login ${login.status} success=${login.json && login.json.success} bearer=${Boolean(panel.accessToken)} userId=${panel.userId}`);

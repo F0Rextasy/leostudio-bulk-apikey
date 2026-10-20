@@ -45,7 +45,7 @@ Leo Studio (`api.leostudio.cc`) attribue à chaque compte **75 000 crédits** et
 | Attribution à l’inscription | **75 000 crédits** (`GET /api/user/self` → `quota: 75000`) |
 | Check-in quotidien | **désactivé** (`{"success":false,"message":"签到功能未启用"}`) — l’attribution est unique |
 | Captcha à l’inscription | **aucun** (`turnstile_check: false`) |
-| E-mail accepté par le panneau | **Gmail** (ou QQ) — les domaines jetables sont refusés ; l’e-mail de vérification arrive de `leostudio2026@163.com` (objet «Leo Studio邮箱验证邮件», code de 6 caractères, validité 10 min) |
+| E-mail accepté par le panneau | **Gmail** (ou QQ) — les domaines jetables sont refusés ; l’e-mail de vérification arrive de `leostudio2026@163` (objet «Leo Studio邮箱验证邮件», code de 6 caractères, validité 10 min) |
 | Groupe servant les modèles texte | **`国模`** — le groupe `default` d’un nouveau compte ne sert que la gamme d’images et un appel de chat y répond `503 model_not_found` |
 | L’unité qui évolue | **un compte = une clé** → `--count N` signifie en réalité « N comptes gratuits » (le quota est par compte) |
 
@@ -163,7 +163,7 @@ Tout le code se trouve dans `src/` — exécutez-le depuis la racine du dépôt 
 * Les sorties proviennent de `proxies.txt` (une ligne par sortie, `scheme://host:port`, `user:pass@` pris en charge, commentaires `#` ignorés). Le même pool alimente les appels au panneau, la vérification des clés et les lectures de la boîte mail ; les outils ne contactent jamais le fournisseur directement.
 * **Le filtrage, c’est le travail.** Chaque compte fixe la première sortie qui valide `GET /api/status` sur l’hôte du panneau, et la vérification fixe une sortie *différente* déjà validée — une sortie morte se retire d’elle-même et le compte continue sur la suivante.
 * La boîte mail ([Emailnator](https://www.emailnator.com)) est un service de messagerie temporaire tiers plutôt que le panneau ; son API est également lue via vos sorties.
-* L’e-mail de vérification arrive de **`leostudio2026@163.com`** (pas du domaine du panneau) ; le premier code d’un lot peut mettre quelques minutes à arriver — l’outil attend au lieu de renvoyer, car un renvoi invalide le code en cours.
+* L’e-mail de vérification arrive de **`leostudio2026@163`** (pas du domaine du panneau) ; le premier code d’un lot peut mettre quelques minutes à arriver — l’outil attend au lieu de renvoyer, car un renvoi invalide le code en cours.
 
 ## 📄 Fichiers
 
