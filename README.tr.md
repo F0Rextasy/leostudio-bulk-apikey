@@ -88,6 +88,7 @@ print(client.chat.completions.create(model="deepseek-v4-flash",
 ## 🛠 Hızlı başlangıç
 
 ```bash
+
 # bu depoyu klonlayın (veya ZIP'i indirin), ardından:
 cd leostudio-bulk-apikey
 
@@ -96,6 +97,7 @@ printf 'socks5://127.0.0.1:1080\n' > proxies.txt
 
 # 2) çalıştır — bir çalıştırma yeni bir hesap için bir anahtar üretir
 node src/launcher.js             # etkileşimli menü: mint / verify / probe / settings
+
 # ya da doğrudan çalıştırın:
 node src/cli.js mint --count 3   # yeni hesaplar → her biri doğrulanmış bir anahtar
 node src/cli.js verify           # diskte zaten bulunan anahtarları yeniden kontrol edin
@@ -183,6 +185,7 @@ Tüm kod `src/` içinde bulunur — depoyu kök dizininden `node src/<file>.js` 
 
 ```bash
 node src/connect-9router.js --base http://localhost:20128 --password 123456
+
 # ya da: node src/cli.js mint --count 3 --connect-9router
 ```
 

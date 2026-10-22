@@ -88,6 +88,7 @@ print(client.chat.completions.create(model="deepseek-v4-flash",
 ## 🛠 Быстрый старт
 
 ```bash
+
 # clone this repository (or download the ZIP), then:
 cd leostudio-bulk-apikey
 
@@ -96,6 +97,7 @@ printf 'socks5://127.0.0.1:1080\n' > proxies.txt
 
 # 2) go — one run mints one key per fresh account
 node src/launcher.js             # interactive menu: mint / verify / probe / settings
+
 # or drive it directly:
 node src/cli.js mint --count 3   # fresh accounts → one verified key each
 node src/cli.js verify           # re-check the keys already on disk
@@ -183,6 +185,7 @@ inbox (one address per account)                                  a fresh address
 
 ```bash
 node src/connect-9router.js --base http://localhost:20128 --password 123456
+
 # or: node src/cli.js mint --count 3 --connect-9router
 ```
 

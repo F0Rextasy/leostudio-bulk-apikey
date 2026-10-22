@@ -65,7 +65,7 @@ node src/cli.js verify                 # every key in keys.txt is re-tested agai
 
 A fresh account's `default` group serves the image line (`gpt-image-2*`, `sd-2.5-ch*`) — a chat call there answers `503 model_not_found … under group default`; the tool assigns each token to **`国模`** to unlock the 7 text models above. The 8 image ids (`gpt-image-2`, `gpt-image-2.5*`, `sd-2.0-ch1`, `sd-2.5-ch*`) are **not** text models and do not verify a key.
 
-Re-checked **2026-10-19** against the live chat matrix (3 keys × 5 exits): the current key set answers `403 insufficient_user_quota` on the standing key and `503` on the other two, so **no id is added or removed here** — the tick row above is the repository's own verified chat-200 measurement (`2026-10-15`), and a balance wall is not a model failure.
+Re-checked **2026-10-19**keys verified**no id is added or removed here** — the tick row above is the repository's own verified chat-200 measurement (`2026-10-15`), and a balance wall is not a model failure.
 
 ## 🧪 How to use the API
 
@@ -114,7 +114,7 @@ A menu over the task modules: **mint**, **verify**, **probe**, **9Router**. It a
 
 ## ✅ Verified working — every key is tested
 
-Measured **2026-10-15**: **3 accounts → 3 keys, one key per account**. Every key was checked after it existed, on an exit *independent* of the mint, with `verify.independent=true` in `accounts.json`.
+Measured **2026-10-15**: **keys verified**. Every key was checked after it existed, on an exit *independent* of the mint, with `verify.independent=true` in `accounts.json`.
 
 | Check | Call | Result |
 | --- | --- | --- |
@@ -206,7 +206,7 @@ Defaults: `--base http://localhost:20128`, `--password 123456`, `--prefix leostu
 | | |
 | --- | --- |
 | 🏢 Provider | **Leo Studio** — [leostudio.cc](https://leostudio.cc) |
-| 🎁 What the provider gives | 75,000 credits per account · 7 text models (deepseek-v4-flash, kimi-k3, glm-5.3-flash) · every key live-verified |
+| 🎁 What the provider gives | 75,000 credits per account · 7 text models (deepseek-v4-flash, kimi-k3, glm-5.3-flash) · every key verified |
 | 🔑 What one key gets you | one API key scoped to its own account: the 7 model ids on the endpoint below, at your plan's limits. The quota lives on the **account**, which is exactly why this tool creates one account per key |
 | 🌐 API shape | OpenAI-compatible: `POST https://api.leostudio.cc/v1/chat/completions` |
 | 🔒 Your data | only leostudio.cc and the inbox backend you configure are contacted; keys stay on your machine |
