@@ -53,8 +53,11 @@ async function login9router(base, password) {
     headers: { 'Content-Type': 'application/json', 'User-Agent': UA },
     body: JSON.stringify({ password: password ?? DEFAULTS.password }),
   });
+  // `getSetCookie()` only exists from Node 18.14 (undici 5.19): on an older 18.x
+  // the jar stayed empty, the login still reported ok, and every call 401'd.
   const sc = typeof res.headers.getSetCookie === 'function' ? res.headers.getSetCookie() : [];
-  const cookie = sc.map((c) => c.split(';')[0]).join('; ');
+  const rawCookie = res.headers.get('set-cookie');
+  const cookie = (sc.length ? sc : rawCookie ? [rawCookie] : []).map((c) => c.split(';')[0]).join('; ');
   return { ok: res.ok, cookie, body: (await res.text()).slice(0, 200) };
 }
 

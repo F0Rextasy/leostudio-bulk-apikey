@@ -22,9 +22,10 @@ const fs = require('fs');
 const path = require('path');
 
 const argv = process.argv.slice(2);
+// A flag must not read the next flag as its value (`--mail --count 3`).
 const one = (name, dflt) => {
   const i = argv.indexOf(`--${name}`);
-  return i >= 0 && argv[i + 1] ? argv[i + 1] : dflt;
+  return i >= 0 && argv[i + 1] && !argv[i + 1].startsWith('--') ? argv[i + 1] : dflt;
 };
 
 const NAME = one('name');

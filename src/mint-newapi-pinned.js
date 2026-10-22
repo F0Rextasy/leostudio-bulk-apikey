@@ -60,21 +60,28 @@ const poolPath = (f) => (path.isAbsolute(f) ? f : path.join(ROOT, f));
 // --------------------------------------------------------------------------- cli
 
 const argv = process.argv.slice(2);
+// A flag must never read the *next* flag as its value: `--count --conc=4` gave
+// parseInt('--conc=4') = NaN, and NaN turned the run into "0 accounts, exit 0".
 const one = (name, dflt) => {
   const i = argv.indexOf(`--${name}`);
-  return i >= 0 && argv[i + 1] ? argv[i + 1] : dflt;
+  return i >= 0 && argv[i + 1] && !argv[i + 1].startsWith('--') ? argv[i + 1] : dflt;
+};
+/** Numeric flag: a bare flag, a following flag or junk keeps the documented default. */
+const num = (name, dflt) => {
+  const v = parseInt(one(name, null), 10);
+  return Number.isFinite(v) ? v : dflt;
 };
 const has = (name) => argv.includes(`--${name}`);
 const many = (name) => {
   const out = [];
-  for (let i = 0; i < argv.length; i++) if (argv[i] === `--${name}` && argv[i + 1]) out.push(argv[i + 1]);
+  for (let i = 0; i < argv.length; i++) if (argv[i] === `--${name}` && argv[i + 1] && !argv[i + 1].startsWith('--')) out.push(argv[i + 1]);
   return out;
 };
 
 const NAME = one('name');
 const BASE = one('base');
 const TAG = one('tag', (NAME || 'x').slice(0, 12));
-const COUNT = parseInt(one('count', '3'), 10);
+const COUNT = num('count', 3);
 const FOLDER = one('folder', `${NAME}-bulk`);
 const CHECKIN = !has('no-checkin');
 const POOLS = many('pool').map(poolPath);
@@ -82,23 +89,23 @@ const MAIL_POOLS = many('mail-pool').map(poolPath);
 const PROBE = has('probe');
 const PROBE_MAIL = has('probe-mail');
 const PROBE_REGISTER = has('probe-register');
-const POLL_MS = parseInt(one('poll-ms', '2500'), 10);
-const CODE_WAIT_MS = parseInt(one('code-wait', '150000'), 10);
-const MAX_CYCLE = parseInt(one('max-cycle', '3'), 10);
-const SCAN_MAX = parseInt(one('scan', '120'), 10);
-const SCAN_CONC = Math.min(parseInt(one('scan-conc', '6'), 10), 8);
-const BUDGET_MS = parseInt(one('budget', '2700'), 10) * 1000;
+const POLL_MS = num('poll-ms', 2500);
+const CODE_WAIT_MS = num('code-wait', 150000);
+const MAX_CYCLE = num('max-cycle', 3);
+const SCAN_MAX = num('scan', 120);
+const SCAN_CONC = Math.min(num('scan-conc', 6), 8);
+const BUDGET_MS = num('budget', 2700) * 1000;
 const AFF = one('aff', '');
 const OFFER_MODEL = one('model', '');
-const MAIL_TRIES = parseInt(one('mail-tries', '3'), 10);
+const MAIL_TRIES = num('mail-tries', 3);
 // Run shape (operator standard v3): `--preset` sets how many accounts are minted
 // at a time and the pause between account starts inside a worker. An explicit
 // --conc/--gap wins, and with no --preset the run stays the historical serial one.
 const PRESET = presetArgv(argv) || one('preset', null);
 const SHAPE = resolvePreset({
   preset: PRESET,
-  conc: one('conc', null) != null ? parseInt(one('conc'), 10) : null,
-  gap: one('gap', null) != null ? parseInt(one('gap'), 10) : null,
+  conc: one('conc', null) != null ? num('conc', 1) : null,
+  gap: one('gap', null) != null ? num('gap', 0) : null,
   defaultConc: 1,
   defaultGap: 0,
 });
@@ -108,13 +115,23 @@ const GAP_MS = Math.max(0, Math.round((SHAPE.gap == null ? 0 : SHAPE.gap) * 1000
 const maskExit = (line) => String(line || 'direct').replace(/:[^:@/]+@/, ':***@');
 /** Keep-alive agent bound to `pin` — none at all when the pin is direct (no pool). */
 const agentFor = (pin) => (pin && !pin.direct ? createAgent(pin, { keepAlive: true, maxSockets: 1 }) : null);
+/** Closes the tunnels those agents hold; the exit keeps each one open otherwise. */
+function closeAgents(agents) {
+  for (const a of agents || []) {
+    try {
+      a.destroy();
+    } catch (e) {
+      /* already gone */
+    }
+  }
+}
 /** The exit line to record for a pin: `direct` when no exit carried the request. */
 const exitLabel = (p) => (p && (p.line || `${p.host}:${p.port}`)) || 'direct';
 // Controls (Main, 2026-10-15): cycle 1 submits on the first poll; cycles
 // >= `--delay-from-cycle` deliberately wait `--delay-ms` before the register
 // POST, so "does a correct code survive 30 s of delay?" is measured, not guessed.
-const DELAY_MS = parseInt(one('delay-ms', '30000'), 10);
-const DELAY_FROM = parseInt(one('delay-from-cycle', '99'), 10);
+const DELAY_MS = num('delay-ms', 30000);
+const DELAY_FROM = num('delay-from-cycle', 99);
 // Reuse a mailbox that has demonstrably received this panel's mail before, instead
 // of generating a fresh Emailnator address (its boxes receive under different
 // underlying accounts; a box that already got the panel's mail is worth more).
@@ -141,6 +158,10 @@ if (!NAME || !BASE) {
   console.error('usage: node src/mint-newapi-pinned.js --name <provider> --base <https://host> [--count 3] [--pool f] [--probe] [--probe-register]');
   process.exit(1);
 }
+if ((has('pool') && !POOLS.length) || (has('mail-pool') && !MAIL_POOLS.length)) {
+  console.error('--pool / --mail-pool need a file path, e.g. --pool proxies.txt');
+  process.exit(1);
+}
 
 const PANEL_DOMAIN = (() => {
   try {
@@ -160,7 +181,14 @@ const log = (...a) => {
   appendLine(LOG, line);
 };
 
-const accounts = readJson(ACCOUNTS, []);
+// Every account's password and key lives in this file: a half-written one must
+// stop the run, not read as "no accounts yet" (the next write would drop them).
+const accounts = (() => {
+  if (!fs.existsSync(ACCOUNTS)) return [];
+  const loaded = readJson(ACCOUNTS, null);
+  if (!Array.isArray(loaded)) throw new Error(`${ACCOUNTS} is not valid JSON — move it aside for a fresh file; every account's password lives there`);
+  return loaded;
+})();
 const startedAt = Date.now();
 const withinBudget = () => Date.now() - startedAt < BUDGET_MS;
 
@@ -196,10 +224,12 @@ class PinnedSupply {
   alive() {}
 }
 
-function pinnedPanel(pin) {
+/** `keep` (optional) collects the keep-alive agents so the caller can close them. */
+function pinnedPanel(pin, keep = null) {
   const supply = new PinnedSupply(pin);
   const panel = new Panel(BASE, supply, { label: NAME, log });
   panel.agent = agentFor(pin);
+  if (keep && panel.agent) keep.push(panel.agent);
   panel.supply = supply;
   return panel;
 }
@@ -534,13 +564,8 @@ const MAIL_FILES = [
   path.join(ROOT, 'out', 'community-live-emailnator.txt'),
 ];
 
-function loadSoft(files) {
-  try {
-    return loadExits(files, { shuffle: false });
-  } catch (e) {
-    return [];
-  }
-}
+// (No try/catch here any more: `loadExits` throwing means the named pool file
+// exists and has lines but no usable exit — that must stop the run, not go direct.)
 
 /**
  * The local proxy pool answers "which exits are proven for this host right now"
@@ -610,7 +635,7 @@ async function probeRegister(panel, email) {
 // --------------------------------------------------------------------------- main
 
 (async () => {
-  const priority = loadSoft(POOLS.length ? POOLS.filter((f) => !/emailnator|mail/.test(f)) : HOT_FILES);
+  const priority = loadExits(POOLS.length ? POOLS.filter((f) => !/emailnator|mail/.test(f)) : HOT_FILES, { shuffle: false });
   for (const a of loadAnnotated(path.join(ROOT, 'out', 'pool-exits.txt'))) {
     try {
       const p = require('./proxy.js').parseProxy(a.line);
@@ -635,7 +660,16 @@ async function probeRegister(panel, email) {
     } catch (e) {}
   }
   priority.unshift(...poolLines);
-  const cold = loadExits(undefined, { shuffle: true });
+  let cold;
+  try {
+    cold = loadExits(undefined, { shuffle: true });
+  } catch (e) {
+    // The cold out/*.txt candidates are optional enrichment: their junk must not
+    // stop a run that has a real priority pool — but with nothing else, stop.
+    if (!priority.length) throw e;
+    log(`  cold pool unusable (${String(e.message).slice(0, 120)}) — using the priority exits only`);
+    cold = [];
+  }
   const hunter = new PinHunter(priority, cold);
   const poolMail = await fetchPool({ target: 'www.emailnator.com', limit: 20 });
   const mailExits = [];
@@ -672,6 +706,9 @@ async function probeRegister(panel, email) {
     `# ${NAME} pinned mint · base=${BASE} · priority=${priority.filter(Boolean).length} (pool=${poolLines.length}${EXIT_CLASS ? ` class=${EXIT_CLASS}` : ''}, poolNote=${String(pool.note || pool.error || '').slice(0, 80)}) cold=${cold.filter(Boolean).length || 'direct'} mail=${mailPool.exits.length || 'direct'} · count=${COUNT}${PROBE ? ' · PROBE' : ''}${STRICT_SENDER ? ` · sender=${SENDER} (strict)` : ''}${DELAY_FROM < 99 ? ` · delay-control from cycle ${DELAY_FROM} (+${DELAY_MS}ms)` : ''}`
   );
 
+  // A keep-alive agent per pin probe, closed when the gates phase is over:
+  // otherwise every probe would hold its tunnel for the rest of the run.
+  const gatesAgents = [];
   let st = null;
   for (let i = 0; i < 6 && !st; i++) {
     const { pin } = await hunter.acquire();
@@ -680,7 +717,7 @@ async function probeRegister(panel, email) {
       await sleep(20000);
       continue;
     }
-    const panel = pinnedPanel(pin);
+    const panel = pinnedPanel(pin, gatesAgents);
     try {
       const r = await panel.status();
       st = { pin: pin.line, r };
@@ -689,6 +726,7 @@ async function probeRegister(panel, email) {
       hunter.retire(pin);
     }
   }
+  closeAgents(gatesAgents);
   if (!st) throw new Error(`no exit answers ${BASE}/api/status (scanned ${hunter.scanned})`);
   const g = gates(st.r.json);
   log(`gates: ${JSON.stringify({ site: g.system_name, reg: g.register_enabled, pwd: g.password_register, em: g.email_verification, ts: g.turnstile_check, ci: g.checkin_enabled, invite: g.invite_required })} · probed via ${st.pin}`);
@@ -774,6 +812,13 @@ async function probeRegister(panel, email) {
     let box = null;
     let done = false;
     let started = false;
+    // Every pinned panel this account opens leaves a keep-alive tunnel at the
+    // exit; they are all closed when the account is done (below).
+    const agents = [];
+    const newPanel = (pin) => {
+      const p = pinnedPanel(pin, agents);
+      return p;
+    };
     /** The spec's live start line: printed once, with the exit this account got. */
     const startLine = (exitLine) => {
       if (started) return;
@@ -807,7 +852,7 @@ async function probeRegister(panel, email) {
         startLine(pin.line);
         hunter.claim(pin, owner);
         log(`  pin ${pin.line}${pin.klass ? ` [class=${pin.klass}]` : ''}${reuse ? ' (reused)' : ` (scanned ${tested})`}`);
-        panel = pinnedPanel(pin);
+        panel = newPanel(pin);
 
         if (!box) {
           if (MAIL_MODE === 'imap') {
@@ -940,6 +985,7 @@ async function probeRegister(panel, email) {
             panel.supply.pin = got2.pin;
             panel.supply.dead = false;
             panel.agent = agentFor(got2.pin);
+            if (panel.agent) agents.push(panel.agent);
             log(`  re-pin for ${why}: ${got2.pin.line}`);
             return got2.pin;
           };
@@ -1005,7 +1051,7 @@ async function probeRegister(panel, email) {
           try {
             const alt = await hunter.acquire();
             if (alt.pin && exitLabel(alt.pin) !== mintExit) {
-              verifier = pinnedPanel(alt.pin);
+              verifier = newPanel(alt.pin);
               hunter.claim(alt.pin, owner);
               verifyExit = exitLabel(alt.pin);
               independent = true;
@@ -1106,6 +1152,7 @@ async function probeRegister(panel, email) {
         if (!exitErr && /no exit/i.test(cyc.error)) break;
       }
     }
+    closeAgents(agents);
 
     accounts.push(rec);
     writeJson(ACCOUNTS, accounts);
@@ -1116,6 +1163,12 @@ async function probeRegister(panel, email) {
   const worker = async () => {
     for (;;) {
       if (abort) return;
+      // The budget is per run: without this a large --count keeps creating empty
+      // 'budget' records and rewriting the whole ledger after the time is up.
+      if (!withinBudget()) {
+        log(`  budget exhausted (${Math.round((Date.now() - startedAt) / 1000)}s) — no more accounts started`);
+        return;
+      }
       const i = issued++;
       if (i >= total) return;
       const owner = `a${i}`;
@@ -1131,7 +1184,10 @@ async function probeRegister(panel, email) {
 
   const minted = accounts.filter((a) => a.provider === NAME && a.status === 'minted').length;
   log(`done: ${NAME} — ${made.length} new key(s) this run, ${minted} minted account(s) total · pins scanned=${hunter.scanned} statuses=${JSON.stringify(hunter.statusHist)}`);
-  console.log(`${String(NAME || 'mint').toUpperCase()} ${made.length}/${total} OK`);
+  if (imapBox) imapBox.close(); // an open IMAP socket outlives the last line
+  const short = made.length < total;
+  console.log(`${String(NAME || 'mint').toUpperCase()} ${made.length}/${total}${short ? (PROBE ? ' (probe run — nothing minted by design)' : ' — short of the target') : ' OK'}`);
+  if (short && !PROBE) process.exitCode = 1;
 })().catch((e) => {
   log(`FATAL ${e && e.stack ? e.stack.split('\n').slice(0, 3).join(' | ') : e}`);
   process.exit(1);

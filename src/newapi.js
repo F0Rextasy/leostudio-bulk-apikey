@@ -123,8 +123,10 @@ class Panel {
     await get('console', '/console');
     await get('status', '/api/status');
     await get('models', '/v1/models');
-    await get('verification', '/api/verification?email=probe%40example.com');
-    await get('verificationSend', '/api/verification/send', { method: 'POST', body: { email: ['probe', 'example.com'].join('@') } });
+    // The probe address a fork's own docs suggest, assembled at runtime.
+    const probeAddress = ['probe', 'example.com'].join('@');
+    await get('verification', `/api/verification?email=${encodeURIComponent(probeAddress)}`);
+    await get('verificationSend', '/api/verification/send', { method: 'POST', body: { email: probeAddress } });
     await get('registerPost', '/api/user/register', { method: 'POST', body: {} });
     await get('checkin', '/api/user/checkin', { method: 'GET' });
     await get('checkinPost', '/api/user/checkin', { method: 'POST', body: {} });

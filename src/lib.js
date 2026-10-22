@@ -19,7 +19,7 @@ const https = require('https');
 const path = require('path');
 const { URL } = require('url');
 
-const { parseProxy, createAgent, loadPoolFile } = require(path.join(__dirname, 'proxy'));
+const { parseProxy, createAgent, createHttpAgent, loadPoolFile } = require(path.join(__dirname, 'proxy'));
 
 // Checkout root — the code lives in `src/`; every user-facing file the tools
 // read or write (`proxies.txt`, `keys.txt`, `out/`, …) sits at the top.
@@ -45,6 +45,20 @@ const DEFAULT_POOLS = [
   path.join(ROOT, 'out', 'freshpool-live.txt'),
   path.join(ROOT, 'out', 'pool-refresh-2026-10-14T18-56-54.txt'),
 ];
+/** Lines that are not blank and not a comment — counted before the parser drops any. */
+function poolLineCount(file) {
+  try {
+    return fs
+      .readFileSync(file, 'utf8')
+      .split(/\r?\n/)
+      .filter((l) => {
+        const t = l.replace(/\s+#.*$/, '').trim();
+        return Boolean(t) && !t.startsWith('#') && !t.startsWith('//');
+      }).length;
+  } catch (e) {
+    return 0; // no such file / unreadable: that is "no pool", not a broken pool
+  }
+}
 
 function loadExits(files = DEFAULT_POOLS, { shuffle = true } = {}) {
   const seen = new Set();
@@ -83,6 +97,15 @@ function loadExits(files = DEFAULT_POOLS, { shuffle = true } = {}) {
   }
   if (shuffle) out.sort(() => Math.random() - 0.5);
   if (!out.length) {
+    // A file that *is* there and *does* have lines but yields no usable exit is a
+    // broken pool, not "no pool": going direct there puts the whole batch on this
+    // machine's own address behind a log line that claims there was no pool.
+    const broken = files.map((f) => ({ f, n: poolLineCount(f) })).find((x) => x.n);
+    if (broken) {
+      throw new Error(
+        `${path.basename(String(broken.f))} has ${broken.n} candidate line(s) but no usable exit — a line must be host:port, user:pass@host:port, scheme://host:port or host|port|user|pass (socks4 lines are dropped); empty the file or leave it out for direct mode`
+      );
+    }
     // No pool = DIRECT mode: a proxy is recommended at scale (per-IP limits,
     // bans), but the tool works without one. `null` is the direct sentinel —
     // every request in this tree reads it as "no tunnel".
@@ -122,7 +145,7 @@ function req(proxy, url, { method = 'GET', headers = {}, body = null, timeoutMs 
         host: u.hostname,
         port: u.port || (u.protocol === 'https:' ? 443 : 80),
         path: u.pathname + u.search,
-        agent: agent || (exit ? createAgent(exit) : undefined),
+        agent: agent || (exit ? (u.protocol === 'http:' ? createHttpAgent(exit) : createAgent(exit)) : undefined),
         headers: h,
       },
       (res) => {
@@ -281,8 +304,8 @@ function brokerHttp(base, pathname, { method = 'GET', body = null, timeoutMs = 1
 }
 
 /**
- * Gmail aliases exist in two forms of the *same* mailbox: `<user>@gmail.com`
- * (plain) and `<u.s.e.r>@gmail.com` (dotted) — both deliver to one inbox.
+ * Gmail aliases exist in two forms of the *same* mailbox: the plain local part,
+ * and the dotted one (a dot between every character) — both deliver to one inbox.
  * Measured (2026-10-15, five panels): the dotted form is read as a disposable sub-address and refused,
  * while the plain form is accepted. Emailnator hands out the dotted variant as
  * the box identity, so the reader keys on it — but what goes into a register
@@ -455,16 +478,37 @@ function readJson(file, dflt = null) {
   }
 }
 
+/**
+ * Windows fails a replace with EPERM while another process has the destination
+ * open (a sharing violation). A reader's window is microseconds, so a short
+ * burst of retries clears it; anything else is a real failure and is thrown.
+ */
+function renameWithRetry(tmp, file) {
+  for (let i = 0; ; i++) {
+    try {
+      fs.renameSync(tmp, file);
+      return;
+    } catch (e) {
+      if (i >= 100 || (e.code !== 'EPERM' && e.code !== 'EBUSY' && e.code !== 'EACCES')) throw e;
+      Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 2);
+    }
+  }
+}
+
 function writeJson(file, value) {
   fs.mkdirSync(path.dirname(file), { recursive: true });
-  fs.writeFileSync(file, JSON.stringify(value, null, 2));
+  // tmp + rename: a kill mid-write must not truncate the only copy of the
+  // ledger (accounts.json carries every account's password and key).
+  const tmp = `${file}.tmp`;
+  fs.writeFileSync(tmp, JSON.stringify(value, null, 2), { mode: 0o600 });
+  renameWithRetry(tmp, file);
 }
 
 /** Appends to a newline log without ever throwing (logging must not break a mint). */
 function appendLine(file, line) {
   try {
     fs.mkdirSync(path.dirname(file), { recursive: true });
-    fs.appendFileSync(file, line + '\n');
+    fs.appendFileSync(file, line + '\n', { mode: 0o600 });
   } catch (e) {
     /* ignore */
   }

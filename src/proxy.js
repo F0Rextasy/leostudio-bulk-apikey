@@ -33,6 +33,10 @@ const DEFAULT_TIMEOUT_MS = 35000;
 // full handshake budget starve the CPE for the whole batch (measured: 651
 // sockets in SYN_SENT, mostly our own screens, while ICMP was clean).
 const DEFAULT_CONNECT_TIMEOUT_MS = 8000;
+// An exit that answers `HTTP/1.1 200 ` and then streams bytes makes the CONNECT
+// header buffer allocate whatever the link carries; the handshake timer is the
+// only other bound. 16 KiB is far above any real reply.
+const MAX_HANDSHAKE_BYTES = 16384;
 
 /** Accepted line shapes:
  *    host:port
@@ -202,6 +206,7 @@ function connectHttpProxy(proxy, { host, port, timeoutMs = DEFAULT_TIMEOUT_MS })
     const fail = (err) => {
       if (settled) return;
       settled = true;
+      clearTimeout(timer);
       socket.destroy();
       reject(err);
     };
@@ -216,7 +221,13 @@ function connectHttpProxy(proxy, { host, port, timeoutMs = DEFAULT_TIMEOUT_MS })
     const onData = (chunk) => {
       buffer = Buffer.concat([buffer, chunk]);
       const end = buffer.indexOf('\r\n\r\n');
-      if (end === -1) return;
+      if (end === -1) {
+        if (buffer.length > MAX_HANDSHAKE_BYTES) {
+          socket.removeListener('data', onData);
+          fail(new Error(`proxy CONNECT header too large (> ${MAX_HANDSHAKE_BYTES} bytes) via ${label(proxy)}`));
+        }
+        return;
+      }
       socket.removeListener('data', onData);
       clearTimeout(timer);
       const head = buffer.slice(0, end).toString('latin1');
@@ -260,6 +271,7 @@ function connectSocks5(proxy, { host, port, timeoutMs = DEFAULT_TIMEOUT_MS }) {
     const fail = (err) => {
       if (settled) return;
       settled = true;
+      clearTimeout(timer);
       socket.destroy();
       reject(err);
     };
@@ -300,6 +312,10 @@ function connectSocks5(proxy, { host, port, timeoutMs = DEFAULT_TIMEOUT_MS }) {
       if (buffer.length < 4) return;
       const rep = buffer[1];
       const atyp = buffer[3];
+      // The domain-name form carries its length in byte 4: reading it before it
+      // arrived made `need` NaN, skipped the length test below, and handed the
+      // half header to the caller as if it were site data.
+      if (atyp !== 0x01 && atyp !== 0x04 && buffer.length < 5) return;
       const need = atyp === 0x01 ? 10 : atyp === 0x04 ? 22 : 7 + buffer[4];
       if (buffer.length < need) return;
       if (rep !== 0x00) {
@@ -307,6 +323,7 @@ function connectSocks5(proxy, { host, port, timeoutMs = DEFAULT_TIMEOUT_MS }) {
         return fail(new Error(`SOCKS5 error ${reasons[rep] || rep} (${label(proxy)})`));
       }
       clearTimeout(timer);
+      socket.removeListener('data', onData); // never let the handshake reader eat tunnel bytes
       const rest = buffer.slice(need);
       if (settled) return;
       settled = true;
@@ -341,6 +358,7 @@ function connectSocks4(proxy, { host, port, timeoutMs = DEFAULT_TIMEOUT_MS }) {
     const fail = (err) => {
       if (settled) return;
       settled = true;
+      clearTimeout(timer);
       socket.destroy();
       reject(err);
     };
@@ -349,17 +367,19 @@ function connectSocks4(proxy, { host, port, timeoutMs = DEFAULT_TIMEOUT_MS }) {
     socket.setNoDelay(true);
 
     let buffer = Buffer.alloc(0);
-    socket.on('data', (chunk) => {
+    const onData = (chunk) => {
       buffer = Buffer.concat([buffer, chunk]);
       if (buffer.length < 8) return;
       clearTimeout(timer);
       if (buffer[1] !== 0x5a) return fail(new Error(`SOCKS4 error code ${buffer[1]} (${label(proxy)})`));
+      socket.removeListener('data', onData); // never let the handshake reader eat tunnel bytes
       const rest = buffer.slice(8);
       if (settled) return;
       settled = true;
       if (rest.length) socket.unshift(rest);
       resolve(socket);
-    });
+    };
+    socket.on('data', onData);
 
     socket.on('connect', () => {
       const user = Buffer.from(proxy.username || '');
@@ -387,6 +407,8 @@ function openTunnel(proxy, { host, port, timeoutMs } = {}) {
 /**
  * `https.Agent` whose sockets are opened through the proxy and then wrapped in
  * TLS locally, so `https.request({ agent })` transparently exits via the proxy.
+ * Connect and handshake get different budgets: a dead exit must give up its
+ * socket quickly, while a live line on a flapping path may need ~30 s for TLS.
  */
 class ProxyAgent extends https.Agent {
   constructor(proxy, options = {}) {
@@ -398,16 +420,11 @@ class ProxyAgent extends https.Agent {
     const host = options.host;
     const port = Number(options.port) || 443;
     let tunnel = null;
-    // Connect phase and handshake phase need different budgets: a dead exit must
-    // give up its socket quickly (a 35 s connect timeout left hundreds of
-    // SYN_SENT slots open across the runs and starved the CPE), while a live
-    // line on a flapping path may legitimately need ~30 s for TLS.
     const connectMs = this.proxy.connectTimeoutMs || DEFAULT_CONNECT_TIMEOUT_MS;
     const handshakeMs = this.proxy.timeoutMs || DEFAULT_TIMEOUT_MS;
     openTunnel(this.proxy, { host, port, timeoutMs: connectMs })
       .then((socket) => {
         tunnel = socket;
-        if (options.secureEndpoint === false) return socket;
         const tlsSocket = tls.connect({
           socket,
           servername: options.servername || host,
@@ -423,8 +440,39 @@ class ProxyAgent extends https.Agent {
   }
 }
 
+/**
+ * Same idea for a plain-`http://` target: Node refuses an `https.Agent` for an
+ * http request before any I/O (`ERR_INVALID_PROTOCOL`), so an http base URL
+ * could not use the pool at all. Here the bare tunnel *is* the connection.
+ */
+class ProxyHttpAgent extends http.Agent {
+  constructor(proxy, options = {}) {
+    super({ keepAlive: false, ...options });
+    this.proxy = proxy;
+  }
+
+  createConnection(options, callback) {
+    const port = Number(options.port) || 80;
+    let tunnel = null;
+    openTunnel(this.proxy, { host: options.host, port, timeoutMs: this.proxy.connectTimeoutMs || DEFAULT_CONNECT_TIMEOUT_MS })
+      .then((socket) => {
+        tunnel = socket;
+        callback(null, socket);
+      })
+      .catch((err) => {
+        if (tunnel) tunnel.destroy();
+        callback(err);
+      });
+  }
+}
+
 function createAgent(proxy, options) {
   return new ProxyAgent(proxy, options);
+}
+
+/** The agent for a URL scheme: an `http:` target needs the http.Agent subclass. */
+function createHttpAgent(proxy, options) {
+  return new ProxyHttpAgent(proxy, options);
 }
 
 /**
@@ -456,7 +504,7 @@ function fetchText(proxy, url, { timeoutMs = 15000, headers = {}, method = 'GET'
         host: u.hostname,
         port: u.port || (u.protocol === 'https:' ? 443 : 80),
         path: u.pathname + u.search,
-        agent: proxy ? createAgent(proxy) : undefined,
+        agent: proxy ? (u.protocol === 'https:' ? createAgent(proxy) : createHttpAgent(proxy)) : undefined,
         headers: finalHeaders,
       },
       (res) => {
@@ -590,4 +638,6 @@ module.exports = {
   usableInBrowser,
   isLocalHost,
   ProxyAgent,
+  ProxyHttpAgent,
+  createHttpAgent,
 };

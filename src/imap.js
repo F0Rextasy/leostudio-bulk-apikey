@@ -112,6 +112,10 @@ class Imap {
   /** Opens the socket — through the proxy when one is given — and reads the greeting. */
   async connect() {
     if (this.socket) return;
+    // The tunnel first: arming the greeting timer before it would leave a
+    // promise nobody awaits when the exit is dead, and its reject() would
+    // reach the process as an unhandled rejection 20 s later.
+    const tunnel = this.proxy ? await openTunnel(this.proxy, { host: this.host, port: this.port, timeoutMs: this.timeoutMs }) : null;
     const greeting = new Promise((resolve, reject) => {
       const timer = setTimeout(() => reject(new Error('IMAP greeting timeout')), this.timeoutMs);
       const onData = () => {
@@ -128,8 +132,8 @@ class Imap {
       };
     });
 
-    const socket = this.proxy
-      ? tls.connect({ socket: await openTunnel(this.proxy, { host: this.host, port: this.port, timeoutMs: this.timeoutMs }), servername: this.host })
+    const socket = tunnel
+      ? tls.connect({ socket: tunnel, servername: this.host })
       : tls.connect({ host: this.host, port: this.port, servername: this.host });
     this.socket = socket;
     socket.setNoDelay(true);
