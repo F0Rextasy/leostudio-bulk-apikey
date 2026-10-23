@@ -92,8 +92,37 @@ async function connectRouter() {
     }
   }
 }
+async function connectRouterOmni() {
+  const { connectKeysFile, connectOmniRoute, readKeys, defaultKeysFile } = require('./connect-omniroute.js');
+  const base = await ask('OmniRoute base', cfg.routerBase || 'http://localhost:20128');
+  const password = await ask('OmniRoute password', cfg.routerPassword || '123456');
+  cfg.routerBase = base;
+  cfg.routerPassword = password;
+  save();
+  console.log('\n▶ OmniRoute ' + base + ' — one connection per key\n');
+  try {
+    await connectKeysFile({ base, password });
+  } catch (e) {
+    if (readKeys(defaultKeysFile()).length) {
+      console.log('\n⚠ ' + (e && e.message ? e.message : e));
+      return;
+    }
+    const apiKey = await ask('keys.txt is empty — paste one API key', '');
+    if (!apiKey) return;
+    try {
+      await connectOmniRoute({ base, password, apiKey });
+    } catch (e2) {
+      console.log('\n⚠ ' + (e2 && e2.message ? e2.message : e2));
+    }
+  }
+}
 
 async function main() {
+  if (process.argv.includes('--connect-omniroute')) {
+    await connectRouterOmni();
+    rl.close();
+    return;
+  }
   process.stdout.write('\x1b[2J\x1b[H');
   banner();
   console.log('  proxy exits: ' + (count(POOL) || 'none — running WITHOUT a proxy (direct)') + '     keys on disk: ' + count(KEYS) + '\n');
@@ -102,6 +131,7 @@ async function main() {
   console.log('  3) probe     deep probe of a single account or key');
   console.log('  4) Settings');
   console.log('  6) Connect to 9Router');
+  console.log('  7) Connect to OmniRoute');
   console.log('  0) Exit\n');
   const choice = await ask('choose', '1');
   if (choice === '1') {
@@ -118,6 +148,9 @@ async function main() {
   }
   else if (choice === '6') {
     await connectRouter();
+  }
+  else if (choice === '7') {
+    await connectRouterOmni();
   } else {
     rl.close();
     return;
