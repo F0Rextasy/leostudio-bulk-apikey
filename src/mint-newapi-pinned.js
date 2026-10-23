@@ -1098,11 +1098,13 @@ async function probeRegister(panel, email) {
             log(`  ✔ MINTED (models=${models.status}, chat=${rec.verify.chat_status || 'n/a'}, quota=${rec.steps.self.quota})`);
           } else {
             rec.status = 'key-unverified';
-            // Not silently dropped: the key left the live set, so it is parked
-            // in keys-dead.txt for a later re-check instead of vanishing.
-            if (!fs.existsSync(KEYS_DEAD) || !fs.readFileSync(KEYS_DEAD, 'utf8').includes(key)) appendLine(KEYS_DEAD, key);
-            dead.push(key);
-            log(`  ✖ key failed verification (models=${models.status}${chatModel ? `, chat=${rec.verify.chat_status}` : ''}) → keys-dead.txt`);
+            // A definitive refusal (401/402/403) is parked in keys-dead.txt as
+            // `key<TAB>sebep<TAB>ISO` for a later re-check; a transport failure
+            // or a 429 is not a verdict, so that key stays out of the report.
+            const why = [models.status, rec.verify.chat_status].find((s) => [401, 402, 403].includes(Number(s)));
+            if (why && (!fs.existsSync(KEYS_DEAD) || !fs.readFileSync(KEYS_DEAD, 'utf8').includes(key))) appendLine(KEYS_DEAD, `${key}\t${why}\t${new Date().toISOString()}`);
+            if (why) dead.push(key);
+            log(`  ✖ key failed verification (models=${models.status}${chatModel ? `, chat=${rec.verify.chat_status}` : ''})${why ? ' → keys-dead.txt' : ' (not a verdict — kept out of keys-dead.txt)'}`);
           }
           done = true;
           break;
