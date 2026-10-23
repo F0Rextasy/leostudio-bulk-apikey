@@ -1,12 +1,11 @@
 {
   "name": "leostudio-bulk-apikey",
   "version": "1.0.0",
-  "description": "Bulk-create Leo Studio accounts with auto-generated API keys — OpenAI-compatible inference + 9Router connector.",
+  "description": "Bulk-create Leo Studio accounts with auto-generated API keys — OpenAI-compatible inference (DeepSeek, GLM, Kimi, Hunyuan) + 9Router connector.",
   "license": "MIT",
   "type": "commonjs",
   "bin": {
     "leostudio-bulk-apikey": "src/cli.js",
-    "leostudio-bulk-apikey-9router": "src/connect-9router.js",
     "leostudio-bulk-apikey-launcher": "src/launcher.js"
   },
   "main": "src/cli.js",
@@ -25,9 +24,7 @@
     "register",
     "launcher",
     "leostudio",
-    "apikey",
-    "9router",
-    "openai-compatible"
+    "apikey"
   ],
   "files": [
     "src",

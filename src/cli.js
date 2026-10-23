@@ -31,19 +31,12 @@ function help() {
   console.log('\noptions: every task takes its own flags — ask it directly:');
   console.log('  node src/<task-file> --help');
   console.log('  --connect-9router  register the keys in 9Router after the task finishes');
-  console.log('  --preset turbo|balanced|safe  run shape for the task (5/4/2 workers, 3/6/8 s apart)');
-  console.log('\nproxy pool — optional:');
-  console.log('  --pool FILE   exit list, one per line (default proxies.txt), optional');
-  console.log('  each line — scheme://host:port[#comment], user:pass@ supported');
-  console.log('  Requests go through your proxy list when one is provided (--pool / env). Without a pool the tool connects directly.');
+  console.log('\nproxy pool:');
+  console.log('  one exit per line in proxies.txt — scheme://host:port[#comment], user:pass@ supported');
   console.log('\nno options? run the interactive launcher:  node src/launcher.js');
 }
 
-const args = process.argv.slice(2);
-// `--preset` may sit before the task name (node src/cli.js --preset=turbo mint):
-// hold it here and hand it to the task, which is where the run-shape logic lives.
-const presetFlag = args.find((a) => a.startsWith('--preset='));
-const argv = args.filter((a) => a !== presetFlag);
+const argv = process.argv.slice(2);
 const task = argv[0];
 if (!task || task === 'help' || task === '--help' || task === '-h') {
   help();
@@ -57,7 +50,7 @@ if (!entry) {
 }
 const rest = argv.slice(1);
 const connect = rest.includes('--connect-9router');
-const child = spawnSync(process.execPath, [path.join(__dirname, entry.file), ...rest, ...(presetFlag ? [presetFlag] : [])], {
+const child = spawnSync(process.execPath, [path.join(__dirname, entry.file), ...rest], {
   windowsHide: true,
   stdio: 'inherit',
   env: process.env,

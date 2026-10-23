@@ -46,27 +46,31 @@ Leo Studio (`api.leostudio.cc`) hands every account **75,000 credits** and the u
 | Sign-up grant | **75,000 credits** (`GET /api/user/self` → `quota: 75000`) |
 | Daily check-in | **disabled** (`{"success":false,"message":"签到功能未启用"}`) — the grant is one-shot |
 | Captcha at sign-up | **none** (`turnstile_check: false`) |
-| E-mail the panel accepts | **Gmail** (or QQ) — disposable domains are refused; verification mail arrives from `leostudio2026@163` (subject «Leo Studio邮箱验证邮件», 6-char code, 10-min validity) |
+| E-mail the panel accepts | **Gmail** (or QQ) — disposable domains are refused; verification mail arrives from `leostudio2026@<mail>` (subject «Leo Studio邮箱验证邮件», 6-char code, 10-min validity) |
 | Group that serves text models | **`国模`** — a fresh account's `default` group serves only the image line and a chat call there answers `503 model_not_found` |
 | The unit that scales | **one account = one key** → `--count N` is really "N free accounts" (the quota is per account) |
 
 > 💡 The free tier is set by Leo Studio and can change. Check the live numbers at [leostudio.cc](https://leostudio.cc) — and let the tool's own gate decide:
 
 ```bash
-node src/cli.js verify                 # every key in keys.txt is re-tested against the live API
+node src/cli.js --verify-only     # every key in keys.txt is re-tested with a real chat call
 ```
 
 ## 🤖 Models — all 7 of them
 
 `GET https://api.leostudio.cc/v1/models` with a minted key on the **`国模`** group serves **7 text models** (captured in [`models.json`](models.json)):
 
-| Model | ✓ |
-| --- | --- |
-| `deepseek-v4-flash` | ✓ |
+| Model ID | Family | Note |
+| --- | --- | --- |
+| `deepseek-v4-flash` | DeepSeek | verifier's default chat model |
+| `deepseek-v4.1-flash` | DeepSeek | next flash |
+| `glm-5.2` | Z.ai (GLM) | |
+| `glm-5.3-flash` | Z.ai (GLM) | |
+| `kimi-k3` | Moonshot | |
+| `hy3` | Hunyuan | |
+| `hy4-preview` | Hunyuan | preview |
 
 A fresh account's `default` group serves the image line (`gpt-image-2*`, `sd-2.5-ch*`) — a chat call there answers `503 model_not_found … under group default`; the tool assigns each token to **`国模`** to unlock the 7 text models above. The 8 image ids (`gpt-image-2`, `gpt-image-2.5*`, `sd-2.0-ch1`, `sd-2.5-ch*`) are **not** text models and do not verify a key.
-
-Re-checked **2026-10-19** against the live chat matrix (fresh exits each): the current key set hits a quota wall (`403 insufficient_user_quota` / `503`) while the tool's own gate stays honest, so **no id is added or removed here** — the tick row above is the repository's own verified chat-200 measurement (`2026-10-15`), and a balance wall is not a model failure.
 
 ## 🧪 How to use the API
 
@@ -115,7 +119,7 @@ A menu over the task modules: **mint**, **verify**, **probe**, **9Router**. It a
 
 ## ✅ Verified working — every key is tested
 
-Measured **2026-10-15**: **keys verified**. Every key was checked after it existed, on an exit *independent* of the mint, with `verify.independent=true` in `accounts.json`.
+Measured **2026-10-15**: **each account minted its own key, one key per account**. Every key was checked after it existed, on an exit *independent* of the mint, with `verify.independent=true` in `accounts.json`.
 
 | Check | Call | Result |
 | --- | --- | --- |
@@ -123,6 +127,12 @@ Measured **2026-10-15**: **keys verified**. Every key was checked after it exist
 | Real completion | `POST https://api.leostudio.cc/v1/chat/completions` (`deepseek-v4-flash`) | **200** + assistant message |
 
 The check runs from **an exit different from the one that minted the key**, so it cannot pass on session state rather than key validity. `node src/cli.js verify` reproduces exactly that check for your own file. A key is written to `keys.txt` only after both checks answer 200.
+
+> **Quality gates.** Every key here passed a live `chat-200` before it was written to `keys.txt`
+> (dead keys are never shipped). Router combos follow the same rule at the model level: an entry is
+> added **only if the model answers `chat-200` and can call tools** — a model without tool support,
+> a dead key or a dead provider is dropped instead of added. Re-run the verify step any time;
+> failures are reported, never hidden.
 
 ## 🧭 How it works
 
@@ -155,7 +165,7 @@ All code lives in `src/` — run it from the repository root as `node src/<file>
 | Tool | Flags |
 | --- | --- |
 | `src/cli.js` | `mint` · `verify` · `probe` — dispatcher; `--connect-9router` registers keys in 9Router after the task; every task's own flags via `node src/<task> --help` |
-| `src/mint.js` | thin wrapper → `provider-cli.js` / `mint-newapi-pinned.js` — `--count N` (3) · `--pool FILE` (optional) · `--mail emailnator\|imap` · `--sender REGEX` (default `leostudio2026@163`) · `--scan` / `--scan-conc` · `--poll-ms` · `--code-wait` · `--max-cycle` · `--budget` |
+| `src/mint.js` | thin wrapper → `provider-cli.js` / `mint-newapi-pinned.js` — `--count N` (3) · `--pool FILE` · `--mail emailnator\|imap` · `--sender REGEX` (default `leostudio2026@163`) · `--scan` / `--scan-conc` · `--poll-ms` · `--code-wait` · `--max-cycle` · `--budget` |
 | `src/probe-key.js` | deep probe of one account or key |
 | `src/launcher.js` | interactive: mint / verify / probe / settings — `count` and `concurrency` persist in `launcher.config.json` |
 
@@ -189,8 +199,18 @@ All code lives in `src/` — run it from the repository root as `node src/<file>
 
 ```bash
 node src/connect-9router.js --base http://localhost:20128 --password 123456
+# or: node src/cli.js mint --count 3 --connect-9router
+```
+
+Every key in `keys.txt` becomes one connection of the `leostudio` provider node (`--api-key <key>` registers a single key instead, `--model <id>` overrides the default). Then pick a model inside 9Router:
 
 ```
+leostudio/deepseek-v4-flash
+leostudio/deepseek-v4.1-flash
+leostudio/glm-5.3-flash
+```
+
+Defaults: `--base http://localhost:20128`, `--password 123456`, `--prefix leostudio`, `--base-url https://api.leostudio.cc/v1`, default model `deepseek-v4-flash`.
 
 ## 🔌 Connect to OmniRoute
 
@@ -198,10 +218,10 @@ node src/connect-9router.js --base http://localhost:20128 --password 123456
 
 ```bash
 node src/connect-omniroute.js --base http://localhost:20128 --password 123456
-# or: node src/cli.js mint --count 3 --connect-9router
+# or: node src/cli.js mint --count 3 --connect-omniroute
 ```
 
-Every key in `keys.txt` becomes one connection of the `leostudio` provider node (`--api-key <key>` registers a single key instead, `--model <id>` overrides the default). Then pick a model inside 9Router:
+Every key in `keys.txt` becomes one connection of the `leostudio` provider node (`--api-key <key>` registers a single key instead, `--model <id>` overrides the default). Then pick a model inside OmniRoute:
 
 ```
 leostudio/deepseek-v4-flash

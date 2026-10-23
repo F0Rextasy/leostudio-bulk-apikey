@@ -2,161 +2,190 @@
 'use strict';
 
 /**
- * Interactive launcher for leostudio-bulk-apikey — a menu over the task modules.
- * Settings persist in launcher.config.json at the checkout root.
+ * Interactive launcher for the compiled build.
+ *
+ * The CLI's options stay configurable without reading its source: this launcher
+ * asks for them, remembers the answers in `launcher.config.json`, and then runs
+ * the CLI with the right flags — including the proxy list, which is the setting
+ * people most often need and cannot guess.
+ *
+ * Usage: node src/launcher.js            (menu)
+ *        node src/launcher.js --help
  */
 
 const fs = require('fs');
 const path = require('path');
 const readline = require('readline');
 const { spawnSync } = require('child_process');
-const { connect9Router, connectKeysFile, readKeys, defaultKeysFile } = require('./connect-9router.js');
 
-const HERE = __dirname;
-const ROOT = path.resolve(HERE, '..');
+const ROOT = path.resolve(__dirname, '..');
 const CONFIG = path.join(ROOT, 'launcher.config.json');
-const POOL = path.join(ROOT, 'proxies.txt');
-const KEYS = path.join(ROOT, 'keys.txt');
+const CLI = path.join(__dirname, 'cli.js');
 
-const defaults = { count: 30, conc: 2 };
-let cfg = { ...defaults };
-try { Object.assign(cfg, JSON.parse(fs.readFileSync(CONFIG, 'utf8'))); } catch (e) {}
-const save = () => fs.writeFileSync(CONFIG, JSON.stringify(cfg, null, 2) + '\n');
-const ARGS = {"mint":[],"verify":[],"probe":[]};
+const defaults = {
+  count: 50,
+  proxyFile: process.env['LEOSTUDIO_PROXIES'] || 'proxies.txt',
+  model: "deepseek-v4-flash",
+  routerBase: 'http://localhost:20128',
+  routerPassword: '123456',
+};
 
-const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
-const ask = (q, fb) => new Promise((r) => rl.question(q + (fb !== undefined ? ' [' + fb + ']' : '') + ': ', (a) => r(String(a).trim() || fb)));
-
-const LOGO = String.raw`
-  ██╗     ███████╗ ██████╗ ███████╗████████╗██╗   ██╗██████╗ ██╗ ██████╗
-  ██║     ██╔════╝██╔═══██╗██╔════╝╚══██╔══╝██║   ██║██╔══██╗██║██╔═══██╗
-  ██║     █████╗  ██║   ██║███████╗   ██║   ██║   ██║██║  ██║██║██║   ██║
-  ██║     ██╔══╝  ██║   ██║╚════██║   ██║   ██║   ██║██║  ██║██║██║   ██║
-  ███████╗███████╗╚██████╔╝███████║   ██║   ╚██████╔╝██████╔╝██║╚██████╔╝
-  ╚══════╝╚══════╝ ╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═════╝ ╚═╝ ╚═════╝`;
-
-function banner() {
-  const w = 78;
-  const box = (s) => '  │ ' + s.padEnd(w) + ' │';
-  console.log(LOGO);
-  console.log('  ┌' + '─'.repeat(w + 2) + '┐');
-  console.log(box('leostudio-bulk-apikey  ·  Bulk-create Leo Studio accounts with auto-generated API keys — OpenAI-compatible inference + 9Router connector.'));
-  console.log(box('open source · MIT · leostudio-bulk-apikey contributors'));
-  console.log('  └' + '─'.repeat(w + 2) + '┘\n');
-}
-
-const count = (f) => { try { return fs.readFileSync(f, 'utf8').split(/\r?\n/).filter((l) => l.trim() && !l.trim().startsWith('#')).length; } catch (e) { return 0; } };
-
-function run(args) {
-  console.log('\n▶ node src/' + args.join(' ') + '\n');
-  const r = spawnSync(process.execPath, args, { windowsHide: true, cwd: HERE, stdio: 'inherit' });
-  if (r.status !== 0) console.log('\n⚠ exited with code ' + r.status);
-}
-
-function argsFor(task) {
-  const spec = ARGS[task] || [];
-  return spec.map((v) => (v === 'count' ? String(cfg.count) : v === 'conc' ? String(cfg.conc) : v));
-}
-
-async function settings() {
-  console.log('\nSettings');
-  console.log('  1) count      ' + cfg.count);
-  console.log('  2) conc       ' + cfg.conc);
-  console.log('  0) back');
-  const p = await ask('choose', '0');
-  if (p === '1') cfg.count = parseInt(await ask('count', cfg.count), 10) || cfg.count;
-  if (p === '2') cfg.conc = parseInt(await ask('concurrency', cfg.conc), 10) || cfg.conc;
-  save();
-}
-
-async function connectRouter() {
-  const base = await ask('9Router base', cfg.routerBase || 'http://localhost:20128');
-  const password = await ask('9Router password', cfg.routerPassword || '123456');
-  cfg.routerBase = base;
-  cfg.routerPassword = password;
-  save();
-  console.log('\n▶ 9Router ' + base + ' — one connection per key\n');
+function loadConfig() {
   try {
-    await connectKeysFile({ base, password });
+    return { ...defaults, ...JSON.parse(fs.readFileSync(CONFIG, 'utf8')) };
   } catch (e) {
-    if (readKeys(defaultKeysFile()).length) {
-      console.log('\n⚠ ' + (e && e.message ? e.message : e));
-      return;
-    }
-    const apiKey = await ask('keys.txt is empty — paste one API key', '');
-    if (!apiKey) return;
-    try {
-      await connect9Router({ base, password, apiKey });
-    } catch (e2) {
-      console.log('\n⚠ ' + (e2 && e2.message ? e2.message : e2));
-    }
+    return { ...defaults };
   }
 }
-async function connectRouterOmni() {
-  const { connectKeysFile, connectOmniRoute, readKeys, defaultKeysFile } = require('./connect-omniroute.js');
-  const base = await ask('OmniRoute base', cfg.routerBase || 'http://localhost:20128');
-  const password = await ask('OmniRoute password', cfg.routerPassword || '123456');
-  cfg.routerBase = base;
-  cfg.routerPassword = password;
-  save();
-  console.log('\n▶ OmniRoute ' + base + ' — one connection per key\n');
+
+function saveConfig(cfg) {
   try {
-    await connectKeysFile({ base, password });
+    fs.writeFileSync(CONFIG, JSON.stringify(cfg, null, 2) + '\n');
   } catch (e) {
-    if (readKeys(defaultKeysFile()).length) {
-      console.log('\n⚠ ' + (e && e.message ? e.message : e));
-      return;
-    }
-    const apiKey = await ask('keys.txt is empty — paste one API key', '');
-    if (!apiKey) return;
-    try {
-      await connectOmniRoute({ base, password, apiKey });
-    } catch (e2) {
-      console.log('\n⚠ ' + (e2 && e2.message ? e2.message : e2));
-    }
+    console.error(`  ! could not write ${path.basename(CONFIG)}: ${e.message}`);
+  }
+}
+
+const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
+const ask = (question, fallback) =>
+  new Promise((resolve) => {
+    const hint = fallback ? ` [${String(fallback).slice(0, 30)}${String(fallback).length > 30 ? '…' : ''}]` : '';
+    rl.question(`  ${question}${hint}: `, (answer) => resolve(answer.trim() || fallback || ''));
+  });
+
+function run(args, env = {}) {
+  console.log('');
+  const res = spawnSync(process.execPath, [CLI, ...args], {
+    windowsHide: true,
+    cwd: ROOT,
+    stdio: 'inherit',
+    env: { ...process.env, ...env },
+  });
+  if (res.status !== 0) console.log(`  ! exited with code ${res.status}`);
+}
+
+const BANNER_LOGO = String.raw`
+██╗     ███████╗ ██████╗ ███████╗████████╗██╗   ██╗██████╗ ██╗ ██████╗
+██║     ██╔════╝██╔═══██╗██╔════╝╚══██╔══╝██║   ██║██╔══██╗██║██╔═══██╗
+██║     █████╗  ██║   ██║███████╗   ██║   ██║   ██║██║  ██║██║██║   ██║
+██║     ██╔══╝  ██║   ██║╚════██║   ██║   ██║   ██║██║  ██║██║██║   ██║
+███████╗███████╗╚██████╔╝███████║   ██║   ╚██████╔╝██████╔╝██║╚██████╔╝
+╚══════╝╚══════╝ ╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═════╝ ╚═╝ ╚═════╝
+`;
+
+function banner() {
+  const cyan = '\x1b[36m';
+  const dim = '\x1b[2m';
+  const bold = '\x1b[1m';
+  const reset = '\x1b[0m';
+  const title = 'leostudio-bulk-apikey';
+  const tagline = "75,000 credits per account · 7 text models (deepseek-v4-flash, kimi-k3, glm-5.3-flash) · every key verified";
+  const lines = BANNER_LOGO.replace(/^\n/, '').replace(/\n$/, '').split('\n');
+  const width = Math.max(...lines.map((l) => [...l].length), [...title].length, [...tagline].length);
+  const pad = (s) => s + ' '.repeat(width - [...s].length);
+  const inner = width + 4;
+  console.log('');
+  console.log(`${cyan}╔${'═'.repeat(inner)}╗${reset}`);
+  console.log(`${cyan}║${' '.repeat(inner)}║${reset}`);
+  for (const line of lines) console.log(`${cyan}║${reset}  ${bold}${pad(line)}${reset}  ${cyan}║${reset}`);
+  console.log(`${cyan}║${' '.repeat(inner)}║${reset}`);
+  console.log(`${cyan}║${reset}  ${pad(title)}  ${cyan}║${reset}`);
+  console.log(`${cyan}║${reset}  ${dim}${pad(tagline)}${reset}  ${cyan}║${reset}`);
+  console.log(`${cyan}║${' '.repeat(inner)}║${reset}`);
+  console.log(`${cyan}╚${'═'.repeat(inner)}╝${reset}`);
+  console.log(`  ${dim}leostudio-bulk-apikey contributors${reset}`);
+  console.log('');
+}
+
+async function mintFlow(cfg) {
+  cfg.count = parseInt(await ask('How many accounts/keys do you want (any number)', cfg.count), 10) || cfg.count;
+  cfg.proxyFile = await ask('Proxy list file (one proxy per line)', cfg.proxyFile);
+  cfg.model = await ask('Model used for the live verification', cfg.model);
+  saveConfig(cfg);
+
+  if (!fs.existsSync(path.resolve(ROOT, cfg.proxyFile)) && !fs.existsSync(cfg.proxyFile)) {
+    console.log(`  ! ${cfg.proxyFile} not found — running WITHOUT a proxy (direct)`);
+    console.log('    (put one exit per line there to route through proxies: http://host:port, socks5://host:port or host:port)');
+  }
+  run(['--count', String(cfg.count), '--model', cfg.model], { ['LEOSTUDIO_PROXIES']: cfg.proxyFile });
+}
+
+async function verifyFlow(cfg) {
+  cfg.proxyFile = await ask('Proxy list file', cfg.proxyFile);
+  saveConfig(cfg);
+  run(['--verify-only'], { ['LEOSTUDIO_PROXIES']: cfg.proxyFile });
+}
+
+async function screenFlow(cfg) {
+  cfg.proxyFile = await ask('Proxy list file to screen', cfg.proxyFile);
+  saveConfig(cfg);
+  run(['--screen'], { ['LEOSTUDIO_PROXIES']: cfg.proxyFile });
+}
+
+async function connectFlow(cfg) {
+  const { connectKeysFile, connect9Router } = require('./connect-9router.js');
+  cfg.routerBase = await ask('9Router base URL', cfg.routerBase);
+  cfg.routerPassword = await ask('9Router password', cfg.routerPassword);
+  saveConfig(cfg);
+  console.log('');
+  try {
+    await connectKeysFile({ base: cfg.routerBase, password: cfg.routerPassword });
+  } catch (e) {
+    if (!/no API keys/.test(e.message)) throw e;
+    console.log(`  ! ${e.message}`);
+    const apiKey = await ask('Single Leo Studio key to register');
+    if (apiKey) await connect9Router({ base: cfg.routerBase, password: cfg.routerPassword, apiKey });
+  }
+}
+
+async function connectFlowOmni(cfg) {
+  const { connectKeysFile, connectOmniRoute } = require('./connect-omniroute.js');
+  cfg.routerBase = await ask('OmniRoute base URL', cfg.routerBase);
+  cfg.routerPassword = await ask('OmniRoute password', cfg.routerPassword);
+  saveConfig(cfg);
+  console.log('');
+  try {
+    await connectKeysFile({ base: cfg.routerBase, password: cfg.routerPassword });
+  } catch (e) {
+    if (!/no API keys/.test(e.message)) throw e;
+    console.log(`  ! ${e.message}`);
+    const apiKey = await ask('Single Leo Studio key to register');
+    if (apiKey) await connectOmniRoute({ base: cfg.routerBase, password: cfg.routerPassword, apiKey });
   }
 }
 
 async function main() {
+  const cfg = loadConfig();
+  if (process.argv.includes('--connect-9router')) {
+    await connectFlow(cfg);
+    rl.close();
+    return;
+  }
+
   if (process.argv.includes('--connect-omniroute')) {
-    await connectRouterOmni();
+    await connectFlowOmni(cfg);
     rl.close();
     return;
   }
-  process.stdout.write('\x1b[2J\x1b[H');
   banner();
-  console.log('  proxy exits: ' + (count(POOL) || 'none — running WITHOUT a proxy (direct)') + '     keys on disk: ' + count(KEYS) + '\n');
-  console.log('  1) mint      create fresh accounts and mint one key each');
-  console.log('  2) verify    re-check keys that are already on disk');
-  console.log('  3) probe     deep probe of a single account or key');
-  console.log('  4) Settings');
-  console.log('  6) Connect to 9Router');
-  console.log('  7) Connect to OmniRoute');
-  console.log('  0) Exit\n');
-  const choice = await ask('choose', '1');
-  if (choice === '1') {
-    run(['mint.js', ...argsFor('mint')]);
-  }
-  else if (choice === '2') {
-    run(['probe-key.js', ...argsFor('verify')]);
-  }
-  else if (choice === '3') {
-    run(['probe-key.js', ...argsFor('probe')]);
-  }
-  else if (choice === '4') {
-    await settings();
-  }
-  else if (choice === '6') {
-    await connectRouter();
-  }
-  else if (choice === '7') {
-    await connectRouterOmni();
-  } else {
-    rl.close();
-    return;
-  }
-  await ask('\npress enter for the menu', '');
-  return main();
+  console.log('  1) Mint keys      — create one account per key and verify each with a live chat call');
+  console.log('  2) Verify keys    — re-check every key in keys.txt with a live chat call');
+  console.log('  3) Screen proxies — test your proxy list for exits that reach Leo Studio');
+  console.log('  4) Settings       — show what this launcher remembers');
+  console.log('  5) Help           — CLI options and notes');
+  console.log('  6) Connect to 9Router — register the keys in keys.txt with a local 9Router');
+  console.log('  7) Connect to OmniRoute — register the keys in keys.txt with a local OmniRoute');
+  console.log('  q) Quit\n');
+  const choice = (await ask('Choose', '1')).toLowerCase();
+
+  if (choice === '1') await mintFlow(cfg);
+  else if (choice === '2') await verifyFlow(cfg);
+  else if (choice === '3') await screenFlow(cfg);
+  else if (choice === '4') console.log('\n' + JSON.stringify(cfg, null, 2));
+  else if (choice === '5') run(['--help']);
+  else if (choice === '6') await connectFlow(cfg);
+  else if (choice === '7') await connectFlowOmni(cfg);
+  rl.close();
 }
 
 if (process.argv.includes('--help') || process.argv.includes('-h')) {
@@ -164,4 +193,7 @@ if (process.argv.includes('--help') || process.argv.includes('-h')) {
   process.exit(0);
 }
 
-main().catch((e) => { console.error('launcher failed:', e.stack || e.message); process.exit(1); });
+main().catch((e) => {
+  console.error('[fatal]', e.message);
+  process.exit(1);
+});

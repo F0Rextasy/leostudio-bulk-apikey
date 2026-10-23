@@ -39,34 +39,38 @@ Leo Studio (`api.leostudio.cc`) entrega a cada cuenta **75.000 créditos** y la 
 
 ## 🎁 Nivel gratuito — cuánto obtienes
 
-**Cada nueva cuenta de Leo Studio lleva 75.000 créditos — de una sola vez, sin recarga, sin tarjeta.**
+**Cada cuenta nueva de Leo Studio lleva 75.000 créditos — de una sola vez, sin recarga, sin tarjeta.**
 
 | Elemento | Medido |
 | --- | --- |
-| Concesión al registrarse | **75.000 créditos** (`GET /api/user/self` → `quota: 75000`) |
+| Concesión de registro | **75.000 créditos** (`GET /api/user/self` → `quota: 75000`) |
 | Check-in diario | **deshabilitado** (`{"success":false,"message":"签到功能未启用"}`) — la concesión es de una sola vez |
-| Captcha al registrarse | **ninguno** (`turnstile_check: false`) |
-| Correo que acepta el panel | **Gmail** (o QQ) — se rechazan los dominios desechables; el correo de verificación llega desde `leostudio2026@163` (asunto «Leo Studio邮箱验证邮件», código de 6 caracteres, validez de 10 min) |
+| Captcha en el registro | **ninguno** (`turnstile_check: false`) |
+| Correo electrónico que acepta el panel | **Gmail** (o QQ) — los dominios desechables son rechazados; el correo de verificación llega desde `leostudio2026@<mail>` (asunto «Leo Studio邮箱验证邮件», código de 6 caracteres, validez de 10 min) |
 | Grupo que sirve modelos de texto | **`国模`** — el grupo `default` de una cuenta nueva solo sirve la línea de imágenes y una llamada de chat allí responde `503 model_not_found` |
 | La unidad que escala | **una cuenta = una clave** → `--count N` es realmente "N cuentas gratuitas" (la cuota es por cuenta) |
 
 > 💡 El nivel gratuito lo define Leo Studio y puede cambiar. Consulta los números en vivo en [leostudio.cc](https://leostudio.cc) — y deja que la propia puerta de la herramienta decida:
 
 ```bash
-node src/cli.js verify                 # every key in keys.txt is re-tested against the live API
+node src/cli.js --verify-only     # every key in keys.txt is re-tested with a real chat call
 ```
 
 ## 🤖 Modelos — los 7
 
 `GET https://api.leostudio.cc/v1/models` con una clave generada en el grupo **`国模`** sirve **7 modelos de texto** (capturados en [`models.json`](models.json)):
 
-| Modelo | ✓ |
-| --- | --- |
-| `deepseek-v4-flash` | ✓ |
+| ID del modelo | Familia | Nota |
+| --- | --- | --- |
+| `deepseek-v4-flash` | DeepSeek | modelo de chat predeterminado del verificador |
+| `deepseek-v4.1-flash` | DeepSeek | siguiente flash |
+| `glm-5.2` | Z.ai (GLM) | |
+| `glm-5.3-flash` | Z.ai (GLM) | |
+| `kimi-k3` | Moonshot | |
+| `hy3` | Hunyuan | |
+| `hy4-preview` | Hunyuan | preview |
 
 El grupo `default` de una cuenta nueva sirve la línea de imágenes (`gpt-image-2*`, `sd-2.5-ch*`) — una llamada de chat allí responde `503 model_not_found … under group default`; la herramienta asigna cada token a **`国模`** para desbloquear los 7 modelos de texto anteriores. Los 8 ids de imagen (`gpt-image-2`, `gpt-image-2.5*`, `sd-2.0-ch1`, `sd-2.5-ch*`) **no** son modelos de texto y no verifican una clave.
-
-Revisado de nuevo el **2026-10-19** contra la matriz de chat en vivo (3 claves × 5 salidas): el conjunto de claves actual responde `403 insufficient_user_quota` en la clave vigente y `503` en las otras dos, por lo que **no se añade ni se elimina ningún id aquí** — la fila marcada arriba es la medición chat-200 verificada del propio repositorio (`2026-10-15`), y un muro de saldo no es un fallo de modelo.
 
 ## 🧪 Cómo usar la API
 
@@ -94,18 +98,17 @@ print(client.chat.completions.create(model="deepseek-v4-flash",
 cd leostudio-bulk-apikey
 
 # 1) your proxy list, one exit per line (http://, socks5://, socks4:// or bare host:port)
-printf 'socks5://127.0.0.1:1080\n' > proxies.txt
+printf 'socks5://127.0.0.1:1080\n' > proxies.txt   # optional — without it the tool runs direct
 
 # 2) go — one run mints one key per fresh account
 node src/launcher.js             # interactive menu: mint / verify / probe / settings
-
 # or drive it directly:
 node src/cli.js mint --count 3   # fresh accounts → one verified key each
 node src/cli.js verify           # re-check the keys already on disk
 node src/cli.js probe            # deep probe of a single account or key
 ```
 
-`node src/cli.js help` lista las tareas; cada tarea lee sus propios flags. Las claves quedan en `keys.txt`, una por línea; el detalle por cuenta (correo, pasos, resultado de verificación) queda en `accounts.json`. Los ajustes del launcher persisten en `launcher.config.json`.
+`node src/cli.js help` lista las tareas; cada tarea lee sus propias flags. Las claves se guardan en `keys.txt`, una por línea; el detalle por cuenta (correo, pasos, resultado de verificación) se guarda en `accounts.json`. La configuración del launcher persiste en `launcher.config.json`.
 
 ### 🖱️ El launcher
 
@@ -113,18 +116,24 @@ node src/cli.js probe            # deep probe of a single account or key
 node src/launcher.js
 ```
 
-Un menú sobre los módulos de tareas: **mint**, **verify**, **probe**, **9Router**. Pide `count` (claves por ejecución) y `concurrency` (salidas en paralelo), los guarda en `launcher.config.json` y lanza `node src/cli.js <task>` con los flags correctos. El elemento de menú **6** ejecuta directamente el registro en 9Router.
+Un menú sobre los módulos de tareas: **mint**, **verify**, **probe**, **9Router**. Pregunta por `count` (claves por ejecución) y `concurrency` (salidas en paralelo), los guarda en `launcher.config.json` y lanza `node src/cli.js <task>` con las flags correctas. El elemento de menú **6** ejecuta directamente el registro en 9Router.
 
 ## ✅ Verificado y funcionando — cada clave se prueba
 
-Medido el **2026-10-15**: **3 cuentas → 3 claves, una clave por cuenta**. Cada clave se comprobó después de existir, en una salida *independiente* de la generación, con `verify.independent=true` en `accounts.json`.
+Medido el **2026-10-15**: **cada cuenta generó su propia clave, una clave por cuenta**. Cada clave se comprobó después de existir, en una salida *independiente* de la de generación, con `verify.independent=true` en `accounts.json`.
 
 | Comprobación | Llamada | Resultado |
 | --- | --- | --- |
 | Auth + lista de modelos | `GET https://api.leostudio.cc/v1/models` (en el grupo **`国模`**) | **200** + 7 ids de modelos de texto |
 | Completion real | `POST https://api.leostudio.cc/v1/chat/completions` (`deepseek-v4-flash`) | **200** + mensaje del asistente |
 
-La comprobación se ejecuta desde **una salida distinta de la que generó la clave**, por lo que no puede pasar por el estado de la sesión en lugar de por la validez de la clave. `node src/cli.js verify` reproduce exactamente esa comprobación para tu propio archivo. Una clave se escribe en `keys.txt` solo después de que ambas comprobaciones respondan 200.
+La comprobación se ejecuta desde **una salida distinta de la que generó la clave**, así que no puede pasar por el estado de la sesión en lugar de por la validez de la clave. `node src/cli.js verify` reproduce exactamente esa comprobación para tu propio archivo. Una clave se escribe en `keys.txt` solo después de que ambas comprobaciones respondan 200.
+
+> **Puertas de calidad.** Cada clave aquí pasó un `chat-200` en vivo antes de escribirse en `keys.txt`
+> (las claves muertas nunca se entregan). Las combinaciones del router siguen la misma regla a nivel de modelo: una entrada se
+> añade **solo si el modelo responde `chat-200` y puede llamar a herramientas** — un modelo sin soporte de herramientas,
+> una clave muerta o un proveedor muerto se descarta en lugar de añadirse. Vuelve a ejecutar el paso de verificación cuando quieras;
+> los fallos se reportan, nunca se ocultan.
 
 ## 🧭 Cómo funciona
 
@@ -140,15 +149,15 @@ inbox (one address per account)                                  a fresh address
 | Paso | Llamada | Notas |
 | --- | --- | --- |
 | Puertas | `GET /api/status` | `register_enabled: true` · `email_verification: true` · `turnstile_check: false` · `checkin_enabled: false` |
-| Buzón | [Emailnator](https://www.emailnator.com) | una dirección Gmail nueva por cuenta, leída a través de tus salidas; el código está en el **cuerpo** (campo `content`), no en el asunto |
+| Buzón | [Emailnator](https://www.emailnator.com) | una dirección de Gmail nueva por cuenta, leída a través de tus salidas; el código está en el **cuerpo** (campo `content`), no en el asunto |
 | Enviar código | `GET /api/verification?email=<plain>` | `{"success":true}` |
 | Registro | `POST /api/user/register` (`username`, `password`, `email`, `verification_code`) | `{"success":true}` |
-| Login | `POST /api/user/login` | devuelve **`data.access_token` (JWT)** + cookie `new_api_refresh`; la cookie por sí sola responde `401 AUTH_UNAUTHORIZED` — se requiere Bearer |
+| Login | `POST /api/user/login` | devuelve **`data.access_token` (JWT)** + cookie `new_api_refresh`; la cookie sola responde `401 AUTH_UNAUTHORIZED` — se requiere Bearer |
 | Self | `GET /api/user/self` (Bearer + cookie) | `quota: 75000` por cuenta |
 | Crear token | `POST /api/token/` (Bearer) | primero la clave enmascarada (`tbCR******…`) |
 | Revelar clave | `POST /api/token/{id}/key` (Bearer) | clave en texto plano de 48 caracteres |
 | Grupo | `PUT /api/token/{id}` | asignar a **`国模`** (`unlimited_quota: true`) — de lo contrario el relay responde `401 Invalid token` aunque la cuenta tenga cuota |
-| Probar | `GET /v1/models` + `POST /v1/chat/completions` | ambos en una salida *distinta* de la generación; solo entonces la clave se añade a `keys.txt` |
+| Probar | `GET /v1/models` + `POST /v1/chat/completions` | ambos en una salida *distinta* de la de generación; solo entonces la clave se añade a `keys.txt` |
 
 ## ⚙️ Opciones de la CLI
 
@@ -156,16 +165,21 @@ Todo el código vive en `src/` — ejecútalo desde la raíz del repositorio com
 
 | Herramienta | Flags |
 | --- | --- |
-| `src/cli.js` | `mint` · `verify` · `probe` — despachador; `--connect-9router` registra las claves en 9Router tras la tarea; los flags propios de cada tarea vía `node src/<task> --help` |
+| `src/cli.js` | `mint` · `verify` · `probe` — despachador; `--connect-9router` registra las claves en 9Router después de la tarea; las flags propias de cada tarea vía `node src/<task> --help` |
 | `src/mint.js` | envoltorio fino → `provider-cli.js` / `mint-newapi-pinned.js` — `--count N` (3) · `--pool FILE` · `--mail emailnator\|imap` · `--sender REGEX` (por defecto `leostudio2026@163`) · `--scan` / `--scan-conc` · `--poll-ms` · `--code-wait` · `--max-cycle` · `--budget` |
 | `src/probe-key.js` | sonda profunda de una cuenta o clave |
 | `src/launcher.js` | interactivo: mint / verify / probe / settings — `count` y `concurrency` persisten en `launcher.config.json` |
 
 ## 🛰️ Detrás de un proxy
 
-* Las salidas provienen de `proxies.txt` (una línea por salida, `scheme://host:port`, se admite `user:pass@`, los comentarios `#` se ignoran). El mismo pool alimenta las llamadas al panel, la verificación de claves y las lecturas del buzón; las herramientas nunca marcan al proveedor directamente.
+**Opcional — recomendado a escala (límites por IP, baneos).** La herramienta también funciona sin proxy.
+
+* **Con un pool:** pasa `--pool <file>` (o pon las salidas en `proxies.txt`) y cada petición pasa por una salida de esa lista — una línea muerta hace fallar ese intento y la herramienta pasa a la siguiente.
+* **Sin un pool:** la CLI imprime `running WITHOUT a proxy (direct)` y se conecta directamente. Nada del registro, la generación de claves o la verificación cambia — solo desde dónde salen los paquetes.
+
+* Las salidas provienen de `proxies.txt` (una línea por salida, `scheme://host:port`, se admite `user:pass@`, los comentarios `#` se ignoran). El mismo pool alimenta las llamadas al panel, la verificación de claves y las lecturas del buzón cuando se proporciona uno; sin un pool, las herramientas se conectan directamente.
 * **El filtrado es el trabajo.** Cada cuenta fija la primera salida que demuestra `GET /api/status` contra el host del panel, y la verificación fija una salida *distinta* ya probada — una salida muerta se retira sola y la cuenta continúa con la siguiente.
-* El buzón ([Emailnator](https://www.emailnator.com)) es un servicio de correo temporal de terceros en lugar del panel; su API también se lee a través de tus salidas.
+* El buzón ([Emailnator](https://www.emailnator.com)) es un servicio de correo temporal de terceros en lugar del panel; su API también se lee a través de tus salidas cuando se proporciona un pool.
 * El correo de verificación llega desde **`leostudio2026@163`** (no desde el dominio del panel); el primer código de un lote puede tardar unos minutos en llegar — la herramienta espera en lugar de reenviar, porque un reenvío invalida el código en curso.
 
 ## 📄 Archivos
@@ -174,7 +188,7 @@ Todo el código vive en `src/` — ejecútalo desde la raíz del repositorio com
 | --- | --- |
 | `keys.txt` | una clave verificada en vivo por línea — ignorada por git |
 | `accounts.json` | buzón, pasos, check-in, ambas salidas de verificación por cuenta — ignorado por git |
-| `models.json` | una captura fresca de `/v1/models` en el grupo `国模` — ignorado por git |
+| `models.json` | una captura fresca de `/v1/models` en el grupo `国模` — ignorada por git |
 | `proxies.txt` | tus salidas, una por línea — ignorado por git |
 | `out/pinned-<date>.log` | el log por ejecución (salida, tiempos, respuesta exacta del servidor) — ignorado por git |
 | `src/mint.js` · `src/probe-key.js` | los motores a los que despacha la CLI |
@@ -182,24 +196,14 @@ Todo el código vive en `src/` — ejecútalo desde la raíz del repositorio com
 
 ## 🔌 Conectar con 9Router
 
-[9Router](https://9router.com) es un router autoalojado compatible con OpenAI. Leo Studio es compatible con OpenAI, así que regístralo una vez y usa todas las claves:
+[9Router](https://9router.com) es un router autoalojado y compatible con OpenAI. Leo Studio es compatible con OpenAI, así que regístralo una vez y usa todas las claves:
 
 ```bash
 node src/connect-9router.js --base http://localhost:20128 --password 123456
-
-```
-
-## 🔌 Conectar con OmniRoute
-
-[OmniRoute](https://omniroute.online) es un router autoalojado compatible con OpenAI. Leo Studio es compatible con OpenAI, así que regístralo una vez y usa todas las claves:
-
-```bash
-node src/connect-omniroute.js --base http://localhost:20128 --password 123456
-
 # or: node src/cli.js mint --count 3 --connect-9router
 ```
 
-Cada clave de `keys.txt` se convierte en una conexión del nodo proveedor `leostudio` (`--api-key <key>` registra una sola clave en su lugar, `--model <id>` sobrescribe el valor por defecto). Luego elige un modelo dentro de 9Router:
+Cada clave de `keys.txt` se convierte en una conexión del nodo proveedor `leostudio` (`--api-key <key>` registra una sola clave en su lugar, `--model <id>` sobrescribe el predeterminado). Luego elige un modelo dentro de 9Router:
 
 ```
 leostudio/deepseek-v4-flash
@@ -207,21 +211,40 @@ leostudio/deepseek-v4.1-flash
 leostudio/glm-5.3-flash
 ```
 
-Valores por defecto: `--base http://localhost:20128`, `--password 123456`, `--prefix leostudio`, `--base-url https://api.leostudio.cc/v1`, modelo por defecto `deepseek-v4-flash`.
+Valores predeterminados: `--base http://localhost:20128`, `--password 123456`, `--prefix leostudio`, `--base-url https://api.leostudio.cc/v1`, modelo predeterminado `deepseek-v4-flash`.
+
+## 🔌 Conectar con OmniRoute
+
+[OmniRoute](https://omniroute.online) es un router autoalojado y compatible con OpenAI. Leo Studio es compatible con OpenAI, así que regístralo una vez y usa todas las claves:
+
+```bash
+node src/connect-omniroute.js --base http://localhost:20128 --password 123456
+# or: node src/cli.js mint --count 3 --connect-omniroute
+```
+
+Cada clave de `keys.txt` se convierte en una conexión del nodo proveedor `leostudio` (`--api-key <key>` registra una sola clave en su lugar, `--model <id>` sobrescribe el predeterminado). Luego elige un modelo dentro de OmniRoute:
+
+```
+leostudio/deepseek-v4-flash
+leostudio/deepseek-v4.1-flash
+leostudio/glm-5.3-flash
+```
+
+Valores predeterminados: `--base http://localhost:20128`, `--password 123456`, `--prefix leostudio`, `--base-url https://api.leostudio.cc/v1`, modelo predeterminado `deepseek-v4-flash`.
 
 ## 🔑 Qué te da una clave
 
 | | |
 | --- | --- |
 | 🏢 Proveedor | **Leo Studio** — [leostudio.cc](https://leostudio.cc) |
-| 🎁 Qué da el proveedor | 75.000 créditos por cuenta · 7 modelos de texto (deepseek-v4-flash, kimi-k3, glm-5.3-flash) · cada clave verificada en vivo |
+| 🎁 Qué da el proveedor | 75.000 créditos por cuenta · 7 modelos de texto (deepseek-v4-flash, kimi-k3, glm-5.3-flash) · cada clave verificada |
 | 🔑 Qué te da una clave | una clave API limitada a su propia cuenta: los 7 ids de modelo en el endpoint de abajo, con los límites de tu plan. La cuota vive en la **cuenta**, que es exactamente por lo que esta herramienta crea una cuenta por clave |
 | 🌐 Forma de la API | Compatible con OpenAI: `POST https://api.leostudio.cc/v1/chat/completions` |
-| 🔒 Tus datos | solo se contacta con leostudio.cc y el backend de buzón que configures; las claves permanecen en tu máquina |
+| 🔒 Tus datos | solo se contacta con leostudio.cc y el backend de buzón que configures; las claves se quedan en tu máquina |
 
 ## 🐞 Problemas
 
-Abre un issue con el paso que falla y la cola del log de ejecución (`out/pinned-<date>.log`) — contiene la salida, los tiempos y la respuesta exacta del servidor, que es todo lo necesario para reproducir un fallo. Nunca adjuntes una clave. **[Abre un issue](../../issues)** y los PRs son bienvenidos.
+Abre un issue con el paso que falla y el final del log de ejecución (`out/pinned-<date>.log`) — contiene la salida, los tiempos y la respuesta exacta del servidor, que es todo lo necesario para reproducir un fallo. Nunca adjuntes una clave. **[Abre un issue](../../issues)** y los PR son bienvenidos.
 
 ## 📄 Licencia
 

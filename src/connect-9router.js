@@ -13,10 +13,10 @@
  * Usage:
  *   node src/connect-9router.js \
  *     --base http://localhost:20128 --password 123456 \
- *     --api-key sk-xxxx [--name "Leo Studio"] [--prefix leostudio]
+ *     --api-key leostudio_xxxx [--name "Leo Studio"] [--prefix leostudio]
  *
- *   node src/connect-9router.js              # register every key in keys.txt
- *   node src/connect-9router.js --model <id> # pin the connection's default model
+ *   node src/connect-9router.js                  # register every key in keys.txt
+ *   node src/connect-9router.js --model <id>     # pin the connection's default model
  *
  * Options:
  *   --base <url>       9Router base URL         (default http://localhost:20128)
@@ -25,7 +25,7 @@
  *   --name <name>      provider-node name       (default Leo Studio)
  *   --prefix <slug>    provider prefix in 9Router (default leostudio)
  *   --base-url <url>   provider base URL        (default https://api.leostudio.cc/v1)
- *   --model <id>       connection default model (default deepseek-v4-flash)
+ *   --model <id>       connection default model (default: provider's default model)
  *
  * Zero dependencies. Node.js >= 18.
  */
@@ -33,19 +33,19 @@
 const fs = require('fs');
 const path = require('path');
 
-const UA = 'leostudio-bulk-9router-connector/1.0';
+const UA = 'leostudio-bulk-9router-connector/1.0'
 
 const DEFAULTS = {
   base: 'http://localhost:20128',
   password: '123456',
-  name: 'Leo Studio',
-  prefix: 'leostudio',
-  baseUrl: 'https://api.leostudio.cc/v1',
-  defaultModel: 'deepseek-v4-flash',
+  name: "Leo Studio",
+  prefix: "leostudio",
+  baseUrl: "https://api.leostudio.cc/v1",
+  defaultModel: "deepseek-v4-flash",
 };
 
 /** Model ids a fresh key lists, as routed under `<prefix>/…` by 9Router. */
-const MODELS = ['deepseek-v4-flash', 'deepseek-v4.1-flash', 'glm-5.3-flash'];
+const MODELS = ["deepseek-v4-flash","deepseek-v4.1-flash","glm-5.3-flash"];
 
 async function login9router(base, password) {
   const res = await fetch(`${base}/api/auth/login`, {
@@ -53,11 +53,8 @@ async function login9router(base, password) {
     headers: { 'Content-Type': 'application/json', 'User-Agent': UA },
     body: JSON.stringify({ password: password ?? DEFAULTS.password }),
   });
-  // `getSetCookie()` only exists from Node 18.14 (undici 5.19): on an older 18.x
-  // the jar stayed empty, the login still reported ok, and every call 401'd.
   const sc = typeof res.headers.getSetCookie === 'function' ? res.headers.getSetCookie() : [];
-  const rawCookie = res.headers.get('set-cookie');
-  const cookie = (sc.length ? sc : rawCookie ? [rawCookie] : []).map((c) => c.split(';')[0]).join('; ');
+  const cookie = sc.map((c) => c.split(';')[0]).join('; ');
   return { ok: res.ok, cookie, body: (await res.text()).slice(0, 200) };
 }
 
@@ -148,9 +145,9 @@ async function connect9Router(opts = {}) {
   return connection;
 }
 
-/** `keys.txt` at the checkout root — where the mint writes keys and the README says they land. */
+/** `keys.txt` at the checkout root (beside `src/`) — the layout the tools run in. */
 function defaultKeysFile() {
-  return path.join(path.resolve(__dirname, '..'), 'keys.txt');
+  return path.join(__dirname, '..', 'keys.txt');
 }
 
 function readKeys(keysFile = defaultKeysFile()) {
