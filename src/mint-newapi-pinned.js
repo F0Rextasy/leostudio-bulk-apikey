@@ -173,6 +173,7 @@ const PANEL_DOMAIN = (() => {
   }
 })();
 const KEYS = path.join(ROOT, 'keys.txt');
+const KEYS_DEAD = path.join(ROOT, 'keys-dead.txt');
 const ACCOUNTS = path.join(ROOT, 'accounts.json');
 const LOG = path.join(ROOT, 'out', `pinned-${new Date().toISOString().slice(0, 10)}.log`);
 const log = (...a) => {
@@ -737,6 +738,7 @@ async function probeRegister(panel, email) {
   }
 
   const made = [];
+  const dead = [];
   const total = Math.min(COUNT, PROBE ? 1 : COUNT);
 
   // ---- mailbox transport probe: which read shape actually returns a body?
@@ -1096,7 +1098,11 @@ async function probeRegister(panel, email) {
             log(`  ✔ MINTED (models=${models.status}, chat=${rec.verify.chat_status || 'n/a'}, quota=${rec.steps.self.quota})`);
           } else {
             rec.status = 'key-unverified';
-            log(`  ✖ key failed verification (models=${models.status}${chatModel ? `, chat=${rec.verify.chat_status}` : ''})`);
+            // Not silently dropped: the key left the live set, so it is parked
+            // in keys-dead.txt for a later re-check instead of vanishing.
+            if (!fs.existsSync(KEYS_DEAD) || !fs.readFileSync(KEYS_DEAD, 'utf8').includes(key)) appendLine(KEYS_DEAD, key);
+            dead.push(key);
+            log(`  ✖ key failed verification (models=${models.status}${chatModel ? `, chat=${rec.verify.chat_status}` : ''}) → keys-dead.txt`);
           }
           done = true;
           break;
@@ -1187,6 +1193,7 @@ async function probeRegister(panel, email) {
   if (imapBox) imapBox.close(); // an open IMAP socket outlives the last line
   const short = made.length < total;
   console.log(`${String(NAME || 'mint').toUpperCase()} ${made.length}/${total}${short ? (PROBE ? ' (probe run — nothing minted by design)' : ' — short of the target') : ' OK'}`);
+  if (dead.length) console.log(`  ! ${dead.length} key(s) failed verification → ${KEYS_DEAD} (kept out of keys.txt)`);
   if (short && !PROBE) process.exitCode = 1;
 })().catch((e) => {
   log(`FATAL ${e && e.stack ? e.stack.split('\n').slice(0, 3).join(' | ') : e}`);

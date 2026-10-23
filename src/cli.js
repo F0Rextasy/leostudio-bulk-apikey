@@ -17,6 +17,10 @@ const path = require('path');
 const { spawnSync } = require('child_process');
 const { connectKeysFile, parseRouterArgs } = require('./connect-9router.js');
 
+// The captcha entry point of this repo (see src/solver.js): this rail is HTTP,
+// so --auto is the default and needs no token.
+const { solverState } = require('./solver.js');
+
 const TASKS = {
   mint: { file: 'mint.js', note: 'create fresh accounts and mint one key each' },
   verify: { file: 'probe-key.js', note: 're-check keys that are already on disk' },
@@ -26,11 +30,16 @@ const TASKS = {
 function help() {
   console.log('leostudio-bulk-apikey — Bulk-create Leo Studio accounts with auto-generated API keys — OpenAI-compatible inference + 9Router connector.\n');
   console.log('usage: node src/cli.js <task> [options]\n');
+  console.log('one command:');
+  console.log('  node src/cli.js mint --count N        mint N accounts, one key each (auto, no token)\n');
   console.log('tasks:');
   for (const [name, t] of Object.entries(TASKS)) console.log('  ' + name.padEnd(9) + ' ' + t.note);
   console.log('\noptions: every task takes its own flags — ask it directly:');
   console.log('  node src/<task-file> --help');
+  console.log('  --count N          accounts (= keys) to mint                          [50]');
+  console.log('  --auto             captcha step automatic — DEFAULT, always on');
   console.log('  --connect-9router  register the keys in 9Router after the task finishes');
+  console.log('  captcha: ' + solverState());
   console.log('\nproxy pool:');
   console.log('  one exit per line in proxies.txt — scheme://host:port[#comment], user:pass@ supported');
   console.log('\nno options? run the interactive launcher:  node src/launcher.js');
