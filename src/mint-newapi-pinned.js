@@ -45,7 +45,7 @@ const { presetArgv, resolvePreset } = require('./preset');
 
 let emailnator = null;
 try {
-  emailnator = require(path.join(__dirname, 'cloudflare-wai', 'emailnator.js'));
+  emailnator = require(path.join(__dirname, 'vendor', 'emailnator.js'));
 } catch (e) {
   /* reported on first use */
 }
